@@ -44,4 +44,5 @@ jobs:
           git add padel_warszawa.db csv_exports/
           git diff --staged --quiet || git commit -m \
             "data: automatyczny eksport $(date -u +'%Y-%m-%d')"
+          git pull --rebase origin main
           git push
