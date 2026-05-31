@@ -15,8 +15,11 @@ Hasło NIE jest nigdzie zapisywane.
 import asyncio, sqlite3, csv, logging, re, json, getpass, os
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import requests
+
+WARSAW_TZ = ZoneInfo("Europe/Warsaw")
 
 DB_PATH  = Path("padel_warszawa.db")
 CSV_DIR  = Path("csv_exports")
@@ -194,7 +197,7 @@ def save_courts(conn, club_id, courts):
 
 
 def save_slots(conn, club_id, date_str, slots, courts, source):
-    now_dt = datetime.now()
+    now_dt = datetime.now(WARSAW_TZ)
     now    = now_dt.isoformat()
     dt     = datetime.strptime(date_str, "%Y-%m-%d")
     dow    = dt.strftime("%A")
@@ -339,7 +342,7 @@ def build_playtomic_data(klub, date_str):
             if end_min <= start_min:
                 end_min = 24*60
             end_min = min(end_min, 24*60)
-            now = datetime.now()
+            now = datetime.now(WARSAW_TZ)
             if date_str == now.strftime("%Y-%m-%d"):
                 start_min = max(start_min, now.hour*60 + (0 if now.minute < 30 else 30))
             for cidx in range(len(resources)):
@@ -771,8 +774,17 @@ async def run():
     email, password = get_credentials()
 
     conn  = init_db()
-    today = datetime.today().strftime("%Y-%m-%d")
-    now   = datetime.now().isoformat()
+    _now_warsaw = datetime.now(WARSAW_TZ)
+    today = _now_warsaw.strftime("%Y-%m-%d")
+    now   = _now_warsaw.isoformat()
+
+    # Wyczyść stare kluby usunięte z list (squash, zmienione slugi)
+    for stale_id in ("pt_warsaw-padel-club-squash", "pt_rakiety-squash-padel-outdoor"):
+        conn.execute("DELETE FROM clubs  WHERE id=?",       (stale_id,))
+        conn.execute("DELETE FROM courts WHERE club_id=?",  (stale_id,))
+        conn.execute("DELETE FROM slots  WHERE club_id=?",  (stale_id,))
+        conn.execute("DELETE FROM prices WHERE club_id=?",  (stale_id,))
+    conn.commit()
 
     # ── 1. PLAYTOMIC (publiczne API, bez przeglądarki) ────────────────────────
     print("\n── Playtomic (" + str(len(PLAYTOMIC)) + " klubów) " + "─"*35)
