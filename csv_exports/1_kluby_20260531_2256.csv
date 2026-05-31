@@ -1,0 +1,23 @@
+﻿id,name,source,dzielnica,address,lat,lng,padel_courts_total,hours_weekday,hours_weekend,amenities,website,phone
+ko_toro-padel,Toro Padel,kluby_org,Bemowo,ul. Kazubów 14 (Bemowo),,,6,,,[],https://kluby.org/toro-padel,486986088
+pt_loba-padel,Loba Padel,playtomic,Białołęka,03-032,,,,06:00 - 23:00,06:00 - 23:00,"[""Disabled Access"", ""Equipment Rental"", ""Free Parking"", ""Private Parking"", ""Store"", ""Cafeteria"", ""Snack Bar"", ""Changing Room"", ""Lockers"", ""WiFi""]",https://playtomic.com/clubs/loba-padel,
+ko_sporteum,Sporteum,kluby_org,Białołęka,ul. Zawiślańska 27 (Białołęka),,,2,,,[],https://kluby.org/sporteum,796 165 501
+pt_warsaw-padel-club,Warsaw Padel Club,playtomic,Białołęka,03-236,,,,06:00 - 01:00,06:00 - 01:00,"[""Disabled Access"", ""Equipment Rental"", ""Free Parking"", ""Private Parking"", ""Store"", ""Restaurant"", ""Cafeteria"", ""Snack Bar"", ""Vending Machine"", ""Changing Room"", ""Lockers"", ""WiFi""]",https://playtomic.com/clubs/warsaw-padel-club,
+pt_warsaw-padel-club-squash,Warsaw Padel Club – Squash,playtomic,Białołęka,03-236,,,,07:00 - 01:00,07:00 - 01:00,"[""Disabled Access"", ""Equipment Rental"", ""Free Parking"", ""Private Parking"", ""Store"", ""Restaurant"", ""Cafeteria"", ""Snack Bar"", ""Changing Room"", ""Lockers"", ""WiFi""]",https://playtomic.com/clubs/warsaw-padel-club-squash,
+pt_rqt-spot,RQT Spot,playtomic,Bielany,05-080,,,,07:00 - 00:00,07:00 - 00:00,"[""Equipment Rental"", ""Free Parking"", ""Private Parking"", ""Vending Machine"", ""Changing Room"", ""Lockers"", ""WiFi""]",https://playtomic.com/clubs/rqt-spot,
+pt_interpadel-warszawa,Interpadel Warszawa,playtomic,Mokotów,02-690,,,,06:00 - 02:00,06:00 - 02:00,"[""Disabled Access"", ""Equipment Rental"", ""Free Parking"", ""Private Parking"", ""Store"", ""Cafeteria"", ""Snack Bar"", ""Vending Machine"", ""Changing Room"", ""Lockers""]",https://playtomic.com/clubs/interpadel-warszawa,
+ko_mera,WKT Mera,kluby_org,Ochota,al. Bohaterów Września 12 (Ochota),,,2,,,[],https://kluby.org/mera,
+pt_rakiety-pge-narodowy,Rakiety PGE Narodowy,playtomic,Praga Południe,03-901,,,,07:00 - 23:00,07:00 - 23:00,"[""Disabled Access"", ""Equipment Rental"", ""Free Parking"", ""Private Parking"", ""Store"", ""Cafeteria"", ""Changing Room"", ""Lockers"", ""WiFi""]",https://playtomic.com/clubs/rakiety-pge-narodowy,
+ko_decathlon,DECATHLON Targówek,kluby_org,Targówek,ul. Geodezyjna 76 (Targówek),,,1,,,[],https://kluby.org/decathlon,
+ko_tenes,TENES Klub Sportowy,kluby_org,Ursus,ul. Piwna 13 (Ursus),,,3,,,[],https://kluby.org/tenes,609 944 020
+ko_padlovnia,Padlovnia,kluby_org,Ursynów,ul. Karnawał 8 (Ursynów),,,7,,,[],https://kluby.org/padlovnia,660 586 660
+pt_san-padel,San Padel,playtomic,Ursynów,05-500,,,,00:00 - 00:00,00:00 - 00:00,"[""Disabled Access"", ""Free Parking"", ""Private Parking"", ""Store"", ""Restaurant"", ""Cafeteria"", ""Snack Bar"", ""Vending Machine"", ""Changing Room"", ""Lockers"", ""WiFi""]",https://playtomic.com/clubs/san-padel,
+ko_miedzeszyn,Klub Miedzeszyn,kluby_org,Wawer,ul. Bielika 17 (Wawer),,,2,,,[],https://kluby.org/miedzeszyn,
+ko_aerosquash,Rakiety Aero,kluby_org,Wawer,,,,1,,,[],https://kluby.org/aerosquash,505 455 633
+pt_rakiety-squash-padel-outdoor,Rakiety Aero Padel Outdoor,playtomic,Wawer,03-994,,,,08:00 - 21:30,08:00 - 21:30,"[""Equipment Rental"", ""Free Parking"", ""Private Parking"", ""Cafeteria"", ""Changing Room"", ""Lockers"", ""WiFi""]",https://playtomic.com/clubs/rakiety-squash-padel-outdoor,
+ko_happy-padel,Happy Padel,kluby_org,Wesoła,,,,1,,,[],https://kluby.org/happy-padel,668 793 915
+ko_mana-padel,Mana Padel,kluby_org,Wilanów,ul. Zawodzie 24 (Wilanów),,,8,,,[],https://kluby.org/mana-padel,888 888 437
+ko_sinus,Sinus Sport Club,kluby_org,Wilanów,ul. Wał Zawadowski 99 (Wilanów),,,1,,,[],https://kluby.org/sinus,
+ko_teniswil,TenisWil,kluby_org,Wilanów,ul. Przyczółkowa 210C (Wilanów),,,3,,,[],https://kluby.org/teniswil,539 901 539
+ko_propadel,ProPadel Jutrzenki,kluby_org,Włochy,ul. Jutrzenki 12 (Włochy),,,5,,,[],https://kluby.org/propadel,
+ko_bulwary-wislane,Padel4All Bulwary,kluby_org,Śródmieście,,,,1,,,[],https://kluby.org/bulwary-wislane,
