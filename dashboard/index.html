@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Padel Warsaw — Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2/dist/chartjs-chart-matrix.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5/papaparse.min.js"></script>
+  <style>
+    body { background: #0f172a; color: #e2e8f0; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; }
+    .kpi-val { font-size: 2rem; font-weight: 700; }
+    .chart-wrap { position: relative; }
+    select { background: #1e293b; border: 1px solid #475569; color: #e2e8f0;
+             border-radius: 6px; padding: 4px 10px; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #0f172a; color: #94a3b8; font-weight: 600;
+         text-align: left; padding: 8px 12px; font-size: 0.75rem;
+         text-transform: uppercase; letter-spacing: 0.05em; }
+    td { padding: 8px 12px; border-bottom: 1px solid #1e293b; font-size: 0.875rem; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #1e293b; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             font-size: 0.7rem; font-weight: 600; }
+    .badge-green  { background: #064e3b; color: #6ee7b7; }
+    .badge-yellow { background: #451a03; color: #fcd34d; }
+    .badge-red    { background: #450a0a; color: #fca5a5; }
+    .loading { display: flex; align-items: center; justify-content: center;
+               height: 200px; color: #64748b; font-size: 0.875rem; }
+    #filterBar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-6">
+
+  <!-- Nagłówek -->
+  <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-white">Padel Warsaw</h1>
+      <p id="lastUpdate" class="text-slate-400 text-sm mt-1">Ładowanie danych...</p>
+    </div>
+    <div id="filterBar">
+      <label class="text-slate-400 text-sm">Dzielnica:</label>
+      <select id="filterDzielnica" onchange="applyFilters()">
+        <option value="">Wszystkie</option>
+      </select>
+      <label class="text-slate-400 text-sm ml-2">Źródło:</label>
+      <select id="filterSource" onchange="applyFilters()">
+        <option value="">Wszystkie</option>
+        <option value="playtomic">Playtomic</option>
+        <option value="kluby_org">Kluby.org</option>
+      </select>
+      <button onclick="loadAll()" class="ml-2 px-3 py-1 bg-indigo-600 hover:bg-indigo-500
+        text-white text-sm rounded-lg transition-colors">Odśwież</button>
+    </div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div id="kpiRow" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="card p-4">
+      <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Kluby</div>
+      <div id="kpiClubs" class="kpi-val text-indigo-400">—</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Korty padlowe</div>
+      <div id="kpiCourts" class="kpi-val text-cyan-400">—</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Śr. cena / h</div>
+      <div id="kpiPrice" class="kpi-val text-emerald-400">—</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Śr. obłożenie</div>
+      <div id="kpiOcc" class="kpi-val text-amber-400">—</div>
+    </div>
+  </div>
+
+  <!-- Heatmapa + Porównanie cen -->
+  <div class="grid md:grid-cols-2 gap-4 mb-4">
+    <div class="card p-4">
+      <h2 class="font-semibold text-white mb-3">Heatmapa obłożenia (dziś)</h2>
+      <p class="text-slate-400 text-xs mb-3">Procent zajętości per klub per godzina</p>
+      <div class="chart-wrap" style="height:320px">
+        <canvas id="chartHeatmap"></canvas>
+      </div>
+    </div>
+    <div class="card p-4">
+      <h2 class="font-semibold text-white mb-3">Porównanie cen per klub</h2>
+      <p class="text-slate-400 text-xs mb-3">Min / Śr / Max cena PLN (wynajem kortu 60 min)</p>
+      <div class="chart-wrap" style="height:320px">
+        <canvas id="chartPrices"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trend + Indoor/Outdoor -->
+  <div class="grid md:grid-cols-3 gap-4 mb-4">
+    <div class="card p-4 md:col-span-2">
+      <h2 class="font-semibold text-white mb-3">Trend (historia dzienna)</h2>
+      <p class="text-slate-400 text-xs mb-3">Obłożenie % i średnia cena PLN w czasie</p>
+      <div class="chart-wrap" style="height:260px">
+        <canvas id="chartTrend"></canvas>
+      </div>
+    </div>
+    <div class="card p-4">
+      <h2 class="font-semibold text-white mb-3">Indoor vs Outdoor</h2>
+      <p class="text-slate-400 text-xs mb-3">Podział kortów wg nawierzchni</p>
+      <div class="chart-wrap" style="height:220px; display:flex; align-items:center">
+        <canvas id="chartDonut"></canvas>
+      </div>
+      <div id="donutLegend" class="mt-3 space-y-1"></div>
+    </div>
+  </div>
+
+  <!-- Najlepsze oferty -->
+  <div class="card p-4 mb-4">
+    <h2 class="font-semibold text-white mb-1">Najlepsze oferty dziś</h2>
+    <p class="text-slate-400 text-xs mb-3">Wolne sloty — sortowanie: najtańsze pierwsze</p>
+    <div id="dealsTable" class="overflow-x-auto">
+      <div class="loading">Ładowanie...</div>
+    </div>
+  </div>
+
+  <!-- Tabela klubów -->
+  <div class="card p-4">
+    <h2 class="font-semibold text-white mb-3">Wszystkie kluby</h2>
+    <div id="clubsTable" class="overflow-x-auto">
+      <div class="loading">Ładowanie...</div>
+    </div>
+  </div>
+
+<script>
+// ─── Konfiguracja ─────────────────────────────────────────────────────────────
+const CSV_BASE = '../csv_exports/';
+
+// Paleta kolorów wykresów
+const COLORS = [
+  '#6366f1','#22d3ee','#34d399','#f59e0b','#f43f5e',
+  '#a78bfa','#38bdf8','#4ade80','#fbbf24','#fb7185',
+  '#818cf8','#67e8f9','#86efac','#fcd34d','#fda4af',
+];
+
+// ─── Stan globalny ─────────────────────────────────────────────────────────────
+let allData = {};
+let charts  = {};
+let activeFilter = { dzielnica: '', source: '' };
+
+// ─── Ładowanie CSV ─────────────────────────────────────────────────────────────
+function loadCSV(filename) {
+  return new Promise(resolve => {
+    Papa.parse(CSV_BASE + filename, {
+      download: true,
+      header: true,
+      dynamicTyping: true,
+      skipEmptyLines: true,
+      complete: r => resolve(r.data),
+      error: () => resolve([]),
+    });
+  });
+}
+
+async function loadAll() {
+  document.getElementById('lastUpdate').textContent = 'Aktualizowanie...';
+  try {
+    const [clubs, comparison, prices, occupancy, indoor, history] = await Promise.all([
+      loadCSV('latest_kluby.csv'),
+      loadCSV('latest_porownanie_klubow.csv'),
+      loadCSV('latest_ceny_wg_pory_dnia.csv'),
+      loadCSV('latest_oblozenie_per_kort_godzina.csv'),
+      loadCSV('latest_indoor_vs_outdoor.csv'),
+      loadCSV('history.csv'),
+    ]);
+
+    allData = { clubs, comparison, prices, occupancy, indoor, history };
+
+    // Zapełnij filtry
+    const dzielnice = [...new Set(comparison.map(r => r.dzielnica).filter(Boolean))].sort();
+    const sel = document.getElementById('filterDzielnica');
+    sel.innerHTML = '<option value="">Wszystkie</option>' +
+      dzielnice.map(d => `<option value="${d}">${d}</option>`).join('');
+
+    applyFilters();
+
+    // Ostatnia aktualizacja
+    if (history.length) {
+      const last = history[history.length - 1];
+      document.getElementById('lastUpdate').textContent =
+        `Ostatnia aktualizacja: ${last.date} · ${last.n_clubs} klubów · ${last.n_slots} slotów`;
+    } else {
+      document.getElementById('lastUpdate').textContent = 'Dane załadowane';
+    }
+  } catch(e) {
+    document.getElementById('lastUpdate').textContent = 'Błąd ładowania danych: ' + e.message;
+  }
+}
+
+// ─── Filtrowanie ───────────────────────────────────────────────────────────────
+function applyFilters() {
+  activeFilter.dzielnica = document.getElementById('filterDzielnica').value;
+  activeFilter.source    = document.getElementById('filterSource').value;
+
+  let filtered = allData.comparison || [];
+  if (activeFilter.dzielnica)
+    filtered = filtered.filter(r => r.dzielnica === activeFilter.dzielnica);
+  if (activeFilter.source)
+    filtered = filtered.filter(r => r.source === activeFilter.source);
+
+  renderKPI(filtered);
+  renderPriceChart(filtered);
+  renderHeatmap(allData.occupancy || [], filtered);
+  renderTrend(allData.history || []);
+  renderDonut(allData.indoor || []);
+  renderDeals(allData.occupancy || [], filtered);
+  renderClubsTable(filtered);
+}
+
+// ─── KPI ───────────────────────────────────────────────────────────────────────
+function renderKPI(data) {
+  const n_clubs  = data.length;
+  const n_courts = data.reduce((s, r) => s + (r.korty_padlowe || 0), 0);
+  const prices   = data.map(r => r.cena_srednia).filter(v => v > 0);
+  const avg_p    = prices.length ? Math.round(prices.reduce((a,b)=>a+b,0)/prices.length) : null;
+  const occs     = data.map(r => r.oblozenie_pct).filter(v => v != null && v >= 0);
+  const avg_occ  = occs.length ? Math.round(occs.reduce((a,b)=>a+b,0)/occs.length) : null;
+
+  document.getElementById('kpiClubs').textContent  = n_clubs;
+  document.getElementById('kpiCourts').textContent = n_courts || '—';
+  document.getElementById('kpiPrice').textContent  = avg_p ? avg_p + ' zł' : '—';
+  document.getElementById('kpiOcc').textContent    = avg_occ != null ? avg_occ + '%' : '—';
+}
+
+// ─── Wykres: Porównanie cen ────────────────────────────────────────────────────
+function renderPriceChart(data) {
+  const valid = data
+    .filter(r => r.cena_min > 0 || r.cena_max > 0 || r.cena_srednia > 0)
+    .sort((a,b) => (a.cena_srednia||0) - (b.cena_srednia||0));
+
+  const labels  = valid.map(r => r.klub);
+  const mins    = valid.map(r => r.cena_min    || null);
+  const avgs    = valid.map(r => r.cena_srednia || null);
+  const maxs    = valid.map(r => r.cena_max    || null);
+
+  if (charts.prices) charts.prices.destroy();
+  const ctx = document.getElementById('chartPrices').getContext('2d');
+  charts.prices = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Min PLN', data: mins, backgroundColor: '#10b981' },
+        { label: 'Śr. PLN', data: avgs, backgroundColor: '#6366f1' },
+        { label: 'Max PLN', data: maxs, backgroundColor: '#f43f5e' },
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
+      scales: {
+        x: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' },
+             title: { display: true, text: 'PLN', color: '#64748b' } },
+        y: { ticks: { color: '#cbd5e1', font: { size: 10 } }, grid: { color: '#1e293b' } },
+      },
+    }
+  });
+}
+
+// ─── Wykres: Heatmapa ─────────────────────────────────────────────────────────
+function renderHeatmap(occupancy, filteredComparison) {
+  const validClubs = new Set(filteredComparison.map(r => r.klub));
+  const filtered   = occupancy.filter(r => !validClubs.size || validClubs.has(r.klub));
+
+  // Zagreguj: per klub per godzina → procent wolnych
+  const agg = {};
+  filtered.forEach(r => {
+    const k = r.klub;
+    const h = r.godzina;
+    if (!k || h == null) return;
+    if (!agg[k]) agg[k] = {};
+    if (!agg[k][h]) agg[k][h] = { free: 0, total: 0 };
+    agg[k][h].total++;
+    if (r.wolny) agg[k][h].free++;
+  });
+
+  const clubs = Object.keys(agg).sort();
+  const hours = Array.from({ length: 18 }, (_, i) => i + 6); // 6–23
+
+  // Buduj dane dla matrix chart
+  const matrixData = [];
+  clubs.forEach((club, yi) => {
+    hours.forEach(h => {
+      const entry = agg[club]?.[h];
+      const pct   = entry ? Math.round(entry.free / entry.total * 100) : null;
+      matrixData.push({ x: h, y: yi, v: pct });
+    });
+  });
+
+  if (charts.heatmap) charts.heatmap.destroy();
+  const ctx = document.getElementById('chartHeatmap').getContext('2d');
+  charts.heatmap = new Chart(ctx, {
+    type: 'matrix',
+    data: {
+      datasets: [{
+        label: '% wolnych slotów',
+        data: matrixData,
+        backgroundColor(ctx) {
+          const v = ctx.dataset.data[ctx.dataIndex]?.v;
+          if (v == null) return '#1e293b';
+          // zielony (wolny) → czerwony (zajęty)
+          const g = Math.round(v * 2.55);
+          const r = Math.round((100 - v) * 2.55);
+          return `rgba(${r},${g},60,0.85)`;
+        },
+        borderColor: '#0f172a',
+        borderWidth: 1,
+        width(ctx) {
+          const a = ctx.chart.chartArea || {};
+          return clubs.length ? (a.right - a.left) / 18 - 1 : 10;
+        },
+        height(ctx) {
+          const a = ctx.chart.chartArea || {};
+          return clubs.length ? (a.bottom - a.top) / clubs.length - 1 : 10;
+        },
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: ctx => `${clubs[ctx[0].raw.y]} — ${ctx[0].raw.x}:00`,
+            label: ctx => ctx.raw.v != null ? `${ctx.raw.v}% wolnych` : 'brak danych',
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          min: 5.5, max: 23.5,
+          ticks: { stepSize: 1, color: '#64748b',
+                   callback: v => Number.isInteger(v) ? v + ':00' : '' },
+          grid: { color: '#1e293b' },
+        },
+        y: {
+          type: 'linear',
+          min: -0.5, max: clubs.length - 0.5,
+          ticks: { stepSize: 1, color: '#cbd5e1', font: { size: 9 },
+                   callback: v => clubs[v] || '' },
+          grid: { color: '#1e293b' },
+        }
+      }
+    }
+  });
+}
+
+// ─── Wykres: Trend ─────────────────────────────────────────────────────────────
+function renderTrend(history) {
+  const last30 = history.slice(-30);
+  if (charts.trend) charts.trend.destroy();
+  const ctx = document.getElementById('chartTrend').getContext('2d');
+  charts.trend = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: last30.map(r => r.date),
+      datasets: [
+        {
+          label: 'Obłożenie %',
+          data: last30.map(r => r.occupancy_pct),
+          borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)',
+          tension: 0.3, fill: true, yAxisID: 'y',
+        },
+        {
+          label: 'Śr. cena PLN',
+          data: last30.map(r => r.price_avg),
+          borderColor: '#6366f1', backgroundColor: 'rgba(99,102,241,0.1)',
+          tension: 0.3, fill: true, yAxisID: 'y2',
+        },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
+      scales: {
+        x: { ticks: { color: '#64748b', maxRotation: 45 }, grid: { color: '#1e293b' } },
+        y:  { ticks: { color: '#f59e0b' }, grid: { color: '#1e293b' },
+              title: { display: true, text: 'Obłożenie %', color: '#f59e0b' } },
+        y2: { position: 'right', ticks: { color: '#6366f1' }, grid: { drawOnChartArea: false },
+              title: { display: true, text: 'Cena PLN', color: '#6366f1' } },
+      }
+    }
+  });
+}
+
+// ─── Wykres: Donut ─────────────────────────────────────────────────────────────
+function renderDonut(indoor) {
+  if (!indoor.length) return;
+  const labels = indoor.map(r => r.nawierzchnia || 'unknown');
+  const data   = indoor.map(r => r.kortow || 0);
+  const colors = ['#6366f1','#22d3ee','#34d399','#f59e0b'];
+
+  if (charts.donut) charts.donut.destroy();
+  const ctx = document.getElementById('chartDonut').getContext('2d');
+  charts.donut = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels,
+      datasets: [{ data, backgroundColor: colors, borderColor: '#0f172a', borderWidth: 2 }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw} kortów` } }
+      }
+    }
+  });
+
+  // Legenda manualna
+  const leg = document.getElementById('donutLegend');
+  leg.innerHTML = labels.map((l, i) =>
+    `<div class="flex items-center gap-2 text-xs text-slate-300">
+       <span style="width:10px;height:10px;border-radius:2px;background:${colors[i]};display:inline-block"></span>
+       ${l}: <strong>${data[i]}</strong> kortów
+       ${indoor[i]?.srednia_cena_pln ? `· śr. ${indoor[i].srednia_cena_pln} zł` : ''}
+     </div>`
+  ).join('');
+}
+
+// ─── Tabela: Najlepsze oferty ─────────────────────────────────────────────────
+function renderDeals(occupancy, filteredComparison) {
+  const validClubs = new Set(filteredComparison.map(r => r.klub));
+  const now = new Date().getHours();
+
+  // Pobierz ceny ze comparison
+  const priceMap = {};
+  filteredComparison.forEach(r => { priceMap[r.klub] = r.cena_min; });
+
+  const deals = occupancy
+    .filter(r => r.wolny && r.godzina >= now && (!validClubs.size || validClubs.has(r.klub)))
+    .map(r => ({
+      klub: r.klub,
+      dzielnica: r.dzielnica,
+      kort: r.kort,
+      godzina: `${String(r.godzina).padStart(2,'0')}:${String(r.minuta||0).padStart(2,'0')}`,
+      cena: priceMap[r.klub] || null,
+      nawierzchnia: r.nawierzchnia,
+    }))
+    .sort((a,b) => (a.cena||999) - (b.cena||999))
+    .slice(0, 15);
+
+  const el = document.getElementById('dealsTable');
+  if (!deals.length) {
+    el.innerHTML = '<div class="loading">Brak wolnych slotów dla wybranych filtrów</div>';
+    return;
+  }
+
+  el.innerHTML = `
+    <table>
+      <thead><tr>
+        <th>Klub</th><th>Kort</th><th>Godzina</th>
+        <th>Cena min</th><th>Nawierzchnia</th><th>Dzielnica</th>
+      </tr></thead>
+      <tbody>
+        ${deals.map(d => `<tr>
+          <td class="font-medium text-white">${d.klub}</td>
+          <td class="text-slate-300">${d.kort || '—'}</td>
+          <td><span class="badge badge-green">${d.godzina}</span></td>
+          <td>${d.cena ? `<span class="text-emerald-400 font-semibold">${d.cena} zł</span>` : '—'}</td>
+          <td>${d.nawierzchnia ? `<span class="badge badge-yellow">${d.nawierzchnia}</span>` : '—'}</td>
+          <td class="text-slate-400">${d.dzielnica || '—'}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+// ─── Tabela: Wszystkie kluby ──────────────────────────────────────────────────
+function renderClubsTable(data) {
+  const el = document.getElementById('clubsTable');
+  if (!data.length) {
+    el.innerHTML = '<div class="loading">Brak danych</div>';
+    return;
+  }
+
+  const sorted = [...data].sort((a,b) => (a.dzielnica||'').localeCompare(b.dzielnica||'','pl'));
+
+  el.innerHTML = `
+    <table>
+      <thead><tr>
+        <th>Klub</th><th>Dzielnica</th><th>Źródło</th>
+        <th>Korty</th><th>Nawierzchnie</th>
+        <th>Cena min</th><th>Cena śr.</th><th>Cena max</th>
+        <th>Slotów dziś</th><th>Obłożenie</th>
+      </tr></thead>
+      <tbody>
+        ${sorted.map(r => {
+          const occ = r.oblozenie_pct;
+          const badge = occ == null ? '' :
+            occ < 50  ? `<span class="badge badge-green">${occ}%</span>` :
+            occ < 80  ? `<span class="badge badge-yellow">${occ}%</span>` :
+                        `<span class="badge badge-red">${occ}%</span>`;
+          return `<tr>
+            <td class="font-medium text-white">${r.klub}</td>
+            <td class="text-slate-400">${r.dzielnica||'—'}</td>
+            <td><span class="badge ${r.source==='playtomic' ? 'badge-green' : 'badge-yellow'}">${r.source}</span></td>
+            <td class="text-center">${r.korty_padlowe||'—'}</td>
+            <td class="text-slate-300">${r.nawierzchnie||'—'}</td>
+            <td>${r.cena_min ? r.cena_min+' zł' : '—'}</td>
+            <td>${r.cena_srednia ? `<span class="text-indigo-300">${r.cena_srednia} zł</span>` : '—'}</td>
+            <td>${r.cena_max ? r.cena_max+' zł' : '—'}</td>
+            <td class="text-center">${r.slotow_dzisiaj||'—'}</td>
+            <td>${badge || '—'}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
+}
+
+// ─── Start ─────────────────────────────────────────────────────────────────────
+loadAll();
+</script>
+</body>
+</html>

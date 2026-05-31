@@ -1,0 +1,17 @@
+# Logi — zmieniają się przy każdym uruchomieniu, nie commitujemy
+*.log
+
+# Playwright debug screenshots
+debug_*.png
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+
+# Stare foldery robocze (nie potrzebne w repo)
+filesfsdf/
+files,analiza danych klubó∑/
