@@ -16,28 +16,32 @@ import asyncio, sqlite3, csv, logging, re, json, getpass, os
 from datetime import datetime
 from pathlib import Path
 
+import requests
+
 DB_PATH  = Path("padel_warszawa.db")
 CSV_DIR  = Path("csv_exports")
 LOG_FILE = "scraper.log"
 
 # ─── Kompletna lista klubów ───────────────────────────────────────────────────
 
-# Playtomic: sloty w czasie rzeczywistym (od bieżącej godziny wzwyż)
+# Playtomic: publiczne API api.playtomic.io — dokładne ceny per slot,
+# prawdziwa liczba kortów, indoor/outdoor (od bieżącej godziny wzwyż)
 PLAYTOMIC = [
-    {"slug": "warsaw-padel-club",            "name": "Warsaw Padel Club",          "dzielnica": "Białołęka"},
-    {"slug": "warsaw-padel-club-squash",     "name": "Warsaw Padel Club – Squash", "dzielnica": "Białołęka"},
-    {"slug": "interpadel-warszawa",          "name": "Interpadel Warszawa",        "dzielnica": "Mokotów"},
-    {"slug": "rakiety-pge-narodowy",         "name": "Rakiety PGE Narodowy",       "dzielnica": "Praga Południe"},
-    {"slug": "rakiety-squash-padel-outdoor", "name": "Rakiety Aero Padel Outdoor", "dzielnica": "Wawer"},
-    {"slug": "loba-padel",                   "name": "Loba Padel",                 "dzielnica": "Białołęka"},
-    {"slug": "san-padel",                    "name": "San Padel",                  "dzielnica": "Ursynów"},
-    {"slug": "rqt-spot",                     "name": "RQT Spot",                   "dzielnica": "Bielany"},
-    {"slug": "we-are-padel-warsaw",          "name": "We Are Padel Warsaw",        "dzielnica": "Mokotów"},
+    {"slug": "warsaw-padel-club",   "name": "Warsaw Padel Club",          "dzielnica": "Białołęka",     "tenant_id": "e7284c78-e269-44ad-8f3d-a4d63089c80c"},
+    {"slug": "interpadel-warszawa", "name": "Interpadel Warszawa",        "dzielnica": "Mokotów",       "tenant_id": "057c5f40-f54b-4e4d-977c-1f9547a25076"},
+    {"slug": "rakiety-pge-narodowy","name": "Rakiety PGE Narodowy",       "dzielnica": "Praga Południe","tenant_id": "153bbff6-abf6-4ffe-ad93-ba1045e9d43b"},
+    {"slug": "rakiety-aero-outdoor","name": "Rakiety Aero Padel Outdoor", "dzielnica": "Wawer",         "tenant_id": "f3f86625-3c23-41fd-be77-526395fabe74"},
+    {"slug": "loba-padel",          "name": "Loba Padel",                 "dzielnica": "Białołęka",     "tenant_id": "3ae6a706-eba4-42be-9cb3-074c7ade27bb"},
+    {"slug": "san-padel",           "name": "San Padel",                  "dzielnica": "Ursynów",       "tenant_id": "f690a458-011d-4ad2-88c5-e8d175ccc31c"},
+    {"slug": "rqt-spot",            "name": "RQT Spot",                   "dzielnica": "Bielany",       "tenant_id": "44340c7a-0951-47bd-8a7e-ccbe0703cdc3"},
+    {"slug": "we-are-padel-warsaw", "name": "We Are Padel Warsaw",        "dzielnica": "Mokotów",       "tenant_id": "abce9bb1-25e9-426c-b21b-8e5d6cd8ef5e"},
 ]
 
 # Kluby.org: pełny grafik dnia (cały dzień z historią) – wymaga logowania
 KLUBYORG = [
-    {"slug": "padlovnia",       "name": "Padlovnia",           "dzielnica": "Ursynów"},
+    {"slug": "padlovnia",       "name": "Padlovnia",           "dzielnica": "Ursynów",
+     "extra_courts": [{"name": f"Outdoor {i+1}", "surface_type": "outdoor",
+                        "court_format": "double"} for i in range(4)]},
     {"slug": "mana-padel",      "name": "Mana Padel",          "dzielnica": "Wilanów"},
     {"slug": "toro-padel",      "name": "Toro Padel",          "dzielnica": "Bemowo"},
     {"slug": "mera",            "name": "WKT Mera",            "dzielnica": "Ochota"},
@@ -237,94 +241,122 @@ def save_prices(conn, club_id, prices):
     conn.commit()
 
 
-# ─── PLAYTOMIC scraper ────────────────────────────────────────────────────────
+# ─── PLAYTOMIC (publiczne API) ────────────────────────────────────────────────
 
-async def scrape_playtomic(page, klub):
-    url = f"https://playtomic.com/clubs/{klub['slug']}"
+PLAYTOMIC_API = "https://api.playtomic.io/v1"
+PT_HEADERS    = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                               "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
+WEEKDAY_API   = ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"]
+
+
+def _pt_get(path, params=None):
+    r = requests.get(f"{PLAYTOMIC_API}/{path}", params=params, headers=PT_HEADERS, timeout=20)
+    r.raise_for_status()
+    return r.json()
+
+
+def _parse_price(s):
+    m = re.search(r"(\d+(?:[.,]\d+)?)", s or "")
+    return float(m.group(1).replace(",", ".")) if m else None
+
+
+def build_playtomic_data(klub, date_str):
+    """Pobiera metadane klubu i dostępność z publicznego API Playtomic.
+
+    Obłożenie wyprowadzamy z siatki potencjalnych slotów (godziny otwarcia × korty,
+    co 30 min, od bieżącej godziny wzwyż): slot jest wolny, gdy API zwróciło dla
+    danego kortu możliwy start o tej godzinie — w przeciwnym razie jest zajęty.
+    """
     out = {"name":"", "courts":[], "slots":[], "prices":[], "address":"",
            "lat":None, "lng":None, "hours_weekday":"", "hours_weekend":"",
            "amenities":[], "ok":False}
+    tid = klub.get("tenant_id")
+    if not tid:
+        log.warning("    brak tenant_id – pomijam %s", klub["slug"]); return out
     try:
-        resp = await page.goto(url, wait_until="domcontentloaded", timeout=45000)
-        if resp and resp.status == 404:
-            log.warning("    404 – pomijam %s", klub["slug"]); return out
-        await page.wait_for_timeout(3500)
+        tenant = _pt_get(f"tenants/{tid}")
+        out["name"] = tenant.get("tenant_name") or klub["name"]
 
-        html = await page.content()
-        body = await page.inner_text("body")
+        addr  = tenant.get("address") or {}
+        out["address"] = ", ".join(x for x in (addr.get("street"), addr.get("postal_code")) if x)[:200]
+        coord = addr.get("coordinate") or {}
+        out["lat"], out["lng"] = coord.get("lat"), coord.get("lon")
 
-        # GPS
-        m = re.search(r"markers=color[^|]+\|([0-9.]+),([0-9.]+)", html)
-        if m: out["lat"], out["lng"] = float(m.group(1)), float(m.group(2))
+        oh = tenant.get("opening_hours") or {}
+        def fmt(day):
+            d = oh.get(day) or {}
+            return f"{d['opening_time']}-{d['closing_time']}" if d.get("opening_time") else ""
+        out["hours_weekday"] = fmt("MONDAY")
+        out["hours_weekend"] = fmt("SATURDAY")
 
-        # Adres
-        m = re.search(r"(\d{2}-\d{3}[^\n]{0,60})", body)
-        if m: out["address"] = m.group(1).strip()[:200]
-
-        # Godziny
-        hm = re.findall(r"(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+"
-                        r"(\d{1,2}:\d{2}\s*[-–]\s*\d{1,2}:\d{2})", body)
-        hd = {d:h for d,h in hm}
-        out["hours_weekday"] = hd.get("Monday","")
-        out["hours_weekend"] = hd.get("Saturday","")
-
-        # Udogodnienia
-        kw = ["Disabled Access","Equipment Rental","Free Parking","Private Parking",
-              "Store","Restaurant","Cafeteria","Snack Bar","Vending Machine",
-              "Changing Room","Lockers","WiFi"]
-        out["amenities"] = [a for a in kw if a.lower() in body.lower()]
-
-        # Korty padlowe (tylko padel, nie squash)
-        for name_raw, desc_raw in re.findall(
-                r"(\d+\s*[-–]\s*[^\n]+?)\s*\n\s*((?:indoor|outdoor)[^\n]*)", body, re.IGNORECASE):
-            if "squash" in name_raw.lower(): continue
-            d = desc_raw.lower()
+        # Korty padlowe (kolejność = court_idx używany przez save_slots/save_courts)
+        resources = [r for r in (tenant.get("resources") or [])
+                     if r.get("sport_id") == "PADEL" and r.get("is_active", True)]
+        res_idx = {}
+        for i, r in enumerate(resources):
+            props = r.get("properties") or {}
             out["courts"].append({
-                "name": name_raw.strip()[:100],
-                "surface_type": "indoor" if "indoor" in d else ("outdoor" if "outdoor" in d else "unknown"),
-                "court_format": "single" if "single" in d else "double",
-                "court_style":  "panoramic" if "panoramic" in d else "standard",
+                "name": (r.get("name") or f"Kort {i+1}")[:100],
+                "surface_type": props.get("resource_type") or "unknown",
+                "court_format": props.get("resource_size") or "double",
+                "court_style":  props.get("resource_feature") or "standard",
             })
+            res_idx[r.get("resource_id")] = i
 
-        # Sloty
-        els = await page.query_selector_all(
-            "button[class*='slot'],div[class*='slot'],[class*='time-cell'],"
-            "[aria-label*='AM'],[aria-label*='PM'],[class*='available'],[class*='booked']")
-        for el in els:
-            aria = await el.get_attribute("aria-label") or ""
-            cls  = await el.get_attribute("class") or ""
-            txt  = (await el.inner_text()).strip()
-            tm   = re.search(r"(\d{1,2}):(\d{2})\s*(AM|PM)?", aria+" "+txt, re.IGNORECASE)
-            if not tm: continue
-            h, ampm = int(tm.group(1)), (tm.group(3) or "")
-            if ampm.upper()=="PM" and h!=12: h+=12
-            if ampm.upper()=="AM" and h==12: h=0
-            is_free = not any(w in cls.lower() for w in ["disabled","unavailable","booked","full"])
-            out["slots"].append({"hour":h, "minute":0, "is_free":1 if is_free else 0})
+        # Dostępność: wolne starty per kort + ceny per slot
+        avail = _pt_get("availability", {
+            "user_id": "me", "tenant_id": tid, "sport_id": "PADEL",
+            "local_start_min": f"{date_str}T00:00:00",
+            "local_start_max": f"{date_str}T23:59:59",
+        })
+        free       = {}    # court_idx -> set((hour, minute))
+        seen_price = set()
+        for entry in avail:
+            cidx = res_idx.get(entry.get("resource_id"))
+            if cidx is None: continue
+            for sl in entry.get("slots") or []:
+                tm = re.match(r"(\d{1,2}):(\d{2})", sl.get("start_time") or "")
+                if not tm: continue
+                h, mnt = int(tm.group(1)), int(tm.group(2))
+                free.setdefault(cidx, set()).add((h, mnt))
+                price = _parse_price(sl.get("price"))
+                dur   = int(sl.get("duration") or 90)
+                if price and 30 <= price <= 600 and (dur, price) not in seen_price:
+                    seen_price.add((dur, price))
+                    out["prices"].append({"price_type":"court", "price_pln":price,
+                                          "duration_min":dur, "description":"cena z Playtomic API"})
 
-        # Ceny
-        seen, prices = set(), []
-        for desc,dur,price in re.findall(
-                r"(Trening[^\n]{0,60}|Lekcja[^\n]{0,40}).*?(\d+)\s*min.*?(\d+)\s*PLN",
-                body, re.IGNORECASE):
-            p = float(price)
-            if p not in seen and 30<=p<=500:
-                seen.add(p)
-                prices.append({"price_type":"academy","price_pln":p,
-                               "duration_min":int(dur),"description":desc.strip()[:150]})
-        for p_str in re.findall(r"(\d{2,3})\s*PLN", body):
-            p = float(p_str)
-            if 50<=p<=450 and p not in seen:
-                seen.add(p)
-                prices.append({"price_type":"court","price_pln":p,"duration_min":90,
-                               "description":"cena z Playtomic"})
-        out["prices"] = prices
+        # Siatka potencjalnych slotów na dziś (co 30 min), tylko od bieżącej godziny.
+        # Budujemy ją tylko gdy API w ogóle zwróciło dostępność (avail) — inaczej
+        # klub bez rezerwacji online dostałby fałszywe 100% obłożenia.
+        dow   = WEEKDAY_API[datetime.strptime(date_str, "%Y-%m-%d").weekday()]
+        today = oh.get(dow) or {}
+        if today.get("opening_time") and today.get("closing_time") and resources and avail:
+            oh_h, oh_m = map(int, today["opening_time"].split(":"))
+            ch_h, ch_m = map(int, today["closing_time"].split(":"))
+            start_min, end_min = oh_h*60 + oh_m, ch_h*60 + ch_m
+            # Zamknięcie po północy (np. 01:00) → grafik tylko do końca dnia (23:30)
+            if end_min <= start_min:
+                end_min = 24*60
+            end_min = min(end_min, 24*60)
+            now = datetime.now()
+            if date_str == now.strftime("%Y-%m-%d"):
+                start_min = max(start_min, now.hour*60 + (0 if now.minute < 30 else 30))
+            for cidx in range(len(resources)):
+                t = start_min
+                while t < end_min:
+                    h, mnt = divmod(t, 60)
+                    out["slots"].append({"court_idx":cidx, "hour":h, "minute":mnt,
+                                         "is_free": 1 if (h, mnt) in free.get(cidx, set()) else 0})
+                    t += 30
+
         out["ok"] = True
-        log.info("    ✓ %d kortów | %d slotów | ceny: %s PLN",
-                 len(out["courts"]), len(out["slots"]),
-                 sorted({p["price_pln"] for p in prices}) or "brak")
+        n_free = sum(1 for s in out["slots"] if s["is_free"])
+        log.info("    ✓ %d kortów | %d slotów (%d wolnych) | ceny: %s PLN",
+                 len(out["courts"]), len(out["slots"]), n_free,
+                 sorted({p["price_pln"] for p in out["prices"]}) or "brak")
     except Exception as e:
-        log.error("    Błąd: %s", e)
+        log.error("    Błąd API Playtomic (%s): %s", klub["slug"], e)
     return out
 
 
@@ -562,30 +594,44 @@ def export_csv(conn, date_str):
                 CASE s.pora_dnia WHEN 'rano (6-10)' THEN 1
                     WHEN 'poludnie (10-14)' THEN 2 WHEN 'popoludnie (14-18)' THEN 3
                     WHEN 'wieczor (18-22)' THEN 4 ELSE 5 END""",
+        # Agregaty slotów/cen/nawierzchni liczone w osobnych podzapytaniach
+        # (jeden wiersz na klub) — bez tego JOIN-y mnożyłyby sloty i zawyżały
+        # obłożenie powyżej 100%.
         "6_porownanie_klubow": f"""
             SELECT c.name AS klub, c.dzielnica, c.source,
                    c.padel_courts_total AS korty_padlowe,
-                   GROUP_CONCAT(DISTINCT r.surface_type) AS nawierzchnie,
-                   MIN(p.price_pln) AS cena_min, MAX(p.price_pln) AS cena_max,
-                   ROUND(AVG(p.price_pln),0) AS cena_srednia,
+                   (SELECT GROUP_CONCAT(DISTINCT surface_type)
+                      FROM courts WHERE club_id=c.id) AS nawierzchnie,
+                   pr.cena_min, pr.cena_max, pr.cena_srednia,
                    c.hours_weekday AS godz_tydzien, c.hours_weekend AS godz_weekend,
-                   COUNT(DISTINCT s.id) AS slotow_dzisiaj,
-                   ROUND(100.0*SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END)/
-                         NULLIF(COUNT(DISTINCT s.id),0),1) AS oblozenie_pct,
+                   COALESCE(sl.slotow_dzisiaj,0) AS slotow_dzisiaj,
+                   ROUND(100.0*sl.zajete/NULLIF(sl.slotow_dzisiaj,0),1) AS oblozenie_pct,
                    c.address
             FROM clubs c
-            LEFT JOIN courts r ON r.club_id=c.id
-            LEFT JOIN prices p ON p.club_id=c.id AND p.price_type='court'
-            LEFT JOIN slots  s ON s.club_id=c.id AND s.slot_date='{date_str}'
-            GROUP BY c.id ORDER BY c.dzielnica, c.name""",
+            LEFT JOIN (SELECT club_id, MIN(price_pln) AS cena_min,
+                              MAX(price_pln) AS cena_max,
+                              ROUND(AVG(price_pln),0) AS cena_srednia
+                       FROM prices WHERE price_type='court'
+                       GROUP BY club_id) pr ON pr.club_id=c.id
+            LEFT JOIN (SELECT club_id, COUNT(*) AS slotow_dzisiaj,
+                              SUM(CASE WHEN is_free=0 THEN 1 ELSE 0 END) AS zajete
+                       FROM slots WHERE slot_date='{date_str}'
+                       GROUP BY club_id) sl ON sl.club_id=c.id
+            ORDER BY c.dzielnica, c.name""",
+        # Liczba kortów z tabeli courts; ceny per nawierzchnia z agregatu cen
+        # klubów (jeden wiersz na klub) — bez fan-out z JOIN prices.
         "7_indoor_vs_outdoor": """
             SELECT r.surface_type AS nawierzchnia,
                    COUNT(DISTINCT r.club_id) AS klubow,
                    COUNT(r.id) AS kortow,
-                   ROUND(AVG(p.price_pln),0) AS srednia_cena_pln,
-                   MIN(p.price_pln) AS min_cena, MAX(p.price_pln) AS max_cena
+                   ROUND(AVG(pr.cena_srednia),0) AS srednia_cena_pln,
+                   MIN(pr.cena_min) AS min_cena, MAX(pr.cena_max) AS max_cena
             FROM courts r
-            LEFT JOIN prices p ON p.club_id=r.club_id AND p.price_type='court'
+            LEFT JOIN (SELECT club_id, MIN(price_pln) AS cena_min,
+                              MAX(price_pln) AS cena_max,
+                              AVG(price_pln) AS cena_srednia
+                       FROM prices WHERE price_type='court'
+                       GROUP BY club_id) pr ON pr.club_id=r.club_id
             GROUP BY r.surface_type""",
     }
     exported = []
@@ -728,6 +774,27 @@ async def run():
     today = datetime.today().strftime("%Y-%m-%d")
     now   = datetime.now().isoformat()
 
+    # ── 1. PLAYTOMIC (publiczne API, bez przeglądarki) ────────────────────────
+    print("\n── Playtomic (" + str(len(PLAYTOMIC)) + " klubów) " + "─"*35)
+    for klub in PLAYTOMIC:
+        log.info("  [Playtomic API] → %s", klub["name"])
+        data = build_playtomic_data(klub, today)
+        if not data["ok"]: continue
+        club_id = f"pt_{klub['slug']}"
+        upsert_club(conn, {
+            "id":club_id, "name":data["name"] or klub["name"],
+            "source":"playtomic", "dzielnica":klub["dzielnica"],
+            "address":data["address"], "lat":data["lat"], "lng":data["lng"],
+            "padel_courts_total":len(data["courts"]) or None,
+            "hours_weekday":data["hours_weekday"], "hours_weekend":data["hours_weekend"],
+            "amenities":json.dumps(data["amenities"], ensure_ascii=False),
+            "website":f"https://playtomic.com/clubs/{klub['slug']}",
+            "phone":None, "scraped_at":now,
+        })
+        save_courts(conn, club_id, data["courts"])
+        save_slots(conn, club_id, today, data["slots"], data["courts"], "playtomic")
+        save_prices(conn, club_id, data["prices"])
+
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(
             headless=True, args=["--no-sandbox","--disable-dev-shm-usage"])
@@ -736,28 +803,6 @@ async def run():
             user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
         page = await ctx.new_page()
-
-        # ── 1. PLAYTOMIC ──────────────────────────────────────────────────────
-        print("\n── Playtomic (" + str(len(PLAYTOMIC)) + " klubów) " + "─"*35)
-        for klub in PLAYTOMIC:
-            log.info("  [Playtomic] → %s", klub["name"])
-            data = await scrape_playtomic(page, klub)
-            if not data["ok"]: continue
-            club_id = f"pt_{klub['slug']}"
-            upsert_club(conn, {
-                "id":club_id, "name":data["name"] or klub["name"],
-                "source":"playtomic", "dzielnica":klub["dzielnica"],
-                "address":data["address"], "lat":data["lat"], "lng":data["lng"],
-                "padel_courts_total":len(data["courts"]) or None,
-                "hours_weekday":data["hours_weekday"], "hours_weekend":data["hours_weekend"],
-                "amenities":json.dumps(data["amenities"], ensure_ascii=False),
-                "website":f"https://playtomic.com/clubs/{klub['slug']}",
-                "phone":None, "scraped_at":now,
-            })
-            save_courts(conn, club_id, data["courts"])
-            save_slots(conn, club_id, today, data["slots"], data["courts"], "playtomic")
-            save_prices(conn, club_id, data["prices"])
-            await page.wait_for_timeout(1500)
 
         # ── 2. KLUBY.ORG – logowanie ──────────────────────────────────────────
         print("\n── Kluby.org (" + str(len(KLUBYORG)) + " klubów) " + "─"*35)
@@ -769,19 +814,20 @@ async def run():
                 log.info("  [Kluby.org] → %s", klub["name"])
                 data = await scrape_klubyorg(page, klub, today)
                 club_id = f"ko_{klub['slug']}"
+                all_courts = data["courts"] + klub.get("extra_courts", [])
                 upsert_club(conn, {
                     "id":club_id, "name":klub["name"], "source":"kluby_org",
                     "dzielnica":klub["dzielnica"], "address":data["address"],
                     "lat":None, "lng":None,
-                    "padel_courts_total":len(data["courts"]) or None,
+                    "padel_courts_total":len(all_courts) or None,
                     "hours_weekday":data["hours_weekday"],
                     "hours_weekend":data["hours_weekend"],
                     "amenities":json.dumps(data["amenities"], ensure_ascii=False),
                     "website":f"https://kluby.org/{klub['slug']}",
                     "phone":data["phone"], "scraped_at":now,
                 })
-                save_courts(conn, club_id, data["courts"])
-                save_slots(conn, club_id, today, data["slots"], data["courts"], "kluby_org")
+                save_courts(conn, club_id, all_courts)
+                save_slots(conn, club_id, today, data["slots"], all_courts, "kluby_org")
                 save_prices(conn, club_id, data["prices"])
                 await page.wait_for_timeout(1500)
 
