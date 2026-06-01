@@ -525,23 +525,29 @@ async def scrape_klubyorg(page, klub, date_str):
 
         out["slots"] = slots
 
-        # Ceny: jedno wywołanie JS — szuka cen tylko w wolnych komórkach tabeli
-        # rezerwacji. Precyzyjniejsze niż regex po całym body; unika kart.
-        # COALESCE duration_min=60 → normalizacja do zł/h działa poprawnie.
+        # Ceny: jedno wywołanie JS skanuje wszystkie węzły tekstowe strony
+        # (pomija script/style). Szybsze niż inner_text + Python regex;
+        # zakres podobny do starego podejścia ale z kontrolą kontekstu.
+        # duration_min=60 — zakładamy sloty godzinowe (typowe dla kluby.org).
         try:
             price_vals = await page.evaluate("""() => {
-                const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/i;
+                const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/gi;
+                const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
                 const seen = new Set();
-                document.querySelectorAll('td, [class*="slot"], [class*="cell"]').forEach(el => {
-                    const txt = el.textContent || '';
-                    const cls = (el.className || '').toLowerCase();
-                    if (cls.includes('booked') || txt.toLowerCase().includes('zarezerwow')) return;
-                    const m = txt.match(RE);
-                    if (!m) return;
-                    const p = parseFloat(m[1].replace(',', '.'));
-                    if (p >= 40 && p <= 500) seen.add(p);
-                });
-                return Array.from(seen).sort((a,b)=>a-b);
+                const walker = document.createTreeWalker(
+                    document.body, NodeFilter.SHOW_TEXT, null);
+                let node;
+                while ((node = walker.nextNode()) !== null) {
+                    const el = node.parentElement;
+                    if (!el || SKIP.has(el.tagName)) continue;
+                    let m;
+                    while ((m = RE.exec(node.textContent)) !== null) {
+                        const p = parseFloat(m[1].replace(',', '.'));
+                        if (p >= 40 && p <= 500) seen.add(Math.round(p * 100) / 100);
+                    }
+                    RE.lastIndex = 0;
+                }
+                return Array.from(seen).sort((a, b) => a - b);
             }""")
         except Exception:
             price_vals = []
