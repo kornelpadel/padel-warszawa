@@ -525,32 +525,44 @@ async def scrape_klubyorg(page, klub, date_str):
 
         out["slots"] = slots
 
-        # Ceny: jedno wywołanie JS skanuje wszystkie węzły tekstowe strony
-        # (pomija script/style). Szybsze niż inner_text + Python regex;
-        # zakres podobny do starego podejścia ale z kontrolą kontekstu.
-        # duration_min=60 — zakładamy sloty godzinowe (typowe dla kluby.org).
-        try:
-            price_vals = await page.evaluate("""() => {
-                const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/gi;
-                const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
-                const seen = new Set();
-                const walker = document.createTreeWalker(
-                    document.body, NodeFilter.SHOW_TEXT, null);
-                let node;
-                while ((node = walker.nextNode()) !== null) {
-                    const el = node.parentElement;
-                    if (!el || SKIP.has(el.tagName)) continue;
-                    let m;
-                    while ((m = RE.exec(node.textContent)) !== null) {
-                        const p = parseFloat(m[1].replace(',', '.'));
-                        if (p >= 40 && p <= 500) seen.add(Math.round(p * 100) / 100);
-                    }
-                    RE.lastIndex = 0;
+        # Ceny: JS skanuje węzły tekstowe strony pomijając script/style.
+        # Strona /rezerwacje nie renderuje cen (ładują się przez AJAX po
+        # kliknięciu slotu), więc jako fallback odwiedzamy stronę główną klubu.
+        # duration_min=60 — sloty godzinowe (typowe dla kluby.org).
+        _PRICE_JS = """() => {
+            const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/gi;
+            const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
+            const seen = new Set();
+            const walker = document.createTreeWalker(
+                document.body, NodeFilter.SHOW_TEXT, null);
+            let node;
+            while ((node = walker.nextNode()) !== null) {
+                const el = node.parentElement;
+                if (!el || SKIP.has(el.tagName)) continue;
+                let m;
+                while ((m = RE.exec(node.textContent)) !== null) {
+                    const p = parseFloat(m[1].replace(',', '.'));
+                    if (p >= 40 && p <= 500) seen.add(Math.round(p * 100) / 100);
                 }
-                return Array.from(seen).sort((a, b) => a - b);
-            }""")
+                RE.lastIndex = 0;
+            }
+            return Array.from(seen).sort((a, b) => a - b);
+        }"""
+        try:
+            price_vals = await page.evaluate(_PRICE_JS)
         except Exception:
             price_vals = []
+
+        # Fallback: strona główna klubu ma cennik w opisie
+        if not price_vals:
+            try:
+                await page.goto(f"https://kluby.org/{klub['slug']}",
+                                wait_until="domcontentloaded", timeout=20000)
+                await page.wait_for_timeout(1000)
+                price_vals = await page.evaluate(_PRICE_JS)
+            except Exception:
+                pass
+
         out["prices"] = [{"price_pln": p, "duration_min": 60,
                            "description": "cena z kluby.org"}
                           for p in price_vals]
@@ -558,8 +570,9 @@ async def scrape_klubyorg(page, klub, date_str):
 
         n_free   = sum(1 for s in slots if s["is_free"])
         n_booked = len(slots) - n_free
-        log.info("    ✓ %d kortów | %d slotów (%d zajętych, %d wolnych)",
-                 len(courts), len(slots), n_booked, n_free)
+        log.info("    ✓ %d kortów | %d slotów (%d zajętych, %d wolnych) | ceny: %s PLN",
+                 len(courts), len(slots), n_booked, n_free,
+                 price_vals if price_vals else "brak")
     except Exception as e:
         log.error("    Błąd: %s", e)
     return out
