@@ -1,0 +1,23 @@
+﻿id,name,source,dzielnica,address,lat,lng,padel_courts_total,hours_weekday,hours_weekend,amenities,website,phone
+ko_toro-padel,Toro Padel,kluby_org,Bemowo,ul. Kazubów 14 (Bemowo),,,6,,,[],https://kluby.org/toro-padel,486986088
+pt_loba-padel,Loba Padel,playtomic,Białołęka,"Smugowa 44, 03-032",52.3245197,21.0076347,8,06:00-23:00,06:00-23:00,[],https://playtomic.com/clubs/loba-padel,
+ko_sporteum,Sporteum,kluby_org,Białołęka,ul. Zawiślańska 27 (Białołęka),,,2,,,[],https://kluby.org/sporteum,796 165 501
+pt_warsaw-padel-club,Warsaw Padel Club,playtomic,Białołęka,"Annopol 3, 03-236",52.30257,21.01963,11,06:00-01:00,06:00-01:00,[],https://playtomic.com/clubs/warsaw-padel-club,
+pt_rqt-spot,RQT Spot,playtomic,Bielany,"Estrady 13K, 05-080",52.29213636,20.87689692,8,07:00-00:00,07:00-00:00,[],https://playtomic.com/clubs/rqt-spot,
+pt_interpadel-warszawa,Interpadel Warszawa,playtomic,Mokotów,"Bokserska 66A, 02-690",52.17282,20.988908,11,06:00-02:00,06:00-02:00,[],https://playtomic.com/clubs/interpadel-warszawa,
+pt_we-are-padel-warsaw,We Are Padel Warszawa,playtomic,Mokotów,"Jutrzenki 12, 02233",52.1783189,20.9198695,3,00:00-00:00,00:00-00:00,[],https://playtomic.com/clubs/we-are-padel-warsaw,
+ko_mera,WKT Mera,kluby_org,Ochota,al. Bohaterów Września 12 (Ochota),,,2,,,[],https://kluby.org/mera,
+pt_rakiety-pge-narodowy,Rakiety PGE Narodowy - Padel Outdoor,playtomic,Praga Południe,"al. Księcia Józefa Poniatowskiego 1, 03-901",52.24113912,21.04775185,5,07:00-23:00,07:00-23:00,[],https://playtomic.com/clubs/rakiety-pge-narodowy,
+ko_decathlon,DECATHLON Targówek,kluby_org,Targówek,ul. Geodezyjna 76 (Targówek),,,1,,,[],https://kluby.org/decathlon,
+ko_tenes,TENES Klub Sportowy,kluby_org,Ursus,ul. Piwna 13 (Ursus),,,3,,,[],https://kluby.org/tenes,609 944 020
+ko_padlovnia,Padlovnia,kluby_org,Ursynów,ul. Karnawał 8 (Ursynów),,,11,,,[],https://kluby.org/padlovnia,660 586 660
+pt_san-padel,San Padel,playtomic,Ursynów,"Przedsiębiorców 1, 05-500",52.1053931,21.0245651,12,00:00-00:00,00:00-00:00,[],https://playtomic.com/clubs/san-padel,
+ko_miedzeszyn,Klub Miedzeszyn,kluby_org,Wawer,ul. Bielika 17 (Wawer),,,2,,,[],https://kluby.org/miedzeszyn,
+ko_aerosquash,Rakiety Aero,kluby_org,Wawer,,,,1,,,[],https://kluby.org/aerosquash,505 455 633
+pt_rakiety-aero-outdoor,Rakiety Aero - Padel Outdoor,playtomic,Wawer,"Wał Miedzeszyński 646, 03-994",52.22189332,21.08425495,1,08:00-21:30,08:00-21:30,[],https://playtomic.com/clubs/rakiety-aero-outdoor,
+ko_happy-padel,Happy Padel,kluby_org,Wesoła,,,,1,,,[],https://kluby.org/happy-padel,668 793 915
+ko_mana-padel,Mana Padel,kluby_org,Wilanów,ul. Zawodzie 24 (Wilanów),,,8,,,[],https://kluby.org/mana-padel,888 888 437
+ko_sinus,Sinus Sport Club,kluby_org,Wilanów,ul. Wał Zawadowski 99 (Wilanów),,,1,,,[],https://kluby.org/sinus,
+ko_teniswil,TenisWil,kluby_org,Wilanów,ul. Przyczółkowa 210C (Wilanów),,,3,,,[],https://kluby.org/teniswil,539 901 539
+ko_propadel,ProPadel Jutrzenki,kluby_org,Włochy,ul. Jutrzenki 12 (Włochy),,,5,,,[],https://kluby.org/propadel,
+ko_bulwary-wislane,Padel4All Bulwary,kluby_org,Śródmieście,,,,1,,,[],https://kluby.org/bulwary-wislane,
