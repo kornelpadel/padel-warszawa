@@ -525,14 +525,29 @@ async def scrape_klubyorg(page, klub, date_str):
 
         out["slots"] = slots
 
-        # Ceny
-        prices = []
-        seen   = set()
-        for p_str, unit in re.findall(r"(\d{2,3})\s*(zł|PLN)", body):
-            p = float(p_str)
-            if 40<=p<=400 and p not in seen:
-                seen.add(p); prices.append({"price_pln":p,"description":"z kluby.org"})
-        out["prices"] = prices
+        # Ceny: jedno wywołanie JS — szuka cen tylko w wolnych komórkach tabeli
+        # rezerwacji. Precyzyjniejsze niż regex po całym body; unika kart.
+        # COALESCE duration_min=60 → normalizacja do zł/h działa poprawnie.
+        try:
+            price_vals = await page.evaluate("""() => {
+                const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/i;
+                const seen = new Set();
+                document.querySelectorAll('td, [class*="slot"], [class*="cell"]').forEach(el => {
+                    const txt = el.textContent || '';
+                    const cls = (el.className || '').toLowerCase();
+                    if (cls.includes('booked') || txt.toLowerCase().includes('zarezerwow')) return;
+                    const m = txt.match(RE);
+                    if (!m) return;
+                    const p = parseFloat(m[1].replace(',', '.'));
+                    if (p >= 40 && p <= 500) seen.add(p);
+                });
+                return Array.from(seen).sort((a,b)=>a-b);
+            }""")
+        except Exception:
+            price_vals = []
+        out["prices"] = [{"price_pln": p, "duration_min": 60,
+                           "description": "cena z kluby.org"}
+                          for p in price_vals]
         out["ok"] = True
 
         n_free   = sum(1 for s in slots if s["is_free"])
@@ -562,7 +577,12 @@ def export_csv(conn, date_str):
         "3_ceny_wg_pory_dnia": """
             SELECT c.name AS klub, c.dzielnica, c.source,
                    p.price_type, p.day_type, p.time_slot,
-                   p.hour_from, p.hour_to, p.price_pln, p.duration_min, p.description
+                   p.hour_from, p.hour_to,
+                   p.price_pln AS cena_oryginalna,
+                   p.duration_min,
+                   ROUND(p.price_pln * 60.0 / COALESCE(p.duration_min, 60), 0)
+                       AS cena_za_godzine,
+                   p.description
             FROM prices p JOIN clubs c ON c.id=p.club_id
             WHERE p.price_type IN ('court','academy')
             ORDER BY c.name, p.day_type, p.hour_from""",
@@ -611,9 +631,10 @@ def export_csv(conn, date_str):
                    ROUND(100.0*sl.zajete/NULLIF(sl.slotow_dzisiaj,0),1) AS oblozenie_pct,
                    c.address
             FROM clubs c
-            LEFT JOIN (SELECT club_id, MIN(price_pln) AS cena_min,
-                              MAX(price_pln) AS cena_max,
-                              ROUND(AVG(price_pln),0) AS cena_srednia
+            LEFT JOIN (SELECT club_id,
+                              MIN(ROUND(price_pln*60.0/COALESCE(duration_min,60),0)) AS cena_min,
+                              MAX(ROUND(price_pln*60.0/COALESCE(duration_min,60),0)) AS cena_max,
+                              ROUND(AVG(price_pln*60.0/COALESCE(duration_min,60)),0) AS cena_srednia
                        FROM prices WHERE price_type='court'
                        GROUP BY club_id) pr ON pr.club_id=c.id
             LEFT JOIN (SELECT club_id, COUNT(*) AS slotow_dzisiaj,
@@ -630,9 +651,10 @@ def export_csv(conn, date_str):
                    ROUND(AVG(pr.cena_srednia),0) AS srednia_cena_pln,
                    MIN(pr.cena_min) AS min_cena, MAX(pr.cena_max) AS max_cena
             FROM courts r
-            LEFT JOIN (SELECT club_id, MIN(price_pln) AS cena_min,
-                              MAX(price_pln) AS cena_max,
-                              AVG(price_pln) AS cena_srednia
+            LEFT JOIN (SELECT club_id,
+                              MIN(ROUND(price_pln*60.0/COALESCE(duration_min,60),0)) AS cena_min,
+                              MAX(ROUND(price_pln*60.0/COALESCE(duration_min,60),0)) AS cena_max,
+                              AVG(price_pln*60.0/COALESCE(duration_min,60)) AS cena_srednia
                        FROM prices WHERE price_type='court'
                        GROUP BY club_id) pr ON pr.club_id=r.club_id
             GROUP BY r.surface_type""",
@@ -673,7 +695,10 @@ def export_csv(conn, date_str):
     try:
         n_slots  = conn.execute("SELECT COUNT(*) FROM slots WHERE slot_date=?", (date_str,)).fetchone()[0]
         n_booked = conn.execute("SELECT COUNT(*) FROM slots WHERE slot_date=? AND is_free=0", (date_str,)).fetchone()[0]
-        prices   = conn.execute("SELECT MIN(price_pln),MAX(price_pln),AVG(price_pln) FROM prices WHERE price_type='court'").fetchone()
+        prices   = conn.execute("""SELECT MIN(ROUND(price_pln*60.0/COALESCE(duration_min,60),0)),
+                                          MAX(ROUND(price_pln*60.0/COALESCE(duration_min,60),0)),
+                                          AVG(price_pln*60.0/COALESCE(duration_min,60))
+                                   FROM prices WHERE price_type='court'""").fetchone()
         n_clubs  = conn.execute("SELECT COUNT(*) FROM clubs").fetchone()[0]
         obl      = round(n_booked / n_slots * 100, 1) if n_slots else 0
         history_row = {
