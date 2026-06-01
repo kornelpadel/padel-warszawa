@@ -53,10 +53,6 @@ KLUBYORG = [
     {"slug": "bulwary-wislane", "name": "Padel4All Bulwary",   "dzielnica": "Śródmieście"},
     {"slug": "miedzeszyn",      "name": "Klub Miedzeszyn",     "dzielnica": "Wawer"},
     {"slug": "propadel",        "name": "ProPadel Jutrzenki",  "dzielnica": "Włochy"},
-    {"slug": "sinus",           "name": "Sinus Sport Club",    "dzielnica": "Wilanów"},
-    {"slug": "happy-padel",     "name": "Happy Padel",         "dzielnica": "Wesoła"},
-    {"slug": "decathlon",       "name": "DECATHLON Targówek",  "dzielnica": "Targówek"},
-    {"slug": "aerosquash",      "name": "Rakiety Aero",        "dzielnica": "Wawer",    "surface_type": "outdoor"},
 ]
 
 def pora_dnia(hour: int) -> str:
@@ -556,12 +552,18 @@ async def scrape_klubyorg(page, klub, date_str):
         except Exception:
             price_vals = []
 
-        # Fallback: strona główna klubu ma cennik w opisie
+        # Fallback: strona główna klubu ma cennik w opisie.
+        # Klikamy filtr "PADEL" jeśli strona ma zakładki sportowe (wyklucza squash/pikeball).
         if not price_vals:
             try:
                 await page.goto(f"https://kluby.org/{klub['slug']}",
                                 wait_until="domcontentloaded", timeout=20000)
                 await page.wait_for_timeout(1000)
+                await page.evaluate(
+                    "Array.from(document.querySelectorAll('button,a,li,[role=tab],span'))"
+                    ".find(el => el.textContent.trim().toUpperCase() === 'PADEL')?.click()"
+                )
+                await page.wait_for_timeout(800)
                 price_vals = await page.evaluate(_PRICE_JS)
             except Exception:
                 pass
@@ -596,18 +598,17 @@ def export_csv(conn, date_str):
                    r.court_name, r.surface_type, r.court_format, r.court_style
             FROM courts r JOIN clubs c ON c.id=r.club_id
             ORDER BY c.dzielnica, c.name, r.court_name""",
+        # Unikalne ceny per godzinę — duplikaty z 60/90/120 min są złączone w jedną wartość/h.
+        # Brak kolumny cena_oryginalna (surowej) — tylko znormalizowana per godzinę.
         "3_ceny_wg_pory_dnia": """
             SELECT c.name AS klub, c.dzielnica, c.source,
-                   p.price_type, p.day_type, p.time_slot,
-                   p.hour_from, p.hour_to,
-                   p.price_pln AS cena_oryginalna,
-                   p.duration_min,
                    ROUND(p.price_pln * 60.0 / COALESCE(p.duration_min, 60), 0)
                        AS cena_za_godzine,
                    p.description
             FROM prices p JOIN clubs c ON c.id=p.club_id
             WHERE p.price_type IN ('court','academy')
-            ORDER BY c.name, p.day_type, p.hour_from""",
+            GROUP BY c.id, ROUND(p.price_pln * 60.0 / COALESCE(p.duration_min, 60), 0)
+            ORDER BY c.name, cena_za_godzine""",
         "4_oblozenie_per_kort_godzina": f"""
             SELECT c.name AS klub, c.dzielnica, s.source,
                    s.court_name AS kort, r.surface_type AS nawierzchnia,
@@ -668,6 +669,7 @@ def export_csv(conn, date_str):
                        GROUP BY s.club_id, r2.surface_type) sl
                     ON sl.club_id=c.id AND sl.surface_type=r.surface_type
             GROUP BY c.id, r.surface_type
+            HAVING pr.cena_min IS NOT NULL OR sl.slotow_dzisiaj > 0
             ORDER BY c.dzielnica, c.name, r.surface_type""",
         # Liczba kortów z tabeli courts; ceny per nawierzchnia z agregatu cen
         # klubów (jeden wiersz na klub) — bez fan-out z JOIN prices.
@@ -832,7 +834,8 @@ async def run():
 
     # Wyczyść stare kluby usunięte z list (squash, nieistniejące, zmienione slugi)
     for stale_id in ("pt_warsaw-padel-club-squash", "pt_rakiety-squash-padel-outdoor",
-                     "pt_we-are-padel-warsaw"):
+                     "pt_we-are-padel-warsaw",
+                     "ko_sinus", "ko_happy-padel", "ko_decathlon", "ko_aerosquash"):
         conn.execute("DELETE FROM clubs  WHERE id=?",       (stale_id,))
         conn.execute("DELETE FROM courts WHERE club_id=?",  (stale_id,))
         conn.execute("DELETE FROM slots  WHERE club_id=?",  (stale_id,))
