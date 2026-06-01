@@ -113,15 +113,6 @@
     </div>
   </div>
 
-  <!-- Najlepsze oferty -->
-  <div class="card p-4 mb-4">
-    <h2 class="font-semibold text-white mb-1">Najlepsze oferty dziś</h2>
-    <p class="text-slate-400 text-xs mb-3">Wolne sloty — sortowanie: najtańsze pierwsze</p>
-    <div id="dealsTable" class="overflow-x-auto">
-      <div class="loading">Ładowanie...</div>
-    </div>
-  </div>
-
   <!-- Tabela klubów -->
   <div class="card p-4">
     <h2 class="font-semibold text-white mb-3">Wszystkie kluby</h2>
@@ -211,7 +202,6 @@ function applyFilters() {
   renderHeatmap(allData.occupancy || [], filtered);
   renderTrend(allData.history || []);
   renderDonut(allData.indoor || []);
-  renderDeals(allData.occupancy || [], filtered);
   renderClubsTable(filtered);
 }
 
@@ -431,52 +421,6 @@ function renderDonut(indoor) {
   ).join('');
 }
 
-// ─── Tabela: Najlepsze oferty ─────────────────────────────────────────────────
-function renderDeals(occupancy, filteredComparison) {
-  const validClubs = new Set(filteredComparison.map(r => r.klub));
-  const now = new Date().getHours();
-
-  // Pobierz ceny ze comparison
-  const priceMap = {};
-  filteredComparison.forEach(r => { priceMap[r.klub] = r.cena_min; });
-
-  const deals = occupancy
-    .filter(r => r.wolny && r.godzina >= now && (!validClubs.size || validClubs.has(r.klub)))
-    .map(r => ({
-      klub: r.klub,
-      dzielnica: r.dzielnica,
-      kort: r.kort,
-      godzina: `${String(r.godzina).padStart(2,'0')}:${String(r.minuta||0).padStart(2,'0')}`,
-      cena: priceMap[r.klub] || null,
-      nawierzchnia: r.nawierzchnia,
-    }))
-    .sort((a,b) => (a.cena||999) - (b.cena||999))
-    .slice(0, 15);
-
-  const el = document.getElementById('dealsTable');
-  if (!deals.length) {
-    el.innerHTML = '<div class="loading">Brak wolnych slotów dla wybranych filtrów</div>';
-    return;
-  }
-
-  el.innerHTML = `
-    <table>
-      <thead><tr>
-        <th>Klub</th><th>Kort</th><th>Godzina</th>
-        <th>Cena min</th><th>Nawierzchnia</th><th>Dzielnica</th>
-      </tr></thead>
-      <tbody>
-        ${deals.map(d => `<tr>
-          <td class="font-medium text-white">${d.klub}</td>
-          <td class="text-slate-300">${d.kort || '—'}</td>
-          <td><span class="badge badge-green">${d.godzina}</span></td>
-          <td>${d.cena ? `<span class="text-emerald-400 font-semibold">${d.cena} zł</span>` : '—'}</td>
-          <td>${d.nawierzchnia ? `<span class="badge badge-yellow">${d.nawierzchnia}</span>` : '—'}</td>
-          <td class="text-slate-400">${d.dzielnica || '—'}</td>
-        </tr>`).join('')}
-      </tbody>
-    </table>`;
-}
 
 // ─── Tabela: Wszystkie kluby ──────────────────────────────────────────────────
 function renderClubsTable(data) {

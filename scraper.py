@@ -37,7 +37,6 @@ PLAYTOMIC = [
     {"slug": "loba-padel",          "name": "Loba Padel",                 "dzielnica": "Białołęka",     "tenant_id": "3ae6a706-eba4-42be-9cb3-074c7ade27bb"},
     {"slug": "san-padel",           "name": "San Padel",                  "dzielnica": "Ursynów",       "tenant_id": "f690a458-011d-4ad2-88c5-e8d175ccc31c"},
     {"slug": "rqt-spot",            "name": "RQT Spot",                   "dzielnica": "Bielany",       "tenant_id": "44340c7a-0951-47bd-8a7e-ccbe0703cdc3"},
-    {"slug": "we-are-padel-warsaw", "name": "We Are Padel Warsaw",        "dzielnica": "Mokotów",       "tenant_id": "abce9bb1-25e9-426c-b21b-8e5d6cd8ef5e"},
 ]
 
 # Kluby.org: pełny grafik dnia (cały dzień z historią) – wymaga logowania
@@ -57,7 +56,7 @@ KLUBYORG = [
     {"slug": "sinus",           "name": "Sinus Sport Club",    "dzielnica": "Wilanów"},
     {"slug": "happy-padel",     "name": "Happy Padel",         "dzielnica": "Wesoła"},
     {"slug": "decathlon",       "name": "DECATHLON Targówek",  "dzielnica": "Targówek"},
-    {"slug": "aerosquash",      "name": "Rakiety Aero",        "dzielnica": "Wawer"},
+    {"slug": "aerosquash",      "name": "Rakiety Aero",        "dzielnica": "Wawer",    "surface_type": "outdoor"},
 ]
 
 def pora_dnia(hour: int) -> str:
@@ -495,6 +494,10 @@ async def scrape_klubyorg(page, klub, date_str):
             surface = "outdoor" if any(w in klub["name"].lower() for w in ["outdoor","bulwar"]) else "indoor"
             courts = [{"name":f"Kort {i+1}","surface_type":surface,"court_format":"double"}
                       for i in range(n)]
+        # Override nawierzchni z konfiguracji klubu (np. "outdoor" dla aerosquash)
+        if "surface_type" in klub:
+            for c in courts:
+                c["surface_type"] = klub["surface_type"]
         out["courts"] = courts
 
         # Sloty z grafiku
@@ -542,7 +545,7 @@ async def scrape_klubyorg(page, klub, date_str):
                 let m;
                 while ((m = RE.exec(node.textContent)) !== null) {
                     const p = parseFloat(m[1].replace(',', '.'));
-                    if (p >= 40 && p <= 500) seen.add(Math.round(p * 100) / 100);
+                    if (p >= 60 && p <= 500) seen.add(Math.round(p * 100) / 100);
                 }
                 RE.lastIndex = 0;
             }
@@ -636,31 +639,36 @@ def export_csv(conn, date_str):
                 CASE s.pora_dnia WHEN 'rano (6-10)' THEN 1
                     WHEN 'poludnie (10-14)' THEN 2 WHEN 'popoludnie (14-18)' THEN 3
                     WHEN 'wieczor (18-22)' THEN 4 ELSE 5 END""",
-        # Agregaty slotów/cen/nawierzchni liczone w osobnych podzapytaniach
-        # (jeden wiersz na klub) — bez tego JOIN-y mnożyłyby sloty i zawyżały
-        # obłożenie powyżej 100%.
+        # Jeden wiersz na (klub, nawierzchnia) — kluby z indoor+outdoor = 2 wiersze.
+        # Obłożenie liczone tylko dla kortów danej nawierzchni (JOIN courts→slots).
+        # Ceny na poziomie klubu (te same dla obu nawierzchni gdy brak rozróżnienia).
         "6_porownanie_klubow": f"""
             SELECT c.name AS klub, c.dzielnica, c.source,
-                   c.padel_courts_total AS korty_padlowe,
-                   (SELECT GROUP_CONCAT(DISTINCT surface_type)
-                      FROM courts WHERE club_id=c.id) AS nawierzchnie,
+                   r.surface_type AS nawierzchnia,
+                   COUNT(DISTINCT r.id) AS korty_padlowe,
                    pr.cena_min, pr.cena_max, pr.cena_srednia,
                    c.hours_weekday AS godz_tydzien, c.hours_weekend AS godz_weekend,
                    COALESCE(sl.slotow_dzisiaj,0) AS slotow_dzisiaj,
                    ROUND(100.0*sl.zajete/NULLIF(sl.slotow_dzisiaj,0),1) AS oblozenie_pct,
                    c.address
             FROM clubs c
+            JOIN courts r ON r.club_id=c.id
             LEFT JOIN (SELECT club_id,
                               MIN(ROUND(price_pln*60.0/COALESCE(duration_min,60),0)) AS cena_min,
                               MAX(ROUND(price_pln*60.0/COALESCE(duration_min,60),0)) AS cena_max,
                               ROUND(AVG(price_pln*60.0/COALESCE(duration_min,60)),0) AS cena_srednia
                        FROM prices WHERE price_type='court'
                        GROUP BY club_id) pr ON pr.club_id=c.id
-            LEFT JOIN (SELECT club_id, COUNT(*) AS slotow_dzisiaj,
-                              SUM(CASE WHEN is_free=0 THEN 1 ELSE 0 END) AS zajete
-                       FROM slots WHERE slot_date='{date_str}'
-                       GROUP BY club_id) sl ON sl.club_id=c.id
-            ORDER BY c.dzielnica, c.name""",
+            LEFT JOIN (SELECT s.club_id, r2.surface_type,
+                              COUNT(*) AS slotow_dzisiaj,
+                              SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END) AS zajete
+                       FROM slots s
+                       JOIN courts r2 ON r2.id=s.court_id
+                       WHERE s.slot_date='{date_str}'
+                       GROUP BY s.club_id, r2.surface_type) sl
+                    ON sl.club_id=c.id AND sl.surface_type=r.surface_type
+            GROUP BY c.id, r.surface_type
+            ORDER BY c.dzielnica, c.name, r.surface_type""",
         # Liczba kortów z tabeli courts; ceny per nawierzchnia z agregatu cen
         # klubów (jeden wiersz na klub) — bez fan-out z JOIN prices.
         "7_indoor_vs_outdoor": """
@@ -742,7 +750,7 @@ def export_csv(conn, date_str):
 # ─── Dane logowania z Keychain ────────────────────────────────────────────────
 
 KEYCHAIN_SERVICE = "kluby_org"
-KEYCHAIN_ACCOUNT = "korneltennis@gmail.com"
+KEYCHAIN_ACCOUNT = "kornel.kim@gmail.com"
 
 def get_credentials():
     """
@@ -822,8 +830,9 @@ async def run():
     today = _now_warsaw.strftime("%Y-%m-%d")
     now   = _now_warsaw.isoformat()
 
-    # Wyczyść stare kluby usunięte z list (squash, zmienione slugi)
-    for stale_id in ("pt_warsaw-padel-club-squash", "pt_rakiety-squash-padel-outdoor"):
+    # Wyczyść stare kluby usunięte z list (squash, nieistniejące, zmienione slugi)
+    for stale_id in ("pt_warsaw-padel-club-squash", "pt_rakiety-squash-padel-outdoor",
+                     "pt_we-are-padel-warsaw"):
         conn.execute("DELETE FROM clubs  WHERE id=?",       (stale_id,))
         conn.execute("DELETE FROM courts WHERE club_id=?",  (stale_id,))
         conn.execute("DELETE FROM slots  WHERE club_id=?",  (stale_id,))
