@@ -717,6 +717,33 @@ def export_csv(conn, date_str):
         except Exception as e:
             log.warning("Błąd eksportu latest_%s: %s", suffix, e)
 
+    # Historia godzinowa — per klub × godzina × dzień (dla dashboardu per-klub).
+    # Regenerowana w całości przy każdym uruchomieniu z pełnej historii bazy.
+    history_detail_path = CSV_DIR / "history_detail.csv"
+    try:
+        rows_hd = conn.execute("""
+            SELECT s.slot_date AS data,
+                   c.name     AS klub,
+                   c.source,
+                   s.slot_hour AS godzina,
+                   COUNT(DISTINCT s.court_id) AS n_kortow,
+                   COUNT(*)    AS n_slotow,
+                   SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END) AS n_zajetych,
+                   ROUND(100.0*SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END)
+                         /NULLIF(COUNT(*),0),0) AS oblozenie_pct
+            FROM slots s
+            JOIN clubs c ON c.id=s.club_id
+            GROUP BY s.slot_date, c.name, s.slot_hour
+            ORDER BY s.slot_date, c.name, s.slot_hour
+        """).fetchall()
+        with open(history_detail_path, "w", newline="", encoding="utf-8-sig") as f:
+            writer = csv.writer(f)
+            writer.writerow(["data","klub","source","godzina",
+                             "n_kortow","n_slotow","n_zajetych","oblozenie_pct"])
+            writer.writerows(rows_hd)
+    except Exception as e:
+        log.warning("Błąd eksportu history_detail.csv: %s", e)
+
     # Historia dzienna — jedna linia dopisywana każdego dnia (wykres trendów)
     history_path   = CSV_DIR / "history.csv"
     history_fields = ["date", "n_clubs", "n_slots", "n_booked", "occupancy_pct",

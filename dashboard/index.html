@@ -1,470 +1,931 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Padel Warsaw — Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2/dist/chartjs-chart-matrix.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5/papaparse.min.js"></script>
-  <style>
-    body { background: #0f172a; color: #e2e8f0; }
-    .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; }
-    .kpi-val { font-size: 2rem; font-weight: 700; }
-    .chart-wrap { position: relative; }
-    select { background: #1e293b; border: 1px solid #475569; color: #e2e8f0;
-             border-radius: 6px; padding: 4px 10px; }
-    table { width: 100%; border-collapse: collapse; }
-    th { background: #0f172a; color: #94a3b8; font-weight: 600;
-         text-align: left; padding: 8px 12px; font-size: 0.75rem;
-         text-transform: uppercase; letter-spacing: 0.05em; }
-    td { padding: 8px 12px; border-bottom: 1px solid #1e293b; font-size: 0.875rem; }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: #1e293b; }
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
-             font-size: 0.7rem; font-weight: 600; }
-    .badge-green  { background: #064e3b; color: #6ee7b7; }
-    .badge-yellow { background: #451a03; color: #fcd34d; }
-    .badge-red    { background: #450a0a; color: #fca5a5; }
-    .loading { display: flex; align-items: center; justify-content: center;
-               height: 200px; color: #64748b; font-size: 0.875rem; }
-    #filterBar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Padel Warszawa — Dashboard</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', sans-serif; background: #0f1117; color: #e8eaf0; padding: 20px; }
+h1  { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.subtitle { font-size: 0.8rem; color: #7c8091; margin-bottom: 16px; }
+
+/* ─── KLUB BAR ─────────────────────────────────────────────────────────────── */
+.club-bar {
+  background: rgba(20,23,36,0.95); border: 1px solid #2a2d3e; border-radius: 10px;
+  padding: 12px 16px; margin-bottom: 10px;
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+}
+.club-bar label { font-size: 0.68rem; color: #7c8091; text-transform: uppercase; letter-spacing:.06em; white-space:nowrap; }
+.club-bar select { font-family:inherit; font-size: 0.78rem; background: #1a1d2e;
+  border: 1px solid #2a2d3e; border-radius: 7px; color: #e8eaf0; padding: 6px 10px; cursor:pointer; }
+.club-bar select:focus { outline:none; border-color:#f87171; }
+.club-name-display { font-size: 0.9rem; font-weight: 700; color: #f87171; margin-left: auto; }
+
+/* ─── FILTER BAR ────────────────────────────────────────────────────────────── */
+.filter-bar {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(20,23,36,0.92); backdrop-filter: blur(8px);
+  border: 1px solid #2a2d3e; border-radius: 12px;
+  padding: 12px 16px; margin-bottom: 18px;
+  display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center;
+}
+.fb-group { display: flex; flex-direction: column; gap: 6px; }
+.fb-lbl { font-size: 0.62rem; color: #7c8091; text-transform: uppercase; letter-spacing:.07em; font-weight:600; }
+.fb-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.seg { display: inline-flex; border: 1px solid #2a2d3e; border-radius: 7px; overflow: hidden; }
+.seg button { font-family:inherit; font-size:0.73rem; border:none; background:#1a1d2e;
+  color:#9aa0b4; padding:6px 12px; cursor:pointer; border-right:1px solid #2a2d3e; transition:.15s; }
+.seg button:last-child { border-right: none; }
+.seg button:hover { color: #e8eaf0; }
+.seg button.on { background: #f87171; color: #0f1117; font-weight: 700; }
+.dow { font-family:inherit; font-size:0.72rem; min-width:34px; text-align:center;
+  border:1px solid #2a2d3e; border-radius:7px; background:#1a1d2e;
+  color:#7c8091; padding:6px 0; cursor:pointer; transition:.12s; }
+.dow:hover { color: #e8eaf0; border-color: #3a3d52; }
+.dow.on { background:rgba(248,113,113,0.18); color:#f87171; border-color:rgba(248,113,113,0.5); font-weight:700; }
+.dow.weekend.on { background:rgba(251,191,36,0.16); color:#fbbf24; border-color:rgba(251,191,36,0.45); }
+.date-in { font-family:inherit; font-size:0.73rem; background:#1a1d2e;
+  border:1px solid #2a2d3e; border-radius:7px; color:#e8eaf0; padding:5px 8px; color-scheme:dark; }
+.date-in:disabled { opacity:.4; }
+.fb-summary { margin-left:auto; display:flex; align-items:center; gap:10px; }
+.fb-count { font-size:0.77rem; color:#c8cfe0; }
+.fb-count b { color:#f87171; font-weight:700; }
+.fb-reset { font-family:inherit; font-size:0.71rem; background:none;
+  border:1px solid #2a2d3e; color:#7c8091; border-radius:7px;
+  padding:5px 10px; cursor:pointer; transition:.15s; }
+.fb-reset:hover { color:#e8eaf0; border-color:#3a3d52; }
+
+/* ─── KPI ───────────────────────────────────────────────────────────────────── */
+.kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:20px; }
+.kpi { background:#1a1d2e; border-radius:10px; padding:13px 15px; border:1px solid #2a2d3e; }
+.kpi .val { font-size:1.5rem; font-weight:700; color:#f87171; }
+.kpi .lbl { font-size:0.68rem; color:#7c8091; margin-top:2px; text-transform:uppercase; letter-spacing:.05em; }
+
+/* ─── TABS ──────────────────────────────────────────────────────────────────── */
+.tabs { display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+.tab { padding:7px 15px; border-radius:6px; font-size:0.77rem; cursor:pointer;
+  border:1px solid #2a2d3e; background:#1a1d2e; color:#7c8091; transition:all .2s; }
+.tab.active { background:#f87171; color:#0f1117; font-weight:600; border-color:#f87171; }
+
+/* ─── SECTIONS ──────────────────────────────────────────────────────────────── */
+.section { background:#1a1d2e; border-radius:10px; padding:16px; border:1px solid #2a2d3e; margin-bottom:16px; }
+.section-title { font-size:0.8rem; font-weight:600; color:#a0a8c0; margin-bottom:12px;
+  text-transform:uppercase; letter-spacing:.06em;
+  display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.grid2 > * { min-width:0; }
+canvas { max-width:100%; }
+
+/* ─── INSIGHTS ──────────────────────────────────────────────────────────────── */
+.insight { background:#12162a; border-left:3px solid #f87171; padding:9px 12px;
+  border-radius:0 8px 8px 0; font-size:0.76rem; line-height:1.5; color:#c8cfe0; margin-bottom:8px; }
+.insight strong { color:#f87171; }
+.insight.amber { border-left-color:#fbbf24; }
+.insight.amber strong { color:#fbbf24; }
+.insight.green { border-left-color:#6ee7b7; }
+.insight.green strong { color:#6ee7b7; }
+
+/* ─── TABLES ────────────────────────────────────────────────────────────────── */
+table { width:100%; border-collapse:collapse; font-size:0.77rem; }
+th { color:#7c8091; font-weight:600; padding:7px 10px; text-align:right;
+  border-bottom:1px solid #2a2d3e; }
+th:first-child { text-align:left; }
+td { padding:7px 10px; text-align:right; border-bottom:1px solid #1e2130; }
+td:first-child { text-align:left; color:#c8cfe0; }
+tr:hover td { background:#1e2235; }
+.badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.68rem; font-weight:600; }
+.badge-green  { background:rgba(110,231,183,0.15); color:#6ee7b7; border:1px solid rgba(110,231,183,0.3); }
+.badge-yellow { background:rgba(251,191,36,0.18);  color:#fbbf24; border:1px solid rgba(251,191,36,0.35); }
+.badge-red    { background:rgba(248,113,113,0.18); color:#f87171; border:1px solid rgba(248,113,113,0.3); }
+.badge-blue   { background:rgba(96,165,250,0.15);  color:#93c5fd; border:1px solid rgba(96,165,250,0.25); }
+
+/* ─── HEATMAP ───────────────────────────────────────────────────────────────── */
+.occ-scroll { overflow-x:auto; }
+.occ-table { border-collapse:separate; border-spacing:3px; font-size:0.73rem; }
+.occ-table th { color:#7c8091; font-weight:600; padding:5px 7px; text-align:center; font-size:0.7rem; }
+.occ-table th:first-child { text-align:left; min-width:52px; }
+.occ-table th.avg-h { background:#1e2235; border-radius:4px; }
+.occ-cell { padding:6px 5px; text-align:center; border-radius:4px; font-weight:600; font-size:0.7rem; cursor:default; transition:transform .1s; }
+.occ-cell:hover { transform:scale(1.12); z-index:2; position:relative; }
+.occ-avg { background:#1e2235; color:#a0a8c0; font-weight:700; padding:6px 5px; text-align:center; border-radius:4px; font-size:0.7rem; }
+.occ-label { color:#c8cfe0; padding:6px 4px; font-size:0.73rem; white-space:nowrap; }
+.empty { text-align:center; color:#7c8091; padding:36px 20px; font-size:0.84rem; }
+.mini-seg { display:inline-flex; border:1px solid #2a2d3e; border-radius:6px; overflow:hidden; }
+.mini-seg button { font-family:inherit; font-size:0.69rem; border:none; background:#12162a;
+  color:#9aa0b4; padding:5px 10px; cursor:pointer; border-right:1px solid #2a2d3e; }
+.mini-seg button:last-child { border-right:none; }
+.mini-seg button.on { background:#2a2d3e; color:#fff; }
+.loading-msg { text-align:center; color:#7c8091; padding:60px; font-size:0.85rem; }
+@media(max-width:720px){ .kpi-row{grid-template-columns:repeat(2,1fr);} .grid2{grid-template-columns:1fr;} .fb-summary{margin-left:0;} }
+</style>
 </head>
-<body class="min-h-screen p-4 md:p-6">
+<body>
 
-  <!-- Nagłówek -->
-  <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-    <div>
-      <h1 class="text-2xl font-bold text-white">Padel Warsaw</h1>
-      <p id="lastUpdate" class="text-slate-400 text-sm mt-1">Ładowanie danych...</p>
-    </div>
-    <div id="filterBar">
-      <label class="text-slate-400 text-sm">Dzielnica:</label>
-      <select id="filterDzielnica" onchange="applyFilters()">
-        <option value="">Wszystkie</option>
-      </select>
-      <label class="text-slate-400 text-sm ml-2">Źródło:</label>
-      <select id="filterSource" onchange="applyFilters()">
-        <option value="">Wszystkie</option>
-        <option value="playtomic">Playtomic</option>
-        <option value="kluby_org">Kluby.org</option>
-      </select>
-      <button onclick="loadAll()" class="ml-2 px-3 py-1 bg-indigo-600 hover:bg-indigo-500
-        text-white text-sm rounded-lg transition-colors">Odśwież</button>
-    </div>
-  </div>
+<h1>🎾 Padel Warszawa — Analiza Kortów</h1>
+<p class="subtitle" id="dataInfo">Ładowanie danych…</p>
 
-  <!-- KPI Cards -->
-  <div id="kpiRow" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-    <div class="card p-4">
-      <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Kluby</div>
-      <div id="kpiClubs" class="kpi-val text-indigo-400">—</div>
-    </div>
-    <div class="card p-4">
-      <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Korty padlowe</div>
-      <div id="kpiCourts" class="kpi-val text-cyan-400">—</div>
-    </div>
-    <div class="card p-4">
-      <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Śr. cena / h</div>
-      <div id="kpiPrice" class="kpi-val text-emerald-400">—</div>
-    </div>
-    <div class="card p-4">
-      <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Śr. obłożenie</div>
-      <div id="kpiOcc" class="kpi-val text-amber-400">—</div>
-    </div>
-  </div>
+<!-- KLUB BAR -->
+<div class="club-bar">
+  <label>Klub:</label>
+  <select id="clubSel" onchange="onClubChange()">
+    <option value="">Wszystkie kluby</option>
+  </select>
+  <label style="margin-left:8px">Źródło:</label>
+  <select id="filterSource" onchange="onFilterChange()">
+    <option value="">Wszystkie</option>
+    <option value="playtomic">Playtomic</option>
+    <option value="kluby_org">Kluby.org</option>
+  </select>
+  <label style="margin-left:8px">Dzielnica:</label>
+  <select id="filterDzielnica" onchange="onFilterChange()">
+    <option value="">Wszystkie</option>
+  </select>
+  <span class="club-name-display" id="clubNameDisplay"></span>
+</div>
 
-  <!-- Heatmapa + Porównanie cen -->
-  <div class="grid md:grid-cols-2 gap-4 mb-4">
-    <div class="card p-4">
-      <h2 class="font-semibold text-white mb-3">Heatmapa obłożenia (dziś)</h2>
-      <p class="text-slate-400 text-xs mb-3">Procent zajętości per klub per godzina</p>
-      <div class="chart-wrap" style="height:320px">
-        <canvas id="chartHeatmap"></canvas>
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="fb-group">
+    <span class="fb-lbl">Zakres</span>
+    <div class="fb-row">
+      <div class="seg" id="rangeSeg">
+        <button data-range="all" class="on">Cały okres</button>
+        <button data-range="7">Ostatnie 7 dni</button>
+        <button data-range="30">Ostatnie 30 dni</button>
+        <button data-range="custom">Własny</button>
       </div>
-    </div>
-    <div class="card p-4">
-      <h2 class="font-semibold text-white mb-3">Porównanie cen per klub</h2>
-      <p class="text-slate-400 text-xs mb-3">Min / Śr / Max cena PLN (wynajem kortu 60 min)</p>
-      <div class="chart-wrap" style="height:320px">
-        <canvas id="chartPrices"></canvas>
-      </div>
+      <input type="date" class="date-in" id="dateFrom" disabled>
+      <span style="color:#7c8091;font-size:0.73rem">–</span>
+      <input type="date" class="date-in" id="dateTo" disabled>
     </div>
   </div>
-
-  <!-- Trend + Indoor/Outdoor -->
-  <div class="grid md:grid-cols-3 gap-4 mb-4">
-    <div class="card p-4 md:col-span-2">
-      <h2 class="font-semibold text-white mb-3">Trend (historia dzienna)</h2>
-      <p class="text-slate-400 text-xs mb-3">Obłożenie % i średnia cena PLN w czasie</p>
-      <div class="chart-wrap" style="height:260px">
-        <canvas id="chartTrend"></canvas>
-      </div>
-    </div>
-    <div class="card p-4">
-      <h2 class="font-semibold text-white mb-3">Indoor vs Outdoor</h2>
-      <p class="text-slate-400 text-xs mb-3">Podział kortów wg nawierzchni</p>
-      <div class="chart-wrap" style="height:220px; display:flex; align-items:center">
-        <canvas id="chartDonut"></canvas>
-      </div>
-      <div id="donutLegend" class="mt-3 space-y-1"></div>
+  <div class="fb-group">
+    <span class="fb-lbl">Dni tygodnia</span>
+    <div class="fb-row" id="dowRow">
+      <div class="dow on" data-dow="1">Pn</div>
+      <div class="dow on" data-dow="2">Wt</div>
+      <div class="dow on" data-dow="3">Śr</div>
+      <div class="dow on" data-dow="4">Cz</div>
+      <div class="dow on" data-dow="5">Pt</div>
+      <div class="dow weekend on" data-dow="6">So</div>
+      <div class="dow weekend on" data-dow="0">Nd</div>
     </div>
   </div>
+  <div class="fb-summary">
+    <span class="fb-count" id="fbCount"></span>
+    <button class="fb-reset" id="fbReset">Resetuj</button>
+  </div>
+</div>
 
-  <!-- Tabela klubów -->
-  <div class="card p-4">
-    <h2 class="font-semibold text-white mb-3">Wszystkie kluby</h2>
-    <div id="clubsTable" class="overflow-x-auto">
-      <div class="loading">Ładowanie...</div>
+<!-- KPI -->
+<div class="kpi-row" id="kpiRow">
+  <div class="kpi"><div class="val" id="kpiOcc">—</div><div class="lbl">Śr. obłożenie</div></div>
+  <div class="kpi"><div class="val" id="kpiHours">—</div><div class="lbl">Godzin zarezerwowanych</div></div>
+  <div class="kpi"><div class="val" id="kpiRev">—</div><div class="lbl">Szac. przychód</div></div>
+  <div class="kpi"><div class="val" id="kpiDays">—</div><div class="lbl">Dni w zakresie</div></div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="showTab('godziny',this)">Rozkład godzinowy</div>
+  <div class="tab"        onclick="showTab('trend',this)">Trend w czasie</div>
+  <div class="tab"        onclick="showTab('oblozenie',this)">Obłożenie</div>
+  <div class="tab"        onclick="showTab('porownanie',this)">Porównanie klubów</div>
+  <div class="tab"        onclick="showTab('tabela',this)">Tabela szczegółowa</div>
+</div>
+
+<!-- TAB: GODZINY -->
+<div id="tab-godziny">
+  <div class="grid2">
+    <div class="section">
+      <div class="section-title">Obłożenie wg godziny (%)</div>
+      <canvas id="chartGodziny" height="150"></canvas>
+    </div>
+    <div class="section">
+      <div class="section-title">Szac. przychód wg godziny (zł)</div>
+      <canvas id="chartPrzychod" height="150"></canvas>
     </div>
   </div>
+  <div class="grid2">
+    <div class="section">
+      <div class="section-title">Kluczowe wnioski</div>
+      <div id="insightsGodziny"></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Udział pory dnia w przychodzie</div>
+      <canvas id="chartPrzedzialy" height="160"></canvas>
+    </div>
+  </div>
+</div>
 
+<!-- TAB: TREND -->
+<div id="tab-trend" style="display:none">
+  <div class="section">
+    <div class="section-title">
+      <span>Trend — <span id="trendMetricLbl">Obłożenie</span></span>
+      <span style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="mini-seg" id="trendMetricSeg">
+          <button data-m="occ" class="on">Obłożenie</button>
+          <button data-m="hours">Godziny</button>
+          <button data-m="revenue">Przychód</button>
+        </span>
+        <span class="mini-seg" id="trendModeSeg">
+          <button data-mode="time" class="on">Dzień po dniu</button>
+          <button data-mode="dow">Wg dnia tyg.</button>
+        </span>
+      </span>
+    </div>
+    <canvas id="chartTrend" height="75"></canvas>
+  </div>
+  <div class="grid2">
+    <div class="section">
+      <div class="section-title">Struktura dni tygodnia</div>
+      <canvas id="chartDow" height="160"></canvas>
+    </div>
+    <div class="section">
+      <div class="section-title">Wnioski — trend</div>
+      <div id="insightsTrend"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: OBŁOŻENIE -->
+<div id="tab-oblozenie" style="display:none">
+  <div class="section">
+    <div class="section-title">Heatmapa obłożenia — % zajętości (godzina × dzień)</div>
+    <div class="occ-scroll">
+      <table class="occ-table">
+        <thead><tr id="occHead"></tr></thead>
+        <tbody id="occTableBody"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <span style="font-size:0.7rem;color:#7c8091">Legenda:</span>
+      <span style="background:#1a1f30;color:#555;padding:3px 9px;border-radius:4px;font-size:0.68rem">0–25%</span>
+      <span style="background:rgba(110,231,183,0.25);color:#6ee7b7;padding:3px 9px;border-radius:4px;font-size:0.68rem">25–50%</span>
+      <span style="background:rgba(251,191,36,0.35);color:#fbbf24;padding:3px 9px;border-radius:4px;font-size:0.68rem">50–75%</span>
+      <span style="background:rgba(248,113,113,0.45);color:#fca5a5;padding:3px 9px;border-radius:4px;font-size:0.68rem">75–90%</span>
+      <span style="background:rgba(248,113,113,0.85);color:#fff;padding:3px 9px;border-radius:4px;font-size:0.68rem;font-weight:700">90–100%</span>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="section">
+      <div class="section-title">Śr. obłożenie wg godziny</div>
+      <canvas id="chartOccAvg" height="160"></canvas>
+    </div>
+    <div class="section">
+      <div class="section-title">Wnioski — obłożenie</div>
+      <div id="insightsOcc"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: PORÓWNANIE -->
+<div id="tab-porownanie" style="display:none">
+  <div class="grid2">
+    <div class="section">
+      <div class="section-title">Porównanie cen (zł/h)</div>
+      <canvas id="chartPrices" height="200"></canvas>
+    </div>
+    <div class="section">
+      <div class="section-title">Indoor vs Outdoor</div>
+      <canvas id="chartDonut" height="170"></canvas>
+      <div id="donutLegend" style="margin-top:10px"></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Wszystkie kluby — szczegóły</div>
+    <div style="overflow-x:auto" id="compTable">
+      <div class="loading-msg">Ładowanie…</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: TABELA -->
+<div id="tab-tabela" style="display:none">
+  <div class="section">
+    <div class="section-title">Szczegóły według dnia</div>
+    <table>
+      <thead><tr>
+        <th>Data</th><th>Dzień</th>
+        <th>Slotów</th><th>Godzin rez.</th>
+        <th>Szac. przychód</th><th>Obłożenie</th>
+      </tr></thead>
+      <tbody id="dayTableBody"></tbody>
+    </table>
+  </div>
+  <div class="section">
+    <div class="section-title">Zbiorcze wg godziny (suma zakresu)</div>
+    <table>
+      <thead><tr><th>Godzina</th><th>Strefa</th><th>Śr. obłożenie</th><th>Godzin łącznie</th><th>Szac. przychód</th></tr></thead>
+      <tbody id="hourTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5/papaparse.min.js"></script>
 <script>
-// ─── Konfiguracja ─────────────────────────────────────────────────────────────
+/* ============================================================
+   STAŁE
+   ============================================================ */
 const CSV_BASE = '../csv_exports/';
+const HOURS    = Array.from({length:18}, (_,i) => i+6);  // 6..23
+const HOUR_LBL = HOURS.map(h => (h<10?'0':'')+h+':00');
+const DOW_PL   = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'];
+const DOW_S    = ['Nd','Pn','Wt','Śr','Cz','Pt','So'];
+const PRIME_H  = h => h >= 16;
 
-// Paleta kolorów wykresów
-const COLORS = [
-  '#6366f1','#22d3ee','#34d399','#f59e0b','#f43f5e',
-  '#a78bfa','#38bdf8','#4ade80','#fbbf24','#fb7185',
-  '#818cf8','#67e8f9','#86efac','#fcd34d','#fda4af',
-];
+const occColor = v => v == null ? {bg:'#13172a',fg:'#3a3d52'} :
+  v>=90 ? {bg:'rgba(248,113,113,0.85)',fg:'#fff'} :
+  v>=75 ? {bg:'rgba(248,113,113,0.45)',fg:'#fca5a5'} :
+  v>=50 ? {bg:'rgba(251,191,36,0.35)',fg:'#fbbf24'} :
+  v>=25 ? {bg:'rgba(110,231,183,0.25)',fg:'#6ee7b7'} :
+          {bg:'#1a1f30',fg:'#4a5068'};
 
-// ─── Stan globalny ─────────────────────────────────────────────────────────────
-let allData = {};
-let charts  = {};
-let activeFilter = { dzielnica: '', source: '' };
+const hourColor = h => PRIME_H(h) ? 'rgba(248,113,113,0.7)' : 'rgba(110,231,183,0.55)';
+const fmt  = n => Math.round(n).toLocaleString('pl-PL');
+const fmt1 = n => (+n).toLocaleString('pl-PL',{minimumFractionDigits:1,maximumFractionDigits:1});
 
-// ─── Ładowanie CSV ─────────────────────────────────────────────────────────────
-function loadCSV(filename) {
-  return new Promise(resolve => {
-    Papa.parse(CSV_BASE + filename, {
-      download: true,
-      header: true,
-      dynamicTyping: true,
-      skipEmptyLines: true,
-      complete: r => resolve(r.data),
-      error: () => resolve([]),
+const AXIS = { ticks:{color:'#7c8091',font:{size:11}}, grid:{color:'#1e2130'} };
+const baseOpts = {
+  responsive:true, maintainAspectRatio:true,
+  plugins:{legend:{display:false}, tooltip:{backgroundColor:'#1a1d2e',titleColor:'#e8eaf0',bodyColor:'#a0a8c0',borderColor:'#2a2d3e',borderWidth:1}},
+  scales:{x:AXIS, y:AXIS}
+};
+const legendOpts = { labels:{color:'#a0a8c0',font:{size:11},boxWidth:12} };
+const charts = {};
+function up(id, cfg){
+  if (charts[id]) charts[id].destroy();
+  const el = document.getElementById(id);
+  if (!el) return;
+  charts[id] = new Chart(el, cfg);
+}
+
+/* ============================================================
+   DANE GLOBALNE
+   ============================================================ */
+const allData = {
+  detail: [],        // history_detail.csv
+  comparison: [],    // latest_porownanie_klubow.csv
+  indoor: [],        // latest_indoor_vs_outdoor.csv
+  history: [],       // history.csv
+  byClubDate: {},    // { klub: { date: { h: {n_slotow,n_zajetych,oblozenie_pct} } } }
+  priceByClub: {},   // { klub: cena_srednia }
+  clubMeta: {},      // { klub: { dzielnica, source, nawierzchnia, korty } }
+};
+
+let DATA_MIN = '', DATA_MAX = '';
+
+/* ============================================================
+   ŁADOWANIE CSV
+   ============================================================ */
+function loadCSV(file) {
+  return new Promise(res => {
+    Papa.parse(CSV_BASE + file, {
+      download:true, header:true, dynamicTyping:true, skipEmptyLines:true,
+      complete: r => res(r.data),
+      error: () => res([]),
     });
   });
 }
 
 async function loadAll() {
-  document.getElementById('lastUpdate').textContent = 'Aktualizowanie...';
-  try {
-    const [clubs, comparison, prices, occupancy, indoor, history] = await Promise.all([
-      loadCSV('latest_kluby.csv'),
-      loadCSV('latest_porownanie_klubow.csv'),
-      loadCSV('latest_ceny_wg_pory_dnia.csv'),
-      loadCSV('latest_oblozenie_per_kort_godzina.csv'),
-      loadCSV('latest_indoor_vs_outdoor.csv'),
-      loadCSV('history.csv'),
-    ]);
+  document.getElementById('dataInfo').textContent = 'Ładowanie danych…';
+  const [detail, comp, indoor, hist] = await Promise.all([
+    loadCSV('history_detail.csv'),
+    loadCSV('latest_porownanie_klubow.csv'),
+    loadCSV('latest_indoor_vs_outdoor.csv'),
+    loadCSV('history.csv'),
+  ]);
+  allData.detail     = detail;
+  allData.comparison = comp;
+  allData.indoor     = indoor;
+  allData.history    = hist;
 
-    allData = { clubs, comparison, prices, occupancy, indoor, history };
+  buildIndex();
+  populateSelectors();
+  render();
 
-    // Zapełnij filtry
-    const dzielnice = [...new Set(comparison.map(r => r.dzielnica).filter(Boolean))].sort();
-    const sel = document.getElementById('filterDzielnica');
-    sel.innerHTML = '<option value="">Wszystkie</option>' +
-      dzielnice.map(d => `<option value="${d}">${d}</option>`).join('');
+  const dates = [...new Set(detail.map(r=>r.data))].sort();
+  document.getElementById('dataInfo').textContent =
+    `${dates.length} dni danych · ${comp.length} wierszy porównania · ${detail.length} wierszy historycznych`;
+}
 
-    applyFilters();
+function buildIndex() {
+  allData.byClubDate = {};
+  allData.priceByClub = {};
+  allData.clubMeta = {};
 
-    // Ostatnia aktualizacja
-    if (history.length) {
-      const last = history[history.length - 1];
-      document.getElementById('lastUpdate').textContent =
-        `Ostatnia aktualizacja: ${last.date} · ${last.n_clubs} klubów · ${last.n_slots} slotów`;
-    } else {
-      document.getElementById('lastUpdate').textContent = 'Dane załadowane';
-    }
-  } catch(e) {
-    document.getElementById('lastUpdate').textContent = 'Błąd ładowania danych: ' + e.message;
+  allData.detail.forEach(r => {
+    if (!r.klub || !r.data) return;
+    const c = r.klub, d = r.data, h = +r.godzina;
+    if (!allData.byClubDate[c]) allData.byClubDate[c] = {};
+    if (!allData.byClubDate[c][d]) allData.byClubDate[c][d] = {};
+    allData.byClubDate[c][d][h] = {
+      n_slotow: r.n_slotow, n_zajetych: r.n_zajetych, oblozenie_pct: r.oblozenie_pct||0
+    };
+  });
+
+  allData.comparison.forEach(r => {
+    if (!r.klub) return;
+    if (r.cena_srednia > 0 && !allData.priceByClub[r.klub])
+      allData.priceByClub[r.klub] = r.cena_srednia;
+    if (!allData.clubMeta[r.klub])
+      allData.clubMeta[r.klub] = {
+        dzielnica: r.dzielnica, source: r.source,
+        nawierzchnia: r.nawierzchnia, korty: r.korty_padlowe
+      };
+  });
+
+  const allDates = [...new Set(allData.detail.map(r=>r.data))].sort();
+  DATA_MIN = allDates[0] || new Date().toISOString().slice(0,10);
+  DATA_MAX = allDates[allDates.length-1] || DATA_MIN;
+}
+
+/* ============================================================
+   SELEKTORY
+   ============================================================ */
+function populateSelectors() {
+  const clubs = Object.keys(allData.byClubDate).sort();
+  const clubSel = document.getElementById('clubSel');
+  clubSel.innerHTML = '<option value="">Wszystkie kluby</option>' +
+    clubs.map(c => `<option value="${c}">${c}</option>`).join('');
+
+  const dzielnice = [...new Set(allData.comparison.map(r=>r.dzielnica).filter(Boolean))].sort();
+  const dSel = document.getElementById('filterDzielnica');
+  dSel.innerHTML = '<option value="">Wszystkie</option>' +
+    dzielnice.map(d => `<option value="${d}">${d}</option>`).join('');
+
+  // Init date inputs
+  const dF = document.getElementById('dateFrom'), dT = document.getElementById('dateTo');
+  dF.min = dT.min = DATA_MIN; dF.max = dT.max = DATA_MAX;
+  dF.value = DATA_MIN; dT.value = DATA_MAX;
+}
+
+/* ============================================================
+   STAN
+   ============================================================ */
+const state = {
+  club:'', source:'', dzielnica:'',
+  range:'all', from:'', to:'',
+  dows: new Set([0,1,2,3,4,5,6]),
+};
+let trendMetric = 'occ', trendMode = 'time';
+
+/* ============================================================
+   FILTROWANIE → DAYS
+   ============================================================ */
+function getDateRange() {
+  if (state.range==='custom') return [state.from||DATA_MIN, state.to||DATA_MAX];
+  if (state.range==='all')    return [DATA_MIN, DATA_MAX];
+  const max = new Date(DATA_MAX);
+  const from = new Date(max);
+  from.setDate(max.getDate() - (+state.range - 1));
+  return [from.toISOString().slice(0,10), DATA_MAX];
+}
+
+function getActiveClubes() {
+  let clubs = Object.keys(allData.byClubDate);
+  if (state.club) return [state.club];
+  if (state.source || state.dzielnica) {
+    const ok = new Set(allData.comparison
+      .filter(r => (!state.source || r.source===state.source) &&
+                   (!state.dzielnica || r.dzielnica===state.dzielnica))
+      .map(r => r.klub));
+    clubs = clubs.filter(c => ok.has(c));
   }
+  return clubs;
 }
 
-// ─── Filtrowanie ───────────────────────────────────────────────────────────────
-function applyFilters() {
-  activeFilter.dzielnica = document.getElementById('filterDzielnica').value;
-  activeFilter.source    = document.getElementById('filterSource').value;
+function buildDays() {
+  const [from, to] = getDateRange();
+  const clubs = getActiveClubes();
+  const dayMap = {};
 
-  let filtered = allData.comparison || [];
-  if (activeFilter.dzielnica)
-    filtered = filtered.filter(r => r.dzielnica === activeFilter.dzielnica);
-  if (activeFilter.source)
-    filtered = filtered.filter(r => r.source === activeFilter.source);
+  clubs.forEach(club => {
+    const byDate = allData.byClubDate[club] || {};
+    const price  = allData.priceByClub[club] || 0;
+    Object.entries(byDate).forEach(([date, hourMap]) => {
+      if (date < from || date > to) return;
+      const dd = new Date(date); const dow = dd.getDay();
+      if (!state.dows.has(dow)) return;
 
-  renderKPI(filtered);
-  renderPriceChart(filtered);
-  renderHeatmap(allData.occupancy || [], filtered);
-  renderTrend(allData.history || []);
-  renderDonut(allData.indoor || []);
-  renderClubsTable(filtered);
-}
-
-// ─── KPI ───────────────────────────────────────────────────────────────────────
-function renderKPI(data) {
-  const n_clubs  = data.length;
-  const n_courts = data.reduce((s, r) => s + (r.korty_padlowe || 0), 0);
-  const prices   = data.map(r => r.cena_srednia).filter(v => v > 0);
-  const avg_p    = prices.length ? Math.round(prices.reduce((a,b)=>a+b,0)/prices.length) : null;
-  const occs     = data.map(r => r.oblozenie_pct).filter(v => v != null && v >= 0);
-  const avg_occ  = occs.length ? Math.round(occs.reduce((a,b)=>a+b,0)/occs.length) : null;
-
-  document.getElementById('kpiClubs').textContent  = n_clubs;
-  document.getElementById('kpiCourts').textContent = n_courts || '—';
-  document.getElementById('kpiPrice').textContent  = avg_p ? avg_p + ' zł' : '—';
-  document.getElementById('kpiOcc').textContent    = avg_occ != null ? avg_occ + '%' : '—';
-}
-
-// ─── Wykres: Porównanie cen ────────────────────────────────────────────────────
-function renderPriceChart(data) {
-  const valid = data
-    .filter(r => r.cena_min > 0 || r.cena_max > 0 || r.cena_srednia > 0)
-    .sort((a,b) => (a.cena_srednia||0) - (b.cena_srednia||0));
-
-  const labels  = valid.map(r => r.klub);
-  const mins    = valid.map(r => r.cena_min    || null);
-  const avgs    = valid.map(r => r.cena_srednia || null);
-  const maxs    = valid.map(r => r.cena_max    || null);
-
-  if (charts.prices) charts.prices.destroy();
-  const ctx = document.getElementById('chartPrices').getContext('2d');
-  charts.prices = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        { label: 'Min PLN', data: mins, backgroundColor: '#10b981' },
-        { label: 'Śr. PLN', data: avgs, backgroundColor: '#6366f1' },
-        { label: 'Max PLN', data: maxs, backgroundColor: '#f43f5e' },
-      ]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
-      scales: {
-        x: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' },
-             title: { display: true, text: 'PLN', color: '#64748b' } },
-        y: { ticks: { color: '#cbd5e1', font: { size: 10 } }, grid: { color: '#1e293b' } },
-      },
-    }
-  });
-}
-
-// ─── Wykres: Heatmapa ─────────────────────────────────────────────────────────
-function renderHeatmap(occupancy, filteredComparison) {
-  const validClubs = new Set(filteredComparison.map(r => r.klub));
-  const filtered   = occupancy.filter(r => !validClubs.size || validClubs.has(r.klub));
-
-  // Zagreguj: per klub per godzina → procent wolnych
-  const agg = {};
-  filtered.forEach(r => {
-    const k = r.klub;
-    const h = r.godzina;
-    if (!k || h == null) return;
-    if (!agg[k]) agg[k] = {};
-    if (!agg[k][h]) agg[k][h] = { free: 0, total: 0 };
-    agg[k][h].total++;
-    if (r.wolny) agg[k][h].free++;
-  });
-
-  const clubs = Object.keys(agg).sort();
-  const hours = Array.from({ length: 18 }, (_, i) => i + 6); // 6–23
-
-  // Buduj dane dla matrix chart
-  const matrixData = [];
-  clubs.forEach((club, yi) => {
-    hours.forEach(h => {
-      const entry = agg[club]?.[h];
-      const pct   = entry ? Math.round(entry.free / entry.total * 100) : null;
-      matrixData.push({ x: h, y: yi, v: pct });
+      if (!dayMap[date]) {
+        dayMap[date] = { date, dow, hData:{} };
+        HOURS.forEach(h => dayMap[date].hData[h] = {pctSum:0,cnt:0,nZaj:0,rev:0});
+      }
+      HOURS.forEach(h => {
+        const r = hourMap[h];
+        if (!r) return;
+        dayMap[date].hData[h].pctSum += r.oblozenie_pct;
+        dayMap[date].hData[h].cnt++;
+        dayMap[date].hData[h].nZaj += r.n_zajetych;
+        dayMap[date].hData[h].rev  += r.n_zajetych * 0.5 * price;
+      });
     });
   });
 
-  if (charts.heatmap) charts.heatmap.destroy();
-  const ctx = document.getElementById('chartHeatmap').getContext('2d');
-  charts.heatmap = new Chart(ctx, {
-    type: 'matrix',
-    data: {
-      datasets: [{
-        label: '% wolnych slotów',
-        data: matrixData,
-        backgroundColor(ctx) {
-          const v = ctx.dataset.data[ctx.dataIndex]?.v;
-          if (v == null) return '#1e293b';
-          // zielony (wolny) → czerwony (zajęty)
-          const g = Math.round(v * 2.55);
-          const r = Math.round((100 - v) * 2.55);
-          return `rgba(${r},${g},60,0.85)`;
-        },
-        borderColor: '#0f172a',
-        borderWidth: 1,
-        width(ctx) {
-          const a = ctx.chart.chartArea || {};
-          return clubs.length ? (a.right - a.left) / 18 - 1 : 10;
-        },
-        height(ctx) {
-          const a = ctx.chart.chartArea || {};
-          return clubs.length ? (a.bottom - a.top) / clubs.length - 1 : 10;
-        },
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            title: ctx => `${clubs[ctx[0].raw.y]} — ${ctx[0].raw.x}:00`,
-            label: ctx => ctx.raw.v != null ? `${ctx.raw.v}% wolnych` : 'brak danych',
-          }
-        }
-      },
-      scales: {
-        x: {
-          type: 'linear',
-          min: 5.5, max: 23.5,
-          ticks: { stepSize: 1, color: '#64748b',
-                   callback: v => Number.isInteger(v) ? v + ':00' : '' },
-          grid: { color: '#1e293b' },
-        },
-        y: {
-          type: 'linear',
-          min: -0.5, max: clubs.length - 0.5,
-          ticks: { stepSize: 1, color: '#cbd5e1', font: { size: 9 },
-                   callback: v => clubs[v] || '' },
-          grid: { color: '#1e293b' },
-        }
-      }
-    }
+  return Object.entries(dayMap).sort((a,b)=>a[0].localeCompare(b[0])).map(([date, d]) => {
+    let totalHours=0, totalRev=0, nSlots=0, nZaj=0;
+    const occ = {}, hourRev = {};
+    HOURS.forEach(h => {
+      const hd = d.hData[h];
+      occ[h] = hd.cnt > 0 ? Math.round(hd.pctSum/hd.cnt) : null;
+      totalHours += hd.nZaj * 0.5;
+      totalRev   += hd.rev;
+      hourRev[h]  = hd.rev;
+      nZaj += hd.nZaj;
+    });
+    const occAvg = nZaj > 0 ? Object.values(occ).filter(v=>v!=null).reduce((a,b)=>a+b,0) /
+                               Object.values(occ).filter(v=>v!=null).length : 0;
+    return { date, dow:d.dow, occ, totalHours, totalRev, nZaj, hourRev, occAvg };
   });
 }
 
-// ─── Wykres: Trend ─────────────────────────────────────────────────────────────
-function renderTrend(history) {
-  const last30 = history.slice(-30);
-  if (charts.trend) charts.trend.destroy();
-  const ctx = document.getElementById('chartTrend').getContext('2d');
-  charts.trend = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: last30.map(r => r.date),
-      datasets: [
-        {
-          label: 'Obłożenie %',
-          data: last30.map(r => r.occupancy_pct),
-          borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)',
-          tension: 0.3, fill: true, yAxisID: 'y',
-        },
-        {
-          label: 'Śr. cena PLN',
-          data: last30.map(r => r.price_avg),
-          borderColor: '#6366f1', backgroundColor: 'rgba(99,102,241,0.1)',
-          tension: 0.3, fill: true, yAxisID: 'y2',
-        },
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
-      scales: {
-        x: { ticks: { color: '#64748b', maxRotation: 45 }, grid: { color: '#1e293b' } },
-        y:  { ticks: { color: '#f59e0b' }, grid: { color: '#1e293b' },
-              title: { display: true, text: 'Obłożenie %', color: '#f59e0b' } },
-        y2: { position: 'right', ticks: { color: '#6366f1' }, grid: { drawOnChartArea: false },
-              title: { display: true, text: 'Cena PLN', color: '#6366f1' } },
-      }
-    }
-  });
-}
+/* ============================================================
+   RENDER
+   ============================================================ */
+function render() {
+  const DAYS = buildDays();
+  document.getElementById('fbCount').innerHTML =
+    `Wybrano: <b>${DAYS.length}</b> ${DAYS.length===1?'dzień':'dni'}`;
 
-// ─── Wykres: Donut ─────────────────────────────────────────────────────────────
-function renderDonut(indoor) {
-  if (!indoor.length) return;
-  const labels = indoor.map(r => r.nawierzchnia || 'unknown');
-  const data   = indoor.map(r => r.kortow || 0);
-  const colors = ['#6366f1','#22d3ee','#34d399','#f59e0b'];
+  // KPI
+  const totHours = DAYS.reduce((s,d)=>s+d.totalHours,0);
+  const totRev   = DAYS.reduce((s,d)=>s+d.totalRev,0);
+  const avgOcc   = DAYS.length ? DAYS.reduce((s,d)=>s+d.occAvg,0)/DAYS.length : 0;
+  document.getElementById('kpiOcc').textContent   = DAYS.length ? Math.round(avgOcc)+'%' : '—';
+  document.getElementById('kpiHours').textContent  = DAYS.length ? fmt1(totHours)+' h' : '—';
+  document.getElementById('kpiRev').textContent    = DAYS.length ? fmt(totRev)+' zł' : '—';
+  document.getElementById('kpiDays').textContent   = DAYS.length || '—';
 
-  if (charts.donut) charts.donut.destroy();
-  const ctx = document.getElementById('chartDonut').getContext('2d');
-  charts.donut = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels,
-      datasets: [{ data, backgroundColor: colors, borderColor: '#0f172a', borderWidth: 2 }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw} kortów` } }
-      }
-    }
-  });
+  // Club name display
+  const cn = document.getElementById('clubNameDisplay');
+  cn.textContent = state.club || (getActiveClubes().length + ' klubów');
 
-  // Legenda manualna
-  const leg = document.getElementById('donutLegend');
-  leg.innerHTML = labels.map((l, i) =>
-    `<div class="flex items-center gap-2 text-xs text-slate-300">
-       <span style="width:10px;height:10px;border-radius:2px;background:${colors[i]};display:inline-block"></span>
-       ${l}: <strong>${data[i]}</strong> kortów
-       ${indoor[i]?.srednia_cena_pln ? `· śr. ${indoor[i].srednia_cena_pln} zł` : ''}
-     </div>`
-  ).join('');
-}
-
-
-// ─── Tabela: Wszystkie kluby ──────────────────────────────────────────────────
-function renderClubsTable(data) {
-  const el = document.getElementById('clubsTable');
-  if (!data.length) {
-    el.innerHTML = '<div class="loading">Brak danych</div>';
+  if (!DAYS.length) {
+    ['chartGodziny','chartPrzychod','chartPrzedzialy','chartTrend','chartDow','chartOccAvg']
+      .forEach(id => { if(charts[id]){charts[id].destroy();delete charts[id];} });
+    ['insightsGodziny','insightsOcc','insightsTrend'].forEach(id =>
+      document.getElementById(id).innerHTML='<div class="empty">Brak danych dla wybranego zakresu.</div>');
+    document.getElementById('occTableBody').innerHTML =
+      '<tr><td colspan="3" class="empty">Brak danych.</td></tr>';
+    document.getElementById('dayTableBody').innerHTML =
+      '<tr><td colspan="6" class="empty">Brak danych.</td></tr>';
+    document.getElementById('hourTableBody').innerHTML = '';
     return;
   }
 
-  const sorted = [...data].sort((a,b) => (a.dzielnica||'').localeCompare(b.dzielnica||'','pl'));
+  renderGodziny(DAYS);
+  renderTrend(DAYS);
+  renderHeatmap(DAYS);
+  renderOccAvg(DAYS);
+  renderInsightsGodziny(DAYS);
+  renderInsightsOcc(DAYS);
+  renderInsightsTrend(DAYS);
+  renderDayTable(DAYS);
+  renderHourTable(DAYS);
+  renderPorownanie();
+}
 
-  el.innerHTML = `
+/* ── Godziny ──────────────────────────────────────────────────────────────── */
+function aggByHour(DAYS) {
+  const pctSum={}, pctCnt={}, nZaj={}, rev={};
+  HOURS.forEach(h => { pctSum[h]=0; pctCnt[h]=0; nZaj[h]=0; rev[h]=0; });
+  DAYS.forEach(d => {
+    HOURS.forEach(h => {
+      if (d.occ[h]!=null) { pctSum[h]+=d.occ[h]; pctCnt[h]++; }
+      nZaj[h] += (d.nZaj / Math.max(Object.values(d.occ).filter(v=>v!=null).length,1)); // rough per-hour split
+      rev[h]  += d.hourRev[h]||0;
+    });
+  });
+  // recalc occ properly
+  const avgPct = {};
+  HOURS.forEach(h => avgPct[h] = pctCnt[h]>0 ? Math.round(pctSum[h]/pctCnt[h]) : 0);
+  return { avgPct, rev };
+}
+
+function renderGodziny(DAYS) {
+  const { avgPct, rev } = aggByHour(DAYS);
+  up('chartGodziny', {type:'bar',
+    data:{labels:HOUR_LBL, datasets:[{data:HOURS.map(h=>avgPct[h]),
+      backgroundColor:HOURS.map(hourColor), borderRadius:4}]},
+    options:{...baseOpts,
+      plugins:{...baseOpts.plugins, tooltip:{...baseOpts.plugins.tooltip,
+        callbacks:{label:c=>c.raw+'% zajętości'}}},
+      scales:{x:AXIS, y:{...AXIS, max:100, ticks:{...AXIS.ticks,callback:v=>v+'%'}}}}});
+  up('chartPrzychod', {type:'bar',
+    data:{labels:HOUR_LBL, datasets:[{data:HOURS.map(h=>Math.round(rev[h])),
+      backgroundColor:HOURS.map(hourColor), borderRadius:4}]},
+    options:{...baseOpts,
+      plugins:{...baseOpts.plugins, tooltip:{...baseOpts.plugins.tooltip,
+        callbacks:{label:c=>fmt(c.raw)+' zł'}}}}});
+
+  const buckets = [
+    {l:'06–10 (rano)',   hs:[6,7,8,9],      c:'#334155'},
+    {l:'10–13 (przedp.)',hs:[10,11,12],      c:'#6ee7b7'},
+    {l:'13–16 (popoł.)', hs:[13,14,15],      c:'#34d399'},
+    {l:'16–20 (wieczór)',hs:[16,17,18,19],   c:'#f87171'},
+    {l:'20–23 (noc)',    hs:[20,21,22],       c:'#fbbf24'},
+  ];
+  up('chartPrzedzialy', {type:'doughnut',
+    data:{labels:buckets.map(b=>b.l), datasets:[{
+      data:buckets.map(b=>Math.round(b.hs.reduce((s,h)=>s+(rev[h]||0),0))),
+      backgroundColor:buckets.map(b=>b.c), borderWidth:0}]},
+    options:{responsive:true, plugins:{legend:{position:'right',...legendOpts},
+      tooltip:{backgroundColor:'#1a1d2e',titleColor:'#e8eaf0',bodyColor:'#a0a8c0',
+        callbacks:{label:c=>c.label+': '+fmt(c.raw)+' zł'}}}}});
+}
+
+/* ── Trend ────────────────────────────────────────────────────────────────── */
+const METRICS = {
+  occ:     {lbl:'Obłożenie',  unit:'%', val:d=>d.occAvg,     fmt:v=>Math.round(v)+'%',   color:'#fbbf24', fill:'rgba(251,191,36,0.12)'},
+  hours:   {lbl:'Godziny',    unit:'h', val:d=>d.totalHours,  fmt:v=>fmt1(v)+' h',        color:'#6ee7b7', fill:'rgba(110,231,183,0.12)'},
+  revenue: {lbl:'Przychód',   unit:'zł',val:d=>d.totalRev,   fmt:v=>fmt(v)+' zł',        color:'#f87171', fill:'rgba(248,113,113,0.12)'},
+};
+function renderTrend(DAYS) {
+  const M = METRICS[trendMetric];
+  document.getElementById('trendMetricLbl').textContent = M.lbl;
+  if (trendMode==='dow') {
+    const order=[1,2,3,4,5,6,0], grp={};
+    order.forEach(o=>grp[o]=[]);
+    DAYS.forEach(d=>grp[d.dow].push(M.val(d)));
+    const present = order.filter(o=>grp[o].length);
+    const labels = present.map(o=>DOW_S[o]);
+    const data   = present.map(o=>grp[o].reduce((s,v)=>s+v,0)/grp[o].length);
+    const colors = present.map(o=>(o===0||o===6)?'rgba(248,113,113,0.8)':'rgba(110,231,183,0.6)');
+    up('chartTrend',{type:'bar',
+      data:{labels, datasets:[{data:data.map(v=>+v.toFixed(1)), backgroundColor:colors, borderRadius:4}]},
+      options:{...baseOpts, plugins:{...baseOpts.plugins, tooltip:{...baseOpts.plugins.tooltip,
+        callbacks:{label:c=>'śr. '+M.fmt(c.raw)}}},
+        scales:{x:AXIS, y:{...AXIS, ticks:{...AXIS.ticks,callback:v=>M.unit==='%'?v+'%':v}}}}});
+  } else {
+    const labels = DAYS.map(d=>DOW_S[d.dow]+' '+d.date.slice(5));
+    const data   = DAYS.map(d=>+M.val(d).toFixed(1));
+    up('chartTrend',{type:'line',
+      data:{labels, datasets:[{data, borderColor:M.color, backgroundColor:M.fill,
+        pointBackgroundColor:M.color, pointRadius:4, fill:true, tension:0.3}]},
+      options:{...baseOpts, plugins:{...baseOpts.plugins, tooltip:{...baseOpts.plugins.tooltip,
+        callbacks:{label:c=>M.fmt(c.raw)}}},
+        scales:{x:{...AXIS,ticks:{...AXIS.ticks,maxRotation:45,font:{size:10}}},
+                y:{...AXIS, ticks:{...AXIS.ticks,callback:v=>M.unit==='%'?v+'%':v}}}}});
+  }
+
+  const dowCnt = {};
+  DOW_S.forEach((_,i)=>dowCnt[i]=0);
+  DAYS.forEach(d=>dowCnt[d.dow]++);
+  up('chartDow',{type:'bar',
+    data:{labels:DOW_S, datasets:[{data:Object.values(dowCnt),
+      backgroundColor:DOW_S.map((_,i)=>(i===0||i===6)?'rgba(248,113,113,0.7)':'rgba(110,231,183,0.55)'),
+      borderRadius:4}]},
+    options:{...baseOpts, plugins:{...baseOpts.plugins, tooltip:{...baseOpts.plugins.tooltip,
+      callbacks:{label:c=>c.raw+' dni'}}}}});
+}
+
+/* ── Heatmapa ────────────────────────────────────────────────────────────── */
+function renderHeatmap(DAYS) {
+  const shown = DAYS.slice(-21); // max 21 dni
+  const head = document.getElementById('occHead');
+  head.innerHTML = '<th>Godzina</th>' +
+    shown.map(d=>`<th>${DOW_S[d.dow]} ${d.date.slice(5)}</th>`).join('') +
+    '<th class="avg-h">Śr.</th>';
+  const tbody = document.getElementById('occTableBody');
+  tbody.innerHTML = '';
+  HOURS.forEach((h,hi) => {
+    const tr = document.createElement('tr');
+    let sum=0, cnt=0;
+    let row = `<td class="occ-label">${HOUR_LBL[hi]}${PRIME_H(h)?'<span style="color:#f87171;font-size:0.6rem;margin-left:2px">●</span>':''}</td>`;
+    shown.forEach(d => {
+      const v = d.occ[h];
+      const c = occColor(v);
+      row += `<td class="occ-cell" style="background:${c.bg};color:${c.fg}"
+        title="${DOW_S[d.dow]} ${d.date} ${HOUR_LBL[hi]}: ${v!=null?v+'%':'—'}">${v!=null?v+'%':'—'}</td>`;
+      if (v!=null){sum+=v;cnt++;}
+    });
+    const avg = cnt>0?Math.round(sum/cnt):null;
+    const ca = occColor(avg);
+    row += `<td class="occ-avg" style="background:${ca.bg};color:${ca.fg}">${avg!=null?avg+'%':'—'}</td>`;
+    tr.innerHTML = row;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ── Avg occ by hour ────────────────────────────────────────────────────────── */
+function renderOccAvg(DAYS) {
+  const { avgPct } = aggByHour(DAYS);
+  up('chartOccAvg',{type:'bar',
+    data:{labels:HOUR_LBL, datasets:[{data:HOURS.map(h=>avgPct[h]),
+      backgroundColor:HOURS.map(h=>occColor(avgPct[h]).bg), borderRadius:4}]},
+    options:{...baseOpts, plugins:{...baseOpts.plugins, tooltip:{...baseOpts.plugins.tooltip,
+      callbacks:{label:c=>c.raw+'% obłożenia'}}},
+      scales:{x:AXIS, y:{...AXIS, max:100, ticks:{...AXIS.ticks,callback:v=>v+'%'}}}}});
+}
+
+/* ── Insights ────────────────────────────────────────────────────────────── */
+function renderInsightsGodziny(DAYS) {
+  const { avgPct, rev } = aggByHour(DAYS);
+  const peak = HOURS.reduce((a,b)=>rev[a]>=rev[b]?a:b);
+  const low  = HOURS.reduce((a,b)=>avgPct[a]<=avgPct[b]?a:b);
+  const eveRev = [16,17,18,19,20,21,22].reduce((s,h)=>s+(rev[h]||0),0);
+  const totRev = DAYS.reduce((s,d)=>s+d.totalRev,0);
+  const share  = totRev ? Math.round(eveRev/totRev*100) : 0;
+  document.getElementById('insightsGodziny').innerHTML =
+    `<div class="insight"><strong>Peak: ${(peak<10?'0':'')+peak}:00</strong> — najwyższy szac. przychód: ${fmt(rev[peak])} zł.</div>`
+   +`<div class="insight amber"><strong>Wieczór 16:00–22:00</strong> generuje ${share}% przychodu.</div>`
+   +`<div class="insight green"><strong>Najsłabsza godzina: ${(low<10?'0':'')+low}:00</strong> — śr. ${avgPct[low]}% zajętości. Potencjał na promocje.</div>`;
+}
+function renderInsightsOcc(DAYS) {
+  const { avgPct } = aggByHour(DAYS);
+  const hi = HOURS.reduce((a,b)=>avgPct[a]>=avgPct[b]?a:b);
+  const lo = HOURS.reduce((a,b)=>avgPct[a]<=avgPct[b]?a:b);
+  const valley = [13,14,15].map(h=>avgPct[h]);
+  document.getElementById('insightsOcc').innerHTML =
+    `<div class="insight"><strong>${(hi<10?'0':'')+hi}:00 najpełniejsze</strong> — śr. ${avgPct[hi]}% zajętości.</div>`
+   +`<div class="insight green"><strong>${(lo<10?'0':'')+lo}:00 najsłabsze</strong> — tylko ${avgPct[lo]}%.</div>`
+   +`<div class="insight amber"><strong>Dolina 13:00–15:00</strong> — ${valley.join('%, ')}% zajętości.</div>`;
+}
+function renderInsightsTrend(DAYS) {
+  const best  = DAYS.reduce((a,b)=>b.totalRev>a.totalRev?b:a, DAYS[0]);
+  const worst = DAYS.reduce((a,b)=>b.totalRev<a.totalRev?b:a, DAYS[0]);
+  const avgRev = DAYS.reduce((s,d)=>s+d.totalRev,0)/DAYS.length;
+  document.getElementById('insightsTrend').innerHTML =
+    `<div class="insight"><strong>Najlepszy dzień:</strong> ${DOW_S[best.dow]} ${best.date.slice(5)} — ${fmt(best.totalRev)} zł (${Math.round(best.occAvg)}%).</div>`
+   +`<div class="insight green"><strong>Najsłabszy:</strong> ${DOW_S[worst.dow]} ${worst.date.slice(5)} — ${fmt(worst.totalRev)} zł (${Math.round(worst.occAvg)}%).</div>`
+   +`<div class="insight amber"><strong>Średnia / dzień:</strong> ${fmt(avgRev)} zł · ${fmt1(DAYS.reduce((s,d)=>s+d.totalHours,0)/DAYS.length)} h.</div>`;
+}
+
+/* ── Tabele dzienne / godzinowe ──────────────────────────────────────────── */
+function renderDayTable(DAYS) {
+  const maxRev = Math.max(...DAYS.map(d=>d.totalRev));
+  const minRev = Math.min(...DAYS.map(d=>d.totalRev));
+  document.getElementById('dayTableBody').innerHTML = [...DAYS].reverse().map(d => {
+    const hl = d.totalRev===maxRev?'color:#f87171;font-weight:700'
+             : d.totalRev===minRev?'color:#6ee7b7;font-weight:700':'';
+    const [y,m,dd] = d.date.split('-');
+    return `<tr>
+      <td>${dd}/${m}/${y}</td>
+      <td>${DOW_PL[d.dow]}</td>
+      <td>${fmt(d.nZaj)}</td>
+      <td>${fmt1(d.totalHours)}</td>
+      <td style="${hl}">${fmt(d.totalRev)} zł</td>
+      <td>${Math.round(d.occAvg)}%</td>
+    </tr>`;
+  }).join('');
+}
+function renderHourTable(DAYS) {
+  const { avgPct, rev } = aggByHour(DAYS);
+  const totHours = DAYS.reduce((s,d)=>s+d.totalHours,0);
+  document.getElementById('hourTableBody').innerHTML = HOURS.map((h,hi)=>{
+    const zone = PRIME_H(h) ? '<span class="badge badge-red">PRIME</span>' : '<span class="badge badge-green">STD</span>';
+    const peak = h===18?'🏆': PRIME_H(h)?'🔥':'';
+    return `<tr${PRIME_H(h)?' style="background:#1e1030"':''}>
+      <td style="${PRIME_H(h)?'color:#f87171;font-weight:600':''}">${HOUR_LBL[hi]} ${peak}</td>
+      <td style="text-align:left">${zone}</td>
+      <td>${avgPct[h]}%</td>
+      <td>${fmt1(totHours/HOURS.length)}</td>
+      <td>${fmt(rev[h])} zł</td>
+    </tr>`;
+  }).join('');
+}
+
+/* ── Porównanie ──────────────────────────────────────────────────────────── */
+function renderPorownanie() {
+  // Price chart
+  const validComp = allData.comparison.filter(r=>r.cena_min>0||r.cena_max>0||r.cena_srednia>0)
+    .sort((a,b)=>(a.cena_srednia||0)-(b.cena_srednia||0));
+  const labels = validComp.map(r=>r.klub+(r.nawierzchnia?` (${r.nawierzchnia[0].toUpperCase()})` :''));
+  up('chartPrices',{type:'bar',
+    data:{labels, datasets:[
+      {label:'Min zł/h',  data:validComp.map(r=>r.cena_min||null),    backgroundColor:'#10b981'},
+      {label:'Śr. zł/h',  data:validComp.map(r=>r.cena_srednia||null),backgroundColor:'#6366f1'},
+      {label:'Max zł/h',  data:validComp.map(r=>r.cena_max||null),    backgroundColor:'#f43f5e'},
+    ]},
+    options:{indexAxis:'y', responsive:true, maintainAspectRatio:true,
+      plugins:{legend:{labels:{color:'#94a3b8',font:{size:10}}}},
+      scales:{x:{...AXIS,title:{display:true,text:'PLN/h',color:'#64748b'}},
+              y:{...AXIS,ticks:{...AXIS.ticks,font:{size:9}}}}}});
+
+  // Indoor/outdoor donut
+  if (allData.indoor.length) {
+    const ils = allData.indoor.map(r=>r.nawierzchnia||'unknown');
+    const idt  = allData.indoor.map(r=>r.kortow||0);
+    const idc  = ['#6366f1','#22d3ee','#34d399','#f59e0b'];
+    up('chartDonut',{type:'doughnut',
+      data:{labels:ils, datasets:[{data:idt, backgroundColor:idc, borderColor:'#0f1117', borderWidth:2}]},
+      options:{responsive:true,
+        plugins:{legend:{display:false},
+          tooltip:{callbacks:{label:c=>`${c.label}: ${c.raw} kortów`}}}}});
+    document.getElementById('donutLegend').innerHTML = ils.map((l,i)=>
+      `<div style="display:flex;align-items:center;gap:8px;font-size:0.76rem;color:#a0a8c0;margin-bottom:4px">
+         <span style="width:10px;height:10px;border-radius:2px;background:${idc[i]};display:inline-block"></span>
+         ${l}: <strong>${idt[i]}</strong> kortów${allData.indoor[i]?.srednia_cena_pln?' · śr. '+allData.indoor[i].srednia_cena_pln+' zł':''}
+       </div>`).join('');
+  }
+
+  // Clubs table
+  const sorted = [...allData.comparison].sort((a,b)=>(a.dzielnica||'').localeCompare(b.dzielnica||'','pl'));
+  document.getElementById('compTable').innerHTML = `
     <table>
       <thead><tr>
-        <th>Klub</th><th>Dzielnica</th><th>Źródło</th>
-        <th>Korty</th><th>Nawierzchnie</th>
-        <th>Cena min</th><th>Cena śr.</th><th>Cena max</th>
-        <th>Slotów dziś</th><th>Obłożenie</th>
+        <th>Klub</th><th>Dzielnica</th><th>Źródło</th><th>Korty</th>
+        <th>Nawierzchnia</th><th>Cena min</th><th>Cena śr.</th><th>Cena max</th>
+        <th>Slotów dziś</th><th>Obłożenie dziś</th>
       </tr></thead>
       <tbody>
-        ${sorted.map(r => {
-          const occ = r.oblozenie_pct;
-          const badge = occ == null ? '' :
-            occ < 50  ? `<span class="badge badge-green">${occ}%</span>` :
-            occ < 80  ? `<span class="badge badge-yellow">${occ}%</span>` :
-                        `<span class="badge badge-red">${occ}%</span>`;
-          return `<tr>
-            <td class="font-medium text-white">${r.klub}</td>
-            <td class="text-slate-400">${r.dzielnica||'—'}</td>
-            <td><span class="badge ${r.source==='playtomic' ? 'badge-green' : 'badge-yellow'}">${r.source}</span></td>
-            <td class="text-center">${r.korty_padlowe||'—'}</td>
-            <td class="text-slate-300">${r.nawierzchnie||'—'}</td>
-            <td>${r.cena_min ? r.cena_min+' zł' : '—'}</td>
-            <td>${r.cena_srednia ? `<span class="text-indigo-300">${r.cena_srednia} zł</span>` : '—'}</td>
-            <td>${r.cena_max ? r.cena_max+' zł' : '—'}</td>
-            <td class="text-center">${r.slotow_dzisiaj||'—'}</td>
-            <td>${badge || '—'}</td>
-          </tr>`;
-        }).join('')}
+      ${sorted.map(r=>{
+        const occ = r.oblozenie_pct;
+        const b = occ==null?'—':occ<50?`<span class="badge badge-green">${occ}%</span>`
+          :occ<80?`<span class="badge badge-yellow">${occ}%</span>`
+          :`<span class="badge badge-red">${occ}%</span>`;
+        return `<tr>
+          <td style="font-weight:600;color:#e8eaf0;cursor:pointer" onclick="selectClub('${r.klub.replace(/'/g,"\\'")}')">
+            ${r.klub}
+          </td>
+          <td style="color:#7c8091">${r.dzielnica||'—'}</td>
+          <td><span class="badge ${r.source==='playtomic'?'badge-green':'badge-yellow'}">${r.source}</span></td>
+          <td>${r.korty_padlowe||'—'}</td>
+          <td style="color:#a0a8c0">${r.nawierzchnia||'—'}</td>
+          <td>${r.cena_min?r.cena_min+' zł':'—'}</td>
+          <td style="color:#818cf8">${r.cena_srednia?r.cena_srednia+' zł':'—'}</td>
+          <td>${r.cena_max?r.cena_max+' zł':'—'}</td>
+          <td>${r.slotow_dzisiaj||'—'}</td>
+          <td>${b}</td>
+        </tr>`;
+      }).join('')}
       </tbody>
     </table>`;
 }
 
-// ─── Start ─────────────────────────────────────────────────────────────────────
+/* ============================================================
+   OBSŁUGA WYDARZEŃ
+   ============================================================ */
+function selectClub(name) {
+  state.club = name;
+  document.getElementById('clubSel').value = name;
+  showTab('godziny', document.querySelector('.tab'));
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  render();
+}
+
+function onClubChange() {
+  state.club = document.getElementById('clubSel').value;
+  render();
+}
+function onFilterChange() {
+  state.source    = document.getElementById('filterSource').value;
+  state.dzielnica = document.getElementById('filterDzielnica').value;
+  if (!state.club) render();
+}
+
+// zakres dat
+document.querySelectorAll('#rangeSeg button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rangeSeg button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); state.range = b.dataset.range;
+  const c = state.range==='custom';
+  document.getElementById('dateFrom').disabled = !c;
+  document.getElementById('dateTo').disabled   = !c;
+  render();
+}));
+// DOW
+document.querySelectorAll('#dowRow .dow').forEach(el => el.addEventListener('click', () => {
+  const d = +el.dataset.dow;
+  if (state.dows.has(d)) state.dows.delete(d); else state.dows.add(d);
+  el.classList.toggle('on'); render();
+}));
+// daty własne
+const dF = document.getElementById('dateFrom'), dT = document.getElementById('dateTo');
+dF.addEventListener('change', ()=>{ state.from=dF.value; render(); });
+dT.addEventListener('change', ()=>{ state.to=dT.value; render(); });
+// reset
+document.getElementById('fbReset').addEventListener('click', ()=>{
+  state.range='all'; state.from=''; state.to=''; state.dows=new Set([0,1,2,3,4,5,6]);
+  document.querySelectorAll('#rangeSeg button').forEach(x=>x.classList.toggle('on',x.dataset.range==='all'));
+  document.querySelectorAll('#dowRow .dow').forEach(x=>x.classList.add('on'));
+  dF.disabled=true; dT.disabled=true; dF.value=DATA_MIN; dT.value=DATA_MAX;
+  render();
+});
+// trend controls
+document.querySelectorAll('#trendMetricSeg button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#trendMetricSeg button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); trendMetric=b.dataset.m; render();
+}));
+document.querySelectorAll('#trendModeSeg button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#trendModeSeg button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); trendMode=b.dataset.mode; render();
+}));
+
+// tab switching
+function showTab(name, el) {
+  ['godziny','trend','oblozenie','porownanie','tabela'].forEach(t =>
+    document.getElementById('tab-'+t).style.display='none');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).style.display='block';
+  if (el) el.classList.add('active');
+}
+
+/* ── Start ───────────────────────────────────────────────────────────────── */
 loadAll();
 </script>
 </body>
