@@ -831,7 +831,7 @@ function renderPorownanie() {
       <thead><tr>
         <th>Klub</th><th>Dzielnica</th><th>Źródło</th><th>Korty</th>
         <th>Nawierzchnia</th><th>Cena min</th><th>Cena śr.</th><th>Cena max</th>
-        <th>Slotów dziś</th><th>Obłożenie dziś</th>
+        <th>Slotów dziś</th><th>Slotów max</th><th>Obłożenie dziś</th>
       </tr></thead>
       <tbody>
       ${sorted.map(r=>{
@@ -851,6 +851,7 @@ function renderPorownanie() {
           <td style="color:#818cf8">${r.cena_srednia?r.cena_srednia+' zł':'—'}</td>
           <td>${r.cena_max?r.cena_max+' zł':'—'}</td>
           <td>${r.slotow_dzisiaj||'—'}</td>
+          <td style="color:#7c8091">${r.slotow_max||'—'}</td>
           <td>${b}</td>
         </tr>`;
       }).join('')}

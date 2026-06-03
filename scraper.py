@@ -558,11 +558,12 @@ async def scrape_klubyorg(page, klub, date_str):
                 # Pomiń szare komórki — poza godzinami pracy lub "Klub zamknięty"
                 if "bg-gray" in cls:
                     continue
-                # Zajęty: tekst "Zarezerwowane" LUB klasa rezerwacja_obca/wlasna
+                # Zajęty: tekst "Zarezerwowane" LUB klasa rezerwacja_*/kolor (zajęcia grupowe)
                 is_free = 0 if (
                     "zarezerwow" in ct.lower()
                     or "booked" in cls.lower()
                     or "rezerwacja" in cls.lower()
+                    or "kolor" in cls.lower()   # zajęcia grupowe (kolor-11 itp.)
                 ) else 1
                 bk = re.search(r"(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})", ct)
                 slots.append({
@@ -574,26 +575,57 @@ async def scrape_klubyorg(page, klub, date_str):
 
         out["slots"] = slots
 
-        # Ceny: ZAWSZE ze strony głównej klubu z filtrem PADEL.
-        # Strony kluby.org wyświetlają ceny jako "XX,XX PLN/H" — już per-godzinowe.
-        # Skanowanie strony głównej (nie /rezerwacje) daje czysty cennik padlowy.
+        # Ceny: ze strony głównej klubu, TYLKO z tabel sekcji padlowej.
+        # Strategia: (1) szukaj tabel gdzie nagłówek zawiera "padel" → używaj tylko te.
+        # (2) jeśli brak jawnego "padel" → wyklucz tabele z nagłówkiem innego sportu/usługi.
+        # To eliminuje: saunę z Mana, pickleball/shuffleboard z Toro, tenis z Sporteum, itp.
         _PRICE_JS = """() => {
             const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/gi;
-            const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
             const seen = new Set();
-            const walker = document.createTreeWalker(
-                document.body, NodeFilter.SHOW_TEXT, null);
-            let node;
-            while ((node = walker.nextNode()) !== null) {
-                const el = node.parentElement;
-                if (!el || SKIP.has(el.tagName)) continue;
-                let m;
-                while ((m = RE.exec(node.textContent)) !== null) {
-                    const p = parseFloat(m[1].replace(',', '.'));
-                    if (p >= 60 && p <= 500) seen.add(Math.round(p * 100) / 100);
+            const NON_PADEL = ['sauna','bilard','billiard','dart','pickleball',
+                               'shuffleboard','tenis','squash','fitness','fit ',
+                               'mączka','basen','bowling','spinning','siatkówka',
+                               'golf','kręgiel','kort hard','kort zewn','hala hard',
+                               'sala fit','zajęcia fitness'];
+
+            const allTables = Array.from(document.querySelectorAll('table'));
+            // Pomijamy pierwsze 2 tabele (nawigacja/info)
+            const priceTables = allTables.slice(2).filter(tbl => {
+                const firstRow = (tbl.querySelector('tr')?.innerText || '').toLowerCase();
+                // Jeśli wiersz wygląda jak ogłoszenie/event (np. zawiera rok w nawiasie) — pomiń
+                if (/\\(202\\d-\\d{2}-\\d{2}\\)/.test(firstRow)) return false;
+                return true;
+            });
+
+            // Strategia 1: tabel z jawnym "padel" w nagłówku
+            const explicitPadel = priceTables.filter(tbl => {
+                const r1 = (tbl.querySelector('tr')?.innerText || '').toLowerCase();
+                return r1.includes('padel');
+            });
+
+            // Strategia 2: wszystkie tabele bez jawnie nie-padlowych nagłówków
+            const withoutNonPadel = priceTables.filter(tbl => {
+                const r1 = (tbl.querySelector('tr')?.innerText || '').toLowerCase();
+                return !NON_PADEL.some(kw => r1.includes(kw));
+            });
+
+            const targetTables = explicitPadel.length > 0 ? explicitPadel : withoutNonPadel;
+
+            const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
+            targetTables.forEach(tbl => {
+                const walker = document.createTreeWalker(tbl, NodeFilter.SHOW_TEXT, null);
+                let node;
+                while ((node = walker.nextNode()) !== null) {
+                    const el = node.parentElement;
+                    if (!el || SKIP.has(el.tagName)) continue;
+                    let m;
+                    while ((m = RE.exec(node.textContent)) !== null) {
+                        const p = parseFloat(m[1].replace(',', '.'));
+                        if (p >= 60 && p <= 500) seen.add(Math.round(p * 100) / 100);
+                    }
+                    RE.lastIndex = 0;
                 }
-                RE.lastIndex = 0;
-            }
+            });
             return Array.from(seen).sort((a, b) => a - b);
         }"""
         price_vals = []
@@ -601,12 +633,6 @@ async def scrape_klubyorg(page, klub, date_str):
             await page.goto(f"https://kluby.org/{klub['slug']}",
                             wait_until="domcontentloaded", timeout=20000)
             await page.wait_for_timeout(1500)
-            # Kliknij PADEL jeśli klub ma wiele dyscyplin (usuwa ceny tenisa/squasha)
-            await page.evaluate(
-                "Array.from(document.querySelectorAll('button,a,li,[role=tab],span'))"
-                ".find(el => el.textContent.trim().toUpperCase() === 'PADEL')?.click()"
-            )
-            await page.wait_for_timeout(1000)
             price_vals = await page.evaluate(_PRICE_JS)
         except Exception as e:
             log.warning("    Błąd zbierania cen: %s", e)
@@ -694,7 +720,8 @@ def export_csv(conn, date_str):
                    c.hours_weekday AS godz_tydzien, c.hours_weekend AS godz_weekend,
                    COALESCE(sl.slotow_dzisiaj,0) AS slotow_dzisiaj,
                    ROUND(100.0*sl.zajete/NULLIF(sl.slotow_dzisiaj,0),1) AS oblozenie_pct,
-                   c.address
+                   c.address,
+                   COALESCE(sl.slotow_max,0) AS slotow_max
             FROM clubs c
             JOIN courts r ON r.club_id=c.id
             LEFT JOIN (SELECT club_id,
@@ -705,9 +732,13 @@ def export_csv(conn, date_str):
                        GROUP BY club_id) pr ON pr.club_id=c.id
             LEFT JOIN (SELECT s.club_id, r2.surface_type,
                               COUNT(*) AS slotow_dzisiaj,
-                              SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END) AS zajete
+                              SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END) AS zajete,
+                              MAX(cnt.total) AS slotow_max
                        FROM slots s
                        JOIN courts r2 ON r2.id=s.court_id
+                       JOIN (SELECT club_id, slot_date, COUNT(*) AS total
+                             FROM slots GROUP BY club_id, slot_date) cnt
+                           ON cnt.club_id=s.club_id AND cnt.slot_date=s.slot_date
                        WHERE s.slot_date='{date_str}'
                        GROUP BY s.club_id, r2.surface_type) sl
                     ON sl.club_id=c.id AND sl.surface_type=r.surface_type
