@@ -440,6 +440,48 @@ async def scrape_klubyorg(page, klub, date_str):
         if "zaloguj" in body.lower() and "grafik" not in body.lower():
             log.warning("    Sesja wygasła"); return out
 
+        # Klub bez rezerwacji online — nie ma danych o obłożeniu
+        if "wyłączone rezerwacje online" in body.lower():
+            log.warning("    Klub ma wyłączone rezerwacje ONLINE — pomijam sloty")
+            out["ok"] = True  # zbierzemy tylko ceny i metadane
+            # przejdź od razu do zbierania cen ze strony głównej
+            try:
+                await page.goto(f"https://kluby.org/{klub['slug']}",
+                                wait_until="domcontentloaded", timeout=20000)
+                await page.wait_for_timeout(1500)
+                await page.evaluate(
+                    "Array.from(document.querySelectorAll('button,a,li,[role=tab],span'))"
+                    ".find(el => el.textContent.trim().toUpperCase() === 'PADEL')?.click()"
+                )
+                await page.wait_for_timeout(1000)
+                _PRICE_JS_EARLY = """() => {
+                    const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/gi;
+                    const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
+                    const seen = new Set();
+                    const walker = document.createTreeWalker(
+                        document.body, NodeFilter.SHOW_TEXT, null);
+                    let node;
+                    while ((node = walker.nextNode()) !== null) {
+                        const el = node.parentElement;
+                        if (!el || SKIP.has(el.tagName)) continue;
+                        let m;
+                        while ((m = RE.exec(node.textContent)) !== null) {
+                            const p = parseFloat(m[1].replace(',', '.'));
+                            if (p >= 60 && p <= 500) seen.add(Math.round(p * 100) / 100);
+                        }
+                        RE.lastIndex = 0;
+                    }
+                    return Array.from(seen).sort((a, b) => a - b);
+                }"""
+                pv = await page.evaluate(_PRICE_JS_EARLY)
+                out["prices"] = [{"price_pln": p, "duration_min": 60,
+                                   "description": "cena z kluby.org"}
+                                  for p in pv]
+                log.info("    ✓ (brak grafiku online) | ceny: %s PLN", pv or "brak")
+            except Exception as e:
+                log.warning("    Błąd cen dla wyłączonego klubu: %s", e)
+            return out
+
         # Przełącz na PADEL przez JavaScript (omija problem z niewidocznym przyciskiem)
         await page.evaluate(
             "Array.from(document.querySelectorAll('button,a,li'))"
@@ -513,7 +555,15 @@ async def scrape_klubyorg(page, klub, date_str):
             for col_idx, cell in enumerate(cells[1:], 0):
                 ct  = (await cell.inner_text()).strip()
                 cls = await cell.get_attribute("class") or ""
-                is_free = 0 if "zarezerwow" in ct.lower() or "booked" in cls.lower() else 1
+                # Pomiń szare komórki — poza godzinami pracy lub "Klub zamknięty"
+                if "bg-gray" in cls:
+                    continue
+                # Zajęty: tekst "Zarezerwowane" LUB klasa rezerwacja_obca/wlasna
+                is_free = 0 if (
+                    "zarezerwow" in ct.lower()
+                    or "booked" in cls.lower()
+                    or "rezerwacja" in cls.lower()
+                ) else 1
                 bk = re.search(r"(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})", ct)
                 slots.append({
                     "court_idx": col_idx, "hour": hour, "minute": minute,
@@ -524,10 +574,9 @@ async def scrape_klubyorg(page, klub, date_str):
 
         out["slots"] = slots
 
-        # Ceny: JS skanuje węzły tekstowe strony pomijając script/style.
-        # Strona /rezerwacje nie renderuje cen (ładują się przez AJAX po
-        # kliknięciu slotu), więc jako fallback odwiedzamy stronę główną klubu.
-        # duration_min=60 — sloty godzinowe (typowe dla kluby.org).
+        # Ceny: ZAWSZE ze strony głównej klubu z filtrem PADEL.
+        # Strony kluby.org wyświetlają ceny jako "XX,XX PLN/H" — już per-godzinowe.
+        # Skanowanie strony głównej (nie /rezerwacje) daje czysty cennik padlowy.
         _PRICE_JS = """() => {
             const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/gi;
             const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
@@ -547,26 +596,20 @@ async def scrape_klubyorg(page, klub, date_str):
             }
             return Array.from(seen).sort((a, b) => a - b);
         }"""
+        price_vals = []
         try:
+            await page.goto(f"https://kluby.org/{klub['slug']}",
+                            wait_until="domcontentloaded", timeout=20000)
+            await page.wait_for_timeout(1500)
+            # Kliknij PADEL jeśli klub ma wiele dyscyplin (usuwa ceny tenisa/squasha)
+            await page.evaluate(
+                "Array.from(document.querySelectorAll('button,a,li,[role=tab],span'))"
+                ".find(el => el.textContent.trim().toUpperCase() === 'PADEL')?.click()"
+            )
+            await page.wait_for_timeout(1000)
             price_vals = await page.evaluate(_PRICE_JS)
-        except Exception:
-            price_vals = []
-
-        # Fallback: strona główna klubu ma cennik w opisie.
-        # Klikamy filtr "PADEL" jeśli strona ma zakładki sportowe (wyklucza squash/pikeball).
-        if not price_vals:
-            try:
-                await page.goto(f"https://kluby.org/{klub['slug']}",
-                                wait_until="domcontentloaded", timeout=20000)
-                await page.wait_for_timeout(1000)
-                await page.evaluate(
-                    "Array.from(document.querySelectorAll('button,a,li,[role=tab],span'))"
-                    ".find(el => el.textContent.trim().toUpperCase() === 'PADEL')?.click()"
-                )
-                await page.wait_for_timeout(800)
-                price_vals = await page.evaluate(_PRICE_JS)
-            except Exception:
-                pass
+        except Exception as e:
+            log.warning("    Błąd zbierania cen: %s", e)
 
         out["prices"] = [{"price_pln": p, "duration_min": 60,
                            "description": "cena z kluby.org"}
