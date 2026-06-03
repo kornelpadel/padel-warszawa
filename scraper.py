@@ -458,19 +458,37 @@ async def scrape_klubyorg(page, klub, date_str):
                     const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/gi;
                     const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
                     const seen = new Set();
-                    const walker = document.createTreeWalker(
-                        document.body, NodeFilter.SHOW_TEXT, null);
-                    let node;
-                    while ((node = walker.nextNode()) !== null) {
-                        const el = node.parentElement;
-                        if (!el || SKIP.has(el.tagName)) continue;
-                        let m;
-                        while ((m = RE.exec(node.textContent)) !== null) {
-                            const p = parseFloat(m[1].replace(',', '.'));
-                            if (p >= 60 && p <= 500) seen.add(Math.round(p * 100) / 100);
-                        }
-                        RE.lastIndex = 0;
-                    }
+                    const NON_PADEL = ['sauna','bilard','billiard','dart','pickleball',
+                                       'shuffleboard','tenis','squash','fitness','fit ',
+                                       'mączka','basen','bowling','spinning','siatkówka',
+                                       'golf','kręgiel','kort hard','kort zewn','hala hard',
+                                       'sala fit','zajęcia fitness','karnet'];
+                    const allTables = Array.from(document.querySelectorAll('table'));
+                    // slice(2) pomija pierwsze 2 tabele nawigacyjne (zawierają nazwę klubu z "padel")
+                    const priceTables = allTables.slice(2).filter(tbl => {
+                        const firstRow = (tbl.querySelector('tr')?.innerText || '').toLowerCase();
+                        if (/\\(202\\d-\\d{2}-\\d{2}\\)/.test(firstRow)) return false;
+                        return true;
+                    });
+                    const explicitPadel = priceTables.filter(tbl =>
+                        (tbl.querySelector('tr')?.innerText || '').toLowerCase().includes('padel'));
+                    const withoutNonPadel = priceTables.filter(tbl =>
+                        !NON_PADEL.some(kw => (tbl.querySelector('tr')?.innerText || '').toLowerCase().includes(kw)));
+                    const targetTables = explicitPadel.length > 0 ? explicitPadel : withoutNonPadel;
+                    targetTables.forEach(tbl => {
+                        const walker = document.createTreeWalker(tbl, NodeFilter.SHOW_TEXT, null);
+                        let node;
+                        while ((node = walker.nextNode()) !== null) {
+                            const el = node.parentElement;
+                            if (!el || SKIP.has(el.tagName)) continue;
+                            let m;
+                            while ((m = RE.exec(node.textContent)) !== null) {
+                                    const p = parseFloat(m[1].replace(',', '.'));
+                                    if (p >= 60 && p <= 500 && Number.isInteger(p)) seen.add(p);
+                                }
+                                RE.lastIndex = 0;
+                            }
+                        });
                     return Array.from(seen).sort((a, b) => a - b);
                 }"""
                 pv = await page.evaluate(_PRICE_JS_EARLY)
@@ -586,7 +604,7 @@ async def scrape_klubyorg(page, klub, date_str):
                                'shuffleboard','tenis','squash','fitness','fit ',
                                'mączka','basen','bowling','spinning','siatkówka',
                                'golf','kręgiel','kort hard','kort zewn','hala hard',
-                               'sala fit','zajęcia fitness'];
+                               'sala fit','zajęcia fitness','karnet'];
 
             const allTables = Array.from(document.querySelectorAll('table'));
             // Pomijamy pierwsze 2 tabele (nawigacja/info)
@@ -621,7 +639,7 @@ async def scrape_klubyorg(page, klub, date_str):
                     let m;
                     while ((m = RE.exec(node.textContent)) !== null) {
                         const p = parseFloat(m[1].replace(',', '.'));
-                        if (p >= 60 && p <= 500) seen.add(Math.round(p * 100) / 100);
+                        if (p >= 60 && p <= 500 && Number.isInteger(p)) seen.add(p);
                     }
                     RE.lastIndex = 0;
                 }
@@ -721,7 +739,7 @@ def export_csv(conn, date_str):
                    COALESCE(sl.slotow_dzisiaj,0) AS slotow_dzisiaj,
                    ROUND(100.0*sl.zajete/NULLIF(sl.slotow_dzisiaj,0),1) AS oblozenie_pct,
                    c.address,
-                   COALESCE(sl.slotow_max,0) AS slotow_max
+                   COALESCE(mx.slotow_max,0) AS slotow_max
             FROM clubs c
             JOIN courts r ON r.club_id=c.id
             LEFT JOIN (SELECT club_id,
@@ -732,16 +750,17 @@ def export_csv(conn, date_str):
                        GROUP BY club_id) pr ON pr.club_id=c.id
             LEFT JOIN (SELECT s.club_id, r2.surface_type,
                               COUNT(*) AS slotow_dzisiaj,
-                              SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END) AS zajete,
-                              MAX(cnt.total) AS slotow_max
+                              SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END) AS zajete
                        FROM slots s
                        JOIN courts r2 ON r2.id=s.court_id
-                       JOIN (SELECT club_id, slot_date, COUNT(*) AS total
-                             FROM slots GROUP BY club_id, slot_date) cnt
-                           ON cnt.club_id=s.club_id AND cnt.slot_date=s.slot_date
                        WHERE s.slot_date='{date_str}'
                        GROUP BY s.club_id, r2.surface_type) sl
                     ON sl.club_id=c.id AND sl.surface_type=r.surface_type
+            LEFT JOIN (SELECT club_id, MAX(total) AS slotow_max
+                       FROM (SELECT club_id, slot_date, COUNT(*) AS total
+                             FROM slots GROUP BY club_id, slot_date)
+                       GROUP BY club_id) mx
+                    ON mx.club_id=c.id
             GROUP BY c.id, r.surface_type
             HAVING pr.cena_min IS NOT NULL OR sl.slotow_dzisiaj > 0
             ORDER BY c.dzielnica, c.name, r.surface_type""",
