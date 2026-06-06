@@ -53,10 +53,6 @@ KLUBYORG = [
     {"slug": "bulwary-wislane", "name": "Padel4All Bulwary",   "dzielnica": "Śródmieście"},
     {"slug": "miedzeszyn",      "name": "Klub Miedzeszyn",     "dzielnica": "Wawer"},
     {"slug": "propadel",        "name": "ProPadel Jutrzenki",  "dzielnica": "Włochy"},
-    {"slug": "sinus",           "name": "Sinus Sport Club",    "dzielnica": "Wilanów"},
-    {"slug": "happy-padel",     "name": "Happy Padel",         "dzielnica": "Wesoła"},
-    {"slug": "decathlon",       "name": "DECATHLON Targówek",  "dzielnica": "Targówek"},
-    {"slug": "aerosquash",      "name": "Rakiety Aero",        "dzielnica": "Wawer",    "surface_type": "outdoor"},
 ]
 
 def pora_dnia(hour: int) -> str:
@@ -444,6 +440,66 @@ async def scrape_klubyorg(page, klub, date_str):
         if "zaloguj" in body.lower() and "grafik" not in body.lower():
             log.warning("    Sesja wygasła"); return out
 
+        # Klub bez rezerwacji online — nie ma danych o obłożeniu
+        if "wyłączone rezerwacje online" in body.lower():
+            log.warning("    Klub ma wyłączone rezerwacje ONLINE — pomijam sloty")
+            out["ok"] = True  # zbierzemy tylko ceny i metadane
+            # przejdź od razu do zbierania cen ze strony głównej
+            try:
+                await page.goto(f"https://kluby.org/{klub['slug']}",
+                                wait_until="domcontentloaded", timeout=20000)
+                await page.wait_for_timeout(1500)
+                await page.evaluate(
+                    "Array.from(document.querySelectorAll('button,a,li,[role=tab],span'))"
+                    ".find(el => el.textContent.trim().toUpperCase() === 'PADEL')?.click()"
+                )
+                await page.wait_for_timeout(1000)
+                _PRICE_JS_EARLY = """() => {
+                    const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/gi;
+                    const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
+                    const seen = new Set();
+                    const NON_PADEL = ['sauna','bilard','billiard','dart','pickleball',
+                                       'shuffleboard','tenis','squash','fitness','fit ',
+                                       'mączka','basen','bowling','spinning','siatkówka',
+                                       'golf','kręgiel','kort hard','kort zewn','hala hard',
+                                       'sala fit','zajęcia fitness','karnet'];
+                    const allTables = Array.from(document.querySelectorAll('table'));
+                    // slice(2) pomija pierwsze 2 tabele nawigacyjne (zawierają nazwę klubu z "padel")
+                    const priceTables = allTables.slice(2).filter(tbl => {
+                        const firstRow = (tbl.querySelector('tr')?.innerText || '').toLowerCase();
+                        if (/\\(202\\d-\\d{2}-\\d{2}\\)/.test(firstRow)) return false;
+                        return true;
+                    });
+                    const explicitPadel = priceTables.filter(tbl =>
+                        (tbl.querySelector('tr')?.innerText || '').toLowerCase().includes('padel'));
+                    const withoutNonPadel = priceTables.filter(tbl =>
+                        !NON_PADEL.some(kw => (tbl.querySelector('tr')?.innerText || '').toLowerCase().includes(kw)));
+                    const targetTables = explicitPadel.length > 0 ? explicitPadel : withoutNonPadel;
+                    targetTables.forEach(tbl => {
+                        const walker = document.createTreeWalker(tbl, NodeFilter.SHOW_TEXT, null);
+                        let node;
+                        while ((node = walker.nextNode()) !== null) {
+                            const el = node.parentElement;
+                            if (!el || SKIP.has(el.tagName)) continue;
+                            let m;
+                            while ((m = RE.exec(node.textContent)) !== null) {
+                                    const p = parseFloat(m[1].replace(',', '.'));
+                                    if (p >= 60 && p <= 500 && Number.isInteger(p)) seen.add(p);
+                                }
+                                RE.lastIndex = 0;
+                            }
+                        });
+                    return Array.from(seen).sort((a, b) => a - b);
+                }"""
+                pv = await page.evaluate(_PRICE_JS_EARLY)
+                out["prices"] = [{"price_pln": p, "duration_min": 60,
+                                   "description": "cena z kluby.org"}
+                                  for p in pv]
+                log.info("    ✓ (brak grafiku online) | ceny: %s PLN", pv or "brak")
+            except Exception as e:
+                log.warning("    Błąd cen dla wyłączonego klubu: %s", e)
+            return out
+
         # Przełącz na PADEL przez JavaScript (omija problem z niewidocznym przyciskiem)
         await page.evaluate(
             "Array.from(document.querySelectorAll('button,a,li'))"
@@ -517,7 +573,16 @@ async def scrape_klubyorg(page, klub, date_str):
             for col_idx, cell in enumerate(cells[1:], 0):
                 ct  = (await cell.inner_text()).strip()
                 cls = await cell.get_attribute("class") or ""
-                is_free = 0 if "zarezerwow" in ct.lower() or "booked" in cls.lower() else 1
+                # Pomiń szare komórki — poza godzinami pracy lub "Klub zamknięty"
+                if "bg-gray" in cls:
+                    continue
+                # Zajęty: tekst "Zarezerwowane" LUB klasa rezerwacja_*/kolor (zajęcia grupowe)
+                is_free = 0 if (
+                    "zarezerwow" in ct.lower()
+                    or "booked" in cls.lower()
+                    or "rezerwacja" in cls.lower()
+                    or "kolor" in cls.lower()   # zajęcia grupowe (kolor-11 itp.)
+                ) else 1
                 bk = re.search(r"(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})", ct)
                 slots.append({
                     "court_idx": col_idx, "hour": hour, "minute": minute,
@@ -528,43 +593,67 @@ async def scrape_klubyorg(page, klub, date_str):
 
         out["slots"] = slots
 
-        # Ceny: JS skanuje węzły tekstowe strony pomijając script/style.
-        # Strona /rezerwacje nie renderuje cen (ładują się przez AJAX po
-        # kliknięciu slotu), więc jako fallback odwiedzamy stronę główną klubu.
-        # duration_min=60 — sloty godzinowe (typowe dla kluby.org).
+        # Ceny: ze strony głównej klubu, TYLKO z tabel sekcji padlowej.
+        # Strategia: (1) szukaj tabel gdzie nagłówek zawiera "padel" → używaj tylko te.
+        # (2) jeśli brak jawnego "padel" → wyklucz tabele z nagłówkiem innego sportu/usługi.
+        # To eliminuje: saunę z Mana, pickleball/shuffleboard z Toro, tenis z Sporteum, itp.
         _PRICE_JS = """() => {
             const RE = /(\\d{2,3}(?:[,.]\\d{1,2})?)\\s*(?:zł|PLN)/gi;
-            const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
             const seen = new Set();
-            const walker = document.createTreeWalker(
-                document.body, NodeFilter.SHOW_TEXT, null);
-            let node;
-            while ((node = walker.nextNode()) !== null) {
-                const el = node.parentElement;
-                if (!el || SKIP.has(el.tagName)) continue;
-                let m;
-                while ((m = RE.exec(node.textContent)) !== null) {
-                    const p = parseFloat(m[1].replace(',', '.'));
-                    if (p >= 60 && p <= 500) seen.add(Math.round(p * 100) / 100);
+            const NON_PADEL = ['sauna','bilard','billiard','dart','pickleball',
+                               'shuffleboard','tenis','squash','fitness','fit ',
+                               'mączka','basen','bowling','spinning','siatkówka',
+                               'golf','kręgiel','kort hard','kort zewn','hala hard',
+                               'sala fit','zajęcia fitness','karnet'];
+
+            const allTables = Array.from(document.querySelectorAll('table'));
+            // Pomijamy pierwsze 2 tabele (nawigacja/info)
+            const priceTables = allTables.slice(2).filter(tbl => {
+                const firstRow = (tbl.querySelector('tr')?.innerText || '').toLowerCase();
+                // Jeśli wiersz wygląda jak ogłoszenie/event (np. zawiera rok w nawiasie) — pomiń
+                if (/\\(202\\d-\\d{2}-\\d{2}\\)/.test(firstRow)) return false;
+                return true;
+            });
+
+            // Strategia 1: tabel z jawnym "padel" w nagłówku
+            const explicitPadel = priceTables.filter(tbl => {
+                const r1 = (tbl.querySelector('tr')?.innerText || '').toLowerCase();
+                return r1.includes('padel');
+            });
+
+            // Strategia 2: wszystkie tabele bez jawnie nie-padlowych nagłówków
+            const withoutNonPadel = priceTables.filter(tbl => {
+                const r1 = (tbl.querySelector('tr')?.innerText || '').toLowerCase();
+                return !NON_PADEL.some(kw => r1.includes(kw));
+            });
+
+            const targetTables = explicitPadel.length > 0 ? explicitPadel : withoutNonPadel;
+
+            const SKIP = new Set(['SCRIPT','STYLE','NOSCRIPT','HEAD']);
+            targetTables.forEach(tbl => {
+                const walker = document.createTreeWalker(tbl, NodeFilter.SHOW_TEXT, null);
+                let node;
+                while ((node = walker.nextNode()) !== null) {
+                    const el = node.parentElement;
+                    if (!el || SKIP.has(el.tagName)) continue;
+                    let m;
+                    while ((m = RE.exec(node.textContent)) !== null) {
+                        const p = parseFloat(m[1].replace(',', '.'));
+                        if (p >= 60 && p <= 500 && Number.isInteger(p)) seen.add(p);
+                    }
+                    RE.lastIndex = 0;
                 }
-                RE.lastIndex = 0;
-            }
+            });
             return Array.from(seen).sort((a, b) => a - b);
         }"""
+        price_vals = []
         try:
+            await page.goto(f"https://kluby.org/{klub['slug']}",
+                            wait_until="domcontentloaded", timeout=20000)
+            await page.wait_for_timeout(1500)
             price_vals = await page.evaluate(_PRICE_JS)
-        except Exception:
-            price_vals = []
-
-        # Fallback: strona główna klubu ma cennik w opisie
-        if not price_vals:
-            try:
-                await page.goto(f"https://kluby.org/{klub['slug']}",
-                                wait_until="domcontentloaded", timeout=20000)
-                await page.wait_for_timeout(1000)
-                price_vals = await page.evaluate(_PRICE_JS)
-            except Exception:
-                pass
+        except Exception as e:
+            log.warning("    Błąd zbierania cen: %s", e)
 
         out["prices"] = [{"price_pln": p, "duration_min": 60,
                            "description": "cena z kluby.org"}
@@ -596,18 +685,17 @@ def export_csv(conn, date_str):
                    r.court_name, r.surface_type, r.court_format, r.court_style
             FROM courts r JOIN clubs c ON c.id=r.club_id
             ORDER BY c.dzielnica, c.name, r.court_name""",
+        # Unikalne ceny per godzinę — duplikaty z 60/90/120 min są złączone w jedną wartość/h.
+        # Brak kolumny cena_oryginalna (surowej) — tylko znormalizowana per godzinę.
         "3_ceny_wg_pory_dnia": """
             SELECT c.name AS klub, c.dzielnica, c.source,
-                   p.price_type, p.day_type, p.time_slot,
-                   p.hour_from, p.hour_to,
-                   p.price_pln AS cena_oryginalna,
-                   p.duration_min,
                    ROUND(p.price_pln * 60.0 / COALESCE(p.duration_min, 60), 0)
                        AS cena_za_godzine,
                    p.description
             FROM prices p JOIN clubs c ON c.id=p.club_id
             WHERE p.price_type IN ('court','academy')
-            ORDER BY c.name, p.day_type, p.hour_from""",
+            GROUP BY c.id, ROUND(p.price_pln * 60.0 / COALESCE(p.duration_min, 60), 0)
+            ORDER BY c.name, cena_za_godzine""",
         "4_oblozenie_per_kort_godzina": f"""
             SELECT c.name AS klub, c.dzielnica, s.source,
                    s.court_name AS kort, r.surface_type AS nawierzchnia,
@@ -650,7 +738,8 @@ def export_csv(conn, date_str):
                    c.hours_weekday AS godz_tydzien, c.hours_weekend AS godz_weekend,
                    COALESCE(sl.slotow_dzisiaj,0) AS slotow_dzisiaj,
                    ROUND(100.0*sl.zajete/NULLIF(sl.slotow_dzisiaj,0),1) AS oblozenie_pct,
-                   c.address
+                   c.address,
+                   COALESCE(mx.slotow_max,0) AS slotow_max
             FROM clubs c
             JOIN courts r ON r.club_id=c.id
             LEFT JOIN (SELECT club_id,
@@ -667,7 +756,13 @@ def export_csv(conn, date_str):
                        WHERE s.slot_date='{date_str}'
                        GROUP BY s.club_id, r2.surface_type) sl
                     ON sl.club_id=c.id AND sl.surface_type=r.surface_type
+            LEFT JOIN (SELECT club_id, MAX(total) AS slotow_max
+                       FROM (SELECT club_id, slot_date, COUNT(*) AS total
+                             FROM slots GROUP BY club_id, slot_date)
+                       GROUP BY club_id) mx
+                    ON mx.club_id=c.id
             GROUP BY c.id, r.surface_type
+            HAVING pr.cena_min IS NOT NULL OR sl.slotow_dzisiaj > 0
             ORDER BY c.dzielnica, c.name, r.surface_type""",
         # Liczba kortów z tabeli courts; ceny per nawierzchnia z agregatu cen
         # klubów (jeden wiersz na klub) — bez fan-out z JOIN prices.
@@ -714,6 +809,33 @@ def export_csv(conn, date_str):
                 writer.writerows(rows)
         except Exception as e:
             log.warning("Błąd eksportu latest_%s: %s", suffix, e)
+
+    # Historia godzinowa — per klub × godzina × dzień (dla dashboardu per-klub).
+    # Regenerowana w całości przy każdym uruchomieniu z pełnej historii bazy.
+    history_detail_path = CSV_DIR / "history_detail.csv"
+    try:
+        rows_hd = conn.execute("""
+            SELECT s.slot_date AS data,
+                   c.name     AS klub,
+                   c.source,
+                   s.slot_hour AS godzina,
+                   COUNT(DISTINCT s.court_id) AS n_kortow,
+                   COUNT(*)    AS n_slotow,
+                   SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END) AS n_zajetych,
+                   ROUND(100.0*SUM(CASE WHEN s.is_free=0 THEN 1 ELSE 0 END)
+                         /NULLIF(COUNT(*),0),0) AS oblozenie_pct
+            FROM slots s
+            JOIN clubs c ON c.id=s.club_id
+            GROUP BY s.slot_date, c.name, s.slot_hour
+            ORDER BY s.slot_date, c.name, s.slot_hour
+        """).fetchall()
+        with open(history_detail_path, "w", newline="", encoding="utf-8-sig") as f:
+            writer = csv.writer(f)
+            writer.writerow(["data","klub","source","godzina",
+                             "n_kortow","n_slotow","n_zajetych","oblozenie_pct"])
+            writer.writerows(rows_hd)
+    except Exception as e:
+        log.warning("Błąd eksportu history_detail.csv: %s", e)
 
     # Historia dzienna — jedna linia dopisywana każdego dnia (wykres trendów)
     history_path   = CSV_DIR / "history.csv"
@@ -832,7 +954,8 @@ async def run():
 
     # Wyczyść stare kluby usunięte z list (squash, nieistniejące, zmienione slugi)
     for stale_id in ("pt_warsaw-padel-club-squash", "pt_rakiety-squash-padel-outdoor",
-                     "pt_we-are-padel-warsaw"):
+                     "pt_we-are-padel-warsaw",
+                     "ko_sinus", "ko_happy-padel", "ko_decathlon", "ko_aerosquash"):
         conn.execute("DELETE FROM clubs  WHERE id=?",       (stale_id,))
         conn.execute("DELETE FROM courts WHERE club_id=?",  (stale_id,))
         conn.execute("DELETE FROM slots  WHERE club_id=?",  (stale_id,))
