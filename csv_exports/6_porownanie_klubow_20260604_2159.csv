@@ -1,0 +1,24 @@
+﻿klub,dzielnica,source,nawierzchnia,korty_padlowe,cena_min,cena_max,cena_srednia,godz_tydzien,godz_weekend,slotow_dzisiaj,oblozenie_pct,address
+Toro Padel,Bemowo,kluby_org,indoor,6,80.0,160.0,115.0,,,230,33.9,ul. Kazubów 14 (Bemowo)
+Loba Padel,Białołęka,playtomic,indoor,8,,,,06:00-23:00,06:00-23:00,112,55.4,"Smugowa 44, 03-032"
+Sporteum,Białołęka,kluby_org,indoor,2,65.0,130.0,98.0,,,96,8.3,ul. Zawiślańska 27 (Białołęka)
+Warsaw Padel Club,Białołęka,playtomic,indoor,11,,,,06:00-01:00,06:00-01:00,176,83.5,"Annopol 3, 03-236"
+RQT Spot,Bielany,playtomic,indoor,6,,,,07:00-00:00,07:00-00:00,96,80.2,"Estrady 13K, 05-080"
+RQT Spot,Bielany,playtomic,outdoor,2,,,,07:00-00:00,07:00-00:00,32,40.6,"Estrady 13K, 05-080"
+Interpadel Warszawa,Mokotów,playtomic,indoor,11,,,,06:00-02:00,06:00-02:00,176,92.0,"Bokserska 66A, 02-690"
+WKT Mera,Ochota,kluby_org,indoor,2,80.0,120.0,100.0,,,120,13.3,al. Bohaterów Września 12 (Ochota)
+Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,outdoor,5,,,,07:00-23:00,07:00-23:00,70,72.9,"al. Księcia Józefa Poniatowskiego 1, 03-901"
+DECATHLON Targówek,Targówek,kluby_org,indoor,1,,,,,,0,,ul. Geodezyjna 76 (Targówek)
+TENES Klub Sportowy,Ursus,kluby_org,indoor,3,65.0,120.0,91.0,,,165,18.2,ul. Piwna 13 (Ursus)
+Padlovnia,Ursynów,kluby_org,indoor,7,100.0,160.0,130.0,,,277,43.7,ul. Karnawał 8 (Ursynów)
+Padlovnia,Ursynów,kluby_org,outdoor,4,100.0,160.0,130.0,,,0,,ul. Karnawał 8 (Ursynów)
+San Padel,Ursynów,playtomic,indoor,12,,,,00:00-00:00,00:00-00:00,192,49.5,"Przedsiębiorców 1, 05-500"
+Klub Miedzeszyn,Wawer,kluby_org,indoor,2,80.0,180.0,130.0,,,76,21.1,ul. Bielika 17 (Wawer)
+Rakiety Aero,Wawer,kluby_org,outdoor,1,,,,,,0,,
+Rakiety Aero - Padel Outdoor,Wawer,playtomic,outdoor,1,,,,08:00-21:30,08:00-21:30,11,90.9,"Wał Miedzeszyński 646, 03-994"
+Happy Padel,Wesoła,kluby_org,indoor,1,,,,,,0,,
+Mana Padel,Wilanów,kluby_org,indoor,8,107.0,300.0,177.0,,,239,37.7,ul. Zawodzie 24 (Wilanów)
+Sinus Sport Club,Wilanów,kluby_org,indoor,1,80.0,80.0,80.0,,,0,,ul. Wał Zawadowski 99 (Wilanów)
+TenisWil,Wilanów,kluby_org,outdoor,3,80.0,100.0,90.0,,,162,3.7,ul. Przyczółkowa 210C (Wilanów)
+ProPadel Jutrzenki,Włochy,kluby_org,indoor,5,80.0,80.0,80.0,,,360,0.0,ul. Jutrzenki 12 (Włochy)
+Padel4All Bulwary,Śródmieście,kluby_org,indoor,1,80.0,80.0,80.0,,,64,0.0,

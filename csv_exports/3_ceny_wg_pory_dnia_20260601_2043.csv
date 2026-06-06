@@ -1,0 +1,49 @@
+﻿klub,dzielnica,source,price_type,day_type,time_slot,hour_from,hour_to,cena_oryginalna,duration_min,cena_za_godzine,description
+Interpadel Warszawa,Mokotów,playtomic,court,all,all,,,140.0,60,140.0,cena z Playtomic API
+Interpadel Warszawa,Mokotów,playtomic,court,all,all,,,210.0,90,140.0,cena z Playtomic API
+Interpadel Warszawa,Mokotów,playtomic,court,all,all,,,280.0,120,140.0,cena z Playtomic API
+Klub Miedzeszyn,Wawer,kluby_org,court,all,all,,,80.0,60,80.0,cena z kluby.org
+Klub Miedzeszyn,Wawer,kluby_org,court,all,all,,,100.0,60,100.0,cena z kluby.org
+Klub Miedzeszyn,Wawer,kluby_org,court,all,all,,,120.0,60,120.0,cena z kluby.org
+Klub Miedzeszyn,Wawer,kluby_org,court,all,all,,,140.0,60,140.0,cena z kluby.org
+Klub Miedzeszyn,Wawer,kluby_org,court,all,all,,,160.0,60,160.0,cena z kluby.org
+Klub Miedzeszyn,Wawer,kluby_org,court,all,all,,,180.0,60,180.0,cena z kluby.org
+Mana Padel,Wilanów,kluby_org,court,all,all,,,106.66,60,107.0,cena z kluby.org
+Mana Padel,Wilanów,kluby_org,court,all,all,,,132.0,60,132.0,cena z kluby.org
+Mana Padel,Wilanów,kluby_org,court,all,all,,,140.0,60,140.0,cena z kluby.org
+Mana Padel,Wilanów,kluby_org,court,all,all,,,184.0,60,184.0,cena z kluby.org
+Mana Padel,Wilanów,kluby_org,court,all,all,,,200.0,60,200.0,cena z kluby.org
+Mana Padel,Wilanów,kluby_org,court,all,all,,,300.0,60,300.0,cena z kluby.org
+Padel4All Bulwary,Śródmieście,kluby_org,court,all,all,,,80.0,60,80.0,cena z kluby.org
+Padlovnia,Ursynów,kluby_org,court,all,all,,,100.0,60,100.0,cena z kluby.org
+Padlovnia,Ursynów,kluby_org,court,all,all,,,120.0,60,120.0,cena z kluby.org
+Padlovnia,Ursynów,kluby_org,court,all,all,,,140.0,60,140.0,cena z kluby.org
+Padlovnia,Ursynów,kluby_org,court,all,all,,,160.0,60,160.0,cena z kluby.org
+ProPadel Jutrzenki,Włochy,kluby_org,court,all,all,,,80.0,60,80.0,cena z kluby.org
+RQT Spot,Bielany,playtomic,court,all,all,,,119.0,60,119.0,cena z Playtomic API
+San Padel,Ursynów,playtomic,court,all,all,,,200.0,60,200.0,cena z Playtomic API
+Sinus Sport Club,Wilanów,kluby_org,court,all,all,,,80.0,60,80.0,cena z kluby.org
+Sporteum,Białołęka,kluby_org,court,all,all,,,65.0,60,65.0,cena z kluby.org
+Sporteum,Białołęka,kluby_org,court,all,all,,,85.0,60,85.0,cena z kluby.org
+Sporteum,Białołęka,kluby_org,court,all,all,,,110.0,60,110.0,cena z kluby.org
+Sporteum,Białołęka,kluby_org,court,all,all,,,130.0,60,130.0,cena z kluby.org
+TENES Klub Sportowy,Ursus,kluby_org,court,all,all,,,65.0,60,65.0,cena z kluby.org
+TENES Klub Sportowy,Ursus,kluby_org,court,all,all,,,70.0,60,70.0,cena z kluby.org
+TENES Klub Sportowy,Ursus,kluby_org,court,all,all,,,75.0,60,75.0,cena z kluby.org
+TENES Klub Sportowy,Ursus,kluby_org,court,all,all,,,80.0,60,80.0,cena z kluby.org
+TENES Klub Sportowy,Ursus,kluby_org,court,all,all,,,90.0,60,90.0,cena z kluby.org
+TENES Klub Sportowy,Ursus,kluby_org,court,all,all,,,110.0,60,110.0,cena z kluby.org
+TENES Klub Sportowy,Ursus,kluby_org,court,all,all,,,115.0,60,115.0,cena z kluby.org
+TENES Klub Sportowy,Ursus,kluby_org,court,all,all,,,120.0,60,120.0,cena z kluby.org
+TenisWil,Wilanów,kluby_org,court,all,all,,,80.0,60,80.0,cena z kluby.org
+TenisWil,Wilanów,kluby_org,court,all,all,,,100.0,60,100.0,cena z kluby.org
+Toro Padel,Bemowo,kluby_org,court,all,all,,,80.0,60,80.0,cena z kluby.org
+Toro Padel,Bemowo,kluby_org,court,all,all,,,100.0,60,100.0,cena z kluby.org
+Toro Padel,Bemowo,kluby_org,court,all,all,,,120.0,60,120.0,cena z kluby.org
+Toro Padel,Bemowo,kluby_org,court,all,all,,,160.0,60,160.0,cena z kluby.org
+WKT Mera,Ochota,kluby_org,court,all,all,,,80.0,60,80.0,cena z kluby.org
+WKT Mera,Ochota,kluby_org,court,all,all,,,100.0,60,100.0,cena z kluby.org
+WKT Mera,Ochota,kluby_org,court,all,all,,,120.0,60,120.0,cena z kluby.org
+Warsaw Padel Club,Białołęka,playtomic,court,all,all,,,152.0,90,101.0,cena z Playtomic API
+Warsaw Padel Club,Białołęka,playtomic,court,all,all,,,144.0,60,144.0,cena z Playtomic API
+Warsaw Padel Club,Białołęka,playtomic,court,all,all,,,224.0,120,112.0,cena z Playtomic API
