@@ -12,7 +12,7 @@ Skrypt pyta o login/hasło kluby.org raz na początku.
 Hasło NIE jest nigdzie zapisywane.
 """
 
-import asyncio, sqlite3, csv, logging, re, json, getpass, os
+import argparse, asyncio, sqlite3, csv, logging, re, json, getpass, os
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -931,21 +931,27 @@ def get_credentials():
 
 # ─── Główna pętla ─────────────────────────────────────────────────────────────
 
-async def run():
+async def run(source: str = "all"):
     try:
         from playwright.async_api import async_playwright
     except ImportError:
         print("\n❌ Uruchom najpierw:  python3 setup.py\n"); return
 
+    run_playtomic = source in ("all", "playtomic")
+    run_kluby     = source in ("all", "kluby")
+
     print("\n" + "═"*60)
     print("  Skraper kortów padlowych Warszawa – Master")
-    print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M')}  [źródło: {source}]")
     print("═"*60)
-    print(f"\n  Kluby Playtomic:  {len(PLAYTOMIC)}")
-    print(f"  Kluby Kluby.org:  {len(KLUBYORG)}")
-    print(f"  Łącznie:          {len(PLAYTOMIC)+len(KLUBYORG)} klubów\n")
-    # ── Pobierz dane logowania z Keychain lub ręcznie ────────────────────────
-    email, password = get_credentials()
+    if run_playtomic:
+        print(f"\n  Kluby Playtomic:  {len(PLAYTOMIC)}")
+    if run_kluby:
+        print(f"  Kluby Kluby.org:  {len(KLUBYORG)}")
+    print()
+
+    # ── Pobierz dane logowania (tylko jeśli potrzebne dla kluby.org) ─────────
+    email, password = get_credentials() if run_kluby else (None, None)
 
     conn  = init_db()
     _now_warsaw = datetime.now(WARSAW_TZ)
@@ -963,63 +969,65 @@ async def run():
     conn.commit()
 
     # ── 1. PLAYTOMIC (publiczne API, bez przeglądarki) ────────────────────────
-    print("\n── Playtomic (" + str(len(PLAYTOMIC)) + " klubów) " + "─"*35)
-    for klub in PLAYTOMIC:
-        log.info("  [Playtomic API] → %s", klub["name"])
-        data = build_playtomic_data(klub, today)
-        if not data["ok"]: continue
-        club_id = f"pt_{klub['slug']}"
-        upsert_club(conn, {
-            "id":club_id, "name":data["name"] or klub["name"],
-            "source":"playtomic", "dzielnica":klub["dzielnica"],
-            "address":data["address"], "lat":data["lat"], "lng":data["lng"],
-            "padel_courts_total":len(data["courts"]) or None,
-            "hours_weekday":data["hours_weekday"], "hours_weekend":data["hours_weekend"],
-            "amenities":json.dumps(data["amenities"], ensure_ascii=False),
-            "website":f"https://playtomic.com/clubs/{klub['slug']}",
-            "phone":None, "scraped_at":now,
-        })
-        save_courts(conn, club_id, data["courts"])
-        save_slots(conn, club_id, today, data["slots"], data["courts"], "playtomic")
-        save_prices(conn, club_id, data["prices"])
+    if run_playtomic:
+        print("\n── Playtomic (" + str(len(PLAYTOMIC)) + " klubów) " + "─"*35)
+        for klub in PLAYTOMIC:
+            log.info("  [Playtomic API] → %s", klub["name"])
+            data = build_playtomic_data(klub, today)
+            if not data["ok"]: continue
+            club_id = f"pt_{klub['slug']}"
+            upsert_club(conn, {
+                "id":club_id, "name":data["name"] or klub["name"],
+                "source":"playtomic", "dzielnica":klub["dzielnica"],
+                "address":data["address"], "lat":data["lat"], "lng":data["lng"],
+                "padel_courts_total":len(data["courts"]) or None,
+                "hours_weekday":data["hours_weekday"], "hours_weekend":data["hours_weekend"],
+                "amenities":json.dumps(data["amenities"], ensure_ascii=False),
+                "website":f"https://playtomic.com/clubs/{klub['slug']}",
+                "phone":None, "scraped_at":now,
+            })
+            save_courts(conn, club_id, data["courts"])
+            save_slots(conn, club_id, today, data["slots"], data["courts"], "playtomic")
+            save_prices(conn, club_id, data["prices"])
 
-    async with async_playwright() as pw:
-        browser = await pw.chromium.launch(
-            headless=True, args=["--no-sandbox","--disable-dev-shm-usage"])
-        ctx = await browser.new_context(
-            locale="pl-PL",
-            user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                       "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
-        page = await ctx.new_page()
+    # ── 2. KLUBY.ORG (wymaga przeglądarki + logowania) ────────────────────────
+    if run_kluby:
+        async with async_playwright() as pw:
+            browser = await pw.chromium.launch(
+                headless=True, args=["--no-sandbox","--disable-dev-shm-usage"])
+            ctx = await browser.new_context(
+                locale="pl-PL",
+                user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                           "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+            page = await ctx.new_page()
 
-        # ── 2. KLUBY.ORG – logowanie ──────────────────────────────────────────
-        print("\n── Kluby.org (" + str(len(KLUBYORG)) + " klubów) " + "─"*35)
-        logged_in = await login_klubyorg(page, email, password)
-        if not logged_in:
-            print("\n❌ Logowanie nieudane – pomijam kluby.org\n")
-        else:
-            for klub in KLUBYORG:
-                log.info("  [Kluby.org] → %s", klub["name"])
-                data = await scrape_klubyorg(page, klub, today)
-                club_id = f"ko_{klub['slug']}"
-                all_courts = data["courts"] + klub.get("extra_courts", [])
-                upsert_club(conn, {
-                    "id":club_id, "name":klub["name"], "source":"kluby_org",
-                    "dzielnica":klub["dzielnica"], "address":data["address"],
-                    "lat":None, "lng":None,
-                    "padel_courts_total":len(all_courts) or None,
-                    "hours_weekday":data["hours_weekday"],
-                    "hours_weekend":data["hours_weekend"],
-                    "amenities":json.dumps(data["amenities"], ensure_ascii=False),
-                    "website":f"https://kluby.org/{klub['slug']}",
-                    "phone":data["phone"], "scraped_at":now,
-                })
-                save_courts(conn, club_id, all_courts)
-                save_slots(conn, club_id, today, data["slots"], all_courts, "kluby_org")
-                save_prices(conn, club_id, data["prices"])
-                await page.wait_for_timeout(1500)
+            print("\n── Kluby.org (" + str(len(KLUBYORG)) + " klubów) " + "─"*35)
+            logged_in = await login_klubyorg(page, email, password)
+            if not logged_in:
+                print("\n❌ Logowanie nieudane – pomijam kluby.org\n")
+            else:
+                for klub in KLUBYORG:
+                    log.info("  [Kluby.org] → %s", klub["name"])
+                    data = await scrape_klubyorg(page, klub, today)
+                    club_id = f"ko_{klub['slug']}"
+                    all_courts = data["courts"] + klub.get("extra_courts", [])
+                    upsert_club(conn, {
+                        "id":club_id, "name":klub["name"], "source":"kluby_org",
+                        "dzielnica":klub["dzielnica"], "address":data["address"],
+                        "lat":None, "lng":None,
+                        "padel_courts_total":len(all_courts) or None,
+                        "hours_weekday":data["hours_weekday"],
+                        "hours_weekend":data["hours_weekend"],
+                        "amenities":json.dumps(data["amenities"], ensure_ascii=False),
+                        "website":f"https://kluby.org/{klub['slug']}",
+                        "phone":data["phone"], "scraped_at":now,
+                    })
+                    save_courts(conn, club_id, all_courts)
+                    save_slots(conn, club_id, today, data["slots"], all_courts, "kluby_org")
+                    save_prices(conn, club_id, data["prices"])
+                    await page.wait_for_timeout(1500)
 
-        await browser.close()
+            await browser.close()
 
     # ── Eksport i podsumowanie ────────────────────────────────────────────────
     exported = export_csv(conn, today)
@@ -1048,4 +1056,12 @@ async def run():
     conn.close()
 
 if __name__ == "__main__":
-    asyncio.run(run())
+    parser = argparse.ArgumentParser(description="Scraper kortów padlowych Warszawa")
+    parser.add_argument(
+        "--source",
+        choices=["playtomic", "kluby", "all"],
+        default="all",
+        help="Które źródło scrapować: playtomic | kluby | all (domyślnie: all)"
+    )
+    args = parser.parse_args()
+    asyncio.run(run(source=args.source))

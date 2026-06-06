@@ -2,11 +2,20 @@ name: Collect Padel Court Data
 
 on:
   schedule:
-    # Co 2 godziny: 06:00–20:00 Warsaw (CEST=UTC+2)
+    # Playtomic co 2 godziny: 06:00–20:00 Warsaw (CEST=UTC+2)
     # UTC:           04  06  08  10  12  14  16  18
     # Warsaw lato:   06  08  10  12  14  16  18  20
     - cron: '0 4,6,8,10,12,14,16,18 * * *'
+
+    # Pełny scraping (Playtomic + Kluby.org) o 21:00 Warsaw (19:00 UTC)
+    - cron: '0 19 * * *'
+
   workflow_dispatch:
+    inputs:
+      source:
+        description: 'Źródło danych (playtomic / kluby / all)'
+        required: false
+        default: 'all'
 
 permissions:
   contents: write
@@ -31,11 +40,25 @@ jobs:
           pip install -r requirements.txt
           playwright install chromium --with-deps
 
+      - name: Wybierz źródło danych
+        id: pick_source
+        run: |
+          # Przy ręcznym uruchomieniu używaj parametru input
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "source=${{ github.event.inputs.source }}" >> $GITHUB_OUTPUT
+          # O 19:00 UTC (21:00 Warsaw) – pełny scraping z kluby.org
+          elif [ "$(date -u +%H)" = "19" ]; then
+            echo "source=all" >> $GITHUB_OUTPUT
+          # Pozostałe godziny – tylko Playtomic
+          else
+            echo "source=playtomic" >> $GITHUB_OUTPUT
+          fi
+
       - name: Uruchom scraper
         env:
           KLUBYORG_EMAIL: ${{ secrets.KLUBYORG_EMAIL }}
           KLUBYORG_PASSWORD: ${{ secrets.KLUBYORG_PASSWORD }}
-        run: python scraper.py
+        run: python scraper.py --source ${{ steps.pick_source.outputs.source }}
 
       - name: Zapisz dane do repozytorium
         run: |
