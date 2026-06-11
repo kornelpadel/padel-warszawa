@@ -1,19 +1,19 @@
 ﻿klub,dzielnica,source,nawierzchnia,korty_padlowe,cena_min,cena_max,cena_srednia,godz_tydzien,godz_weekend,slotow_dzisiaj,oblozenie_pct,address,slotow_max
 Toro Padel,Bemowo,kluby_org,indoor,6,80.0,160.0,115.0,,,0,,ul. Kazubów 14 (Bemowo),304
-Loba Padel,Białołęka,playtomic,indoor,8,120.0,200.0,159.0,06:00-23:00,06:00-23:00,272,45.6,"Smugowa 44, 03-032",312
+Loba Padel,Białołęka,playtomic,indoor,8,140.0,200.0,168.0,06:00-23:00,06:00-23:00,280,46.4,"Smugowa 44, 03-032",312
 Sporteum,Białołęka,kluby_org,indoor,2,65.0,130.0,98.0,,,0,,ul. Zawiślańska 27 (Białołęka),120
-Warsaw Padel Club,Białołęka,playtomic,indoor,11,73.0,212.0,130.0,06:00-01:00,06:00-01:00,396,92.2,"Annopol 3, 03-236",451
-RQT Spot,Bielany,playtomic,indoor,6,79.0,160.0,119.0,07:00-00:00,07:00-00:00,204,73.5,"Estrady 13K, 05-080",312
-RQT Spot,Bielany,playtomic,outdoor,2,79.0,160.0,119.0,07:00-00:00,07:00-00:00,68,57.4,"Estrady 13K, 05-080",312
-Interpadel Warszawa,Mokotów,playtomic,indoor,11,86.0,196.0,145.0,06:00-02:00,06:00-02:00,396,93.7,"Bokserska 66A, 02-690",451
+Warsaw Padel Club,Białołęka,playtomic,indoor,11,93.0,212.0,133.0,06:00-01:00,06:00-01:00,407,93.4,"Annopol 3, 03-236",451
+RQT Spot,Bielany,playtomic,indoor,6,79.0,160.0,130.0,07:00-00:00,07:00-00:00,210,74.3,"Estrady 13K, 05-080",312
+RQT Spot,Bielany,playtomic,outdoor,2,79.0,160.0,130.0,07:00-00:00,07:00-00:00,70,57.1,"Estrady 13K, 05-080",312
+Interpadel Warszawa,Mokotów,playtomic,indoor,11,86.0,86.0,86.0,06:00-02:00,06:00-02:00,407,94.3,"Bokserska 66A, 02-690",451
 WKT Mera,Ochota,kluby_org,indoor,2,80.0,120.0,100.0,,,0,,al. Bohaterów Września 12 (Ochota),126
-Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,outdoor,5,120.0,160.0,141.0,07:00-23:00,07:00-23:00,160,73.1,"al. Księcia Józefa Poniatowskiego 1, 03-901",185
+Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,outdoor,5,160.0,160.0,160.0,07:00-23:00,07:00-23:00,165,72.7,"al. Księcia Józefa Poniatowskiego 1, 03-901",185
 TENES Klub Sportowy,Ursus,kluby_org,indoor,3,65.0,120.0,91.0,,,0,,ul. Piwna 13 (Ursus),173
 Padlovnia,Ursynów,kluby_org,indoor,7,100.0,160.0,130.0,,,0,,ul. Karnawał 8 (Ursynów),354
 Padlovnia,Ursynów,kluby_org,outdoor,4,100.0,160.0,130.0,,,0,,ul. Karnawał 8 (Ursynów),354
-San Padel,Ursynów,playtomic,indoor,12,100.0,200.0,151.0,00:00-00:00,00:00-00:00,564,57.3,"Przedsiębiorców 1, 05-500",600
+San Padel,Ursynów,playtomic,indoor,12,150.0,200.0,175.0,00:00-00:00,00:00-00:00,576,59.4,"Przedsiębiorców 1, 05-500",600
 Klub Miedzeszyn,Wawer,kluby_org,indoor,2,80.0,180.0,130.0,,,0,,ul. Bielika 17 (Wawer),92
-Rakiety Aero - Padel Outdoor,Wawer,playtomic,outdoor,1,120.0,160.0,140.0,08:00-21:30,08:00-21:30,27,40.7,"Wał Miedzeszyński 646, 03-994",32
+Rakiety Aero - Padel Outdoor,Wawer,playtomic,outdoor,1,,,,08:00-21:30,08:00-21:30,24,33.3,"Wał Miedzeszyński 646, 03-994",32
 Mana Padel,Wilanów,kluby_org,indoor,8,107.0,300.0,177.0,,,0,,ul. Zawodzie 24 (Wilanów),318
 TenisWil,Wilanów,kluby_org,outdoor,3,80.0,100.0,90.0,,,0,,ul. Przyczółkowa 210C (Wilanów),154
 ProPadel Jutrzenki,Włochy,kluby_org,indoor,5,80.0,80.0,80.0,,,0,,ul. Jutrzenki 12 (Włochy),360
