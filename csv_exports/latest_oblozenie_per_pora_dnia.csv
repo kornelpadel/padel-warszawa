@@ -8,12 +8,12 @@ Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,rano (6-10),
 Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,poludnie (10-14),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,popoludnie (14-18),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,wieczor (18-22),weekend,8,6,2,75.0
-Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,noc,weekend,4,3,1,75.0
+Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,noc,weekend,4,4,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,OSHEE kort 5,indoor,rano (6-10),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,OSHEE kort 5,indoor,poludnie (10-14),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,OSHEE kort 5,indoor,popoludnie (14-18),weekend,8,7,1,87.5
 Interpadel Warszawa,Mokotów,playtomic,OSHEE kort 5,indoor,wieczor (18-22),weekend,8,8,0,100.0
-Interpadel Warszawa,Mokotów,playtomic,OSHEE kort 5,indoor,noc,weekend,4,3,1,75.0
+Interpadel Warszawa,Mokotów,playtomic,OSHEE kort 5,indoor,noc,weekend,4,4,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,RECMAN kort 8,indoor,rano (6-10),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,RECMAN kort 8,indoor,poludnie (10-14),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,RECMAN kort 8,indoor,popoludnie (14-18),weekend,8,6,2,75.0
@@ -37,13 +37,13 @@ Interpadel Warszawa,Mokotów,playtomic,kort 10 Singiel,indoor,noc,weekend,4,4,0,
 Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,rano (6-10),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,poludnie (10-14),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,popoludnie (14-18),weekend,8,8,0,100.0
-Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,wieczor (18-22),weekend,8,5,3,62.5
-Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,noc,weekend,4,3,1,75.0
+Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,wieczor (18-22),weekend,8,7,1,87.5
+Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,noc,weekend,4,4,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,rano (6-10),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,poludnie (10-14),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,popoludnie (14-18),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,wieczor (18-22),weekend,8,3,5,37.5
-Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,noc,weekend,4,3,1,75.0
+Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,noc,weekend,4,4,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 4,indoor,rano (6-10),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 4,indoor,poludnie (10-14),weekend,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 4,indoor,popoludnie (14-18),weekend,8,8,0,100.0
@@ -56,8 +56,8 @@ Interpadel Warszawa,Mokotów,playtomic,kort 6,indoor,wieczor (18-22),weekend,8,7
 Interpadel Warszawa,Mokotów,playtomic,kort 6,indoor,noc,weekend,4,4,0,100.0
 Loba Padel,Białołęka,playtomic,Padel 1,indoor,rano (6-10),weekend,8,5,3,62.5
 Loba Padel,Białołęka,playtomic,Padel 1,indoor,poludnie (10-14),weekend,8,7,1,87.5
-Loba Padel,Białołęka,playtomic,Padel 1,indoor,popoludnie (14-18),weekend,8,1,7,12.5
-Loba Padel,Białołęka,playtomic,Padel 1,indoor,wieczor (18-22),weekend,8,6,2,75.0
+Loba Padel,Białołęka,playtomic,Padel 1,indoor,popoludnie (14-18),weekend,8,4,4,50.0
+Loba Padel,Białołęka,playtomic,Padel 1,indoor,wieczor (18-22),weekend,8,8,0,100.0
 Loba Padel,Białołęka,playtomic,Padel 1,indoor,noc,weekend,2,2,0,100.0
 Loba Padel,Białołęka,playtomic,Padel 2,indoor,rano (6-10),weekend,8,6,2,75.0
 Loba Padel,Białołęka,playtomic,Padel 2,indoor,poludnie (10-14),weekend,8,4,4,50.0
@@ -150,11 +150,11 @@ Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 2,outdoor,w
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 2,outdoor,noc,weekend,2,2,0,100.0
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 3,outdoor,rano (6-10),weekend,6,3,3,50.0
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 3,outdoor,poludnie (10-14),weekend,8,2,6,25.0
-Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 3,outdoor,popoludnie (14-18),weekend,8,0,8,0.0
+Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 3,outdoor,popoludnie (14-18),weekend,8,4,4,50.0
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 3,outdoor,wieczor (18-22),weekend,8,3,5,37.5
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 3,outdoor,noc,weekend,2,2,0,100.0
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 4,outdoor,rano (6-10),weekend,6,0,6,0.0
-Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 4,outdoor,poludnie (10-14),weekend,8,5,3,62.5
+Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 4,outdoor,poludnie (10-14),weekend,8,0,8,0.0
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 4,outdoor,popoludnie (14-18),weekend,8,4,4,50.0
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 4,outdoor,wieczor (18-22),weekend,8,3,5,37.5
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,Padel 4,outdoor,noc,weekend,2,2,0,100.0
@@ -167,62 +167,62 @@ San Padel,Ursynów,playtomic,Padel 1,indoor,rano (6-10),weekend,8,7,1,87.5
 San Padel,Ursynów,playtomic,Padel 1,indoor,poludnie (10-14),weekend,8,7,1,87.5
 San Padel,Ursynów,playtomic,Padel 1,indoor,popoludnie (14-18),weekend,8,7,1,87.5
 San Padel,Ursynów,playtomic,Padel 1,indoor,wieczor (18-22),weekend,8,4,4,50.0
-San Padel,Ursynów,playtomic,Padel 1,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 1,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 10,indoor,rano (6-10),weekend,8,6,2,75.0
 San Padel,Ursynów,playtomic,Padel 10,indoor,poludnie (10-14),weekend,8,7,1,87.5
 San Padel,Ursynów,playtomic,Padel 10,indoor,popoludnie (14-18),weekend,8,6,2,75.0
 San Padel,Ursynów,playtomic,Padel 10,indoor,wieczor (18-22),weekend,8,2,6,25.0
-San Padel,Ursynów,playtomic,Padel 10,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 10,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 11,indoor,rano (6-10),weekend,8,3,5,37.5
 San Padel,Ursynów,playtomic,Padel 11,indoor,poludnie (10-14),weekend,8,1,7,12.5
 San Padel,Ursynów,playtomic,Padel 11,indoor,popoludnie (14-18),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 11,indoor,wieczor (18-22),weekend,8,2,6,25.0
-San Padel,Ursynów,playtomic,Padel 11,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 11,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 12,indoor,rano (6-10),weekend,8,3,5,37.5
 San Padel,Ursynów,playtomic,Padel 12,indoor,poludnie (10-14),weekend,8,3,5,37.5
 San Padel,Ursynów,playtomic,Padel 12,indoor,popoludnie (14-18),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 12,indoor,wieczor (18-22),weekend,8,2,6,25.0
-San Padel,Ursynów,playtomic,Padel 12,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 12,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 2,indoor,rano (6-10),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 2,indoor,poludnie (10-14),weekend,8,7,1,87.5
 San Padel,Ursynów,playtomic,Padel 2,indoor,popoludnie (14-18),weekend,8,8,0,100.0
 San Padel,Ursynów,playtomic,Padel 2,indoor,wieczor (18-22),weekend,8,4,4,50.0
-San Padel,Ursynów,playtomic,Padel 2,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 2,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 3,indoor,rano (6-10),weekend,8,3,5,37.5
 San Padel,Ursynów,playtomic,Padel 3,indoor,poludnie (10-14),weekend,8,7,1,87.5
 San Padel,Ursynów,playtomic,Padel 3,indoor,popoludnie (14-18),weekend,8,8,0,100.0
 San Padel,Ursynów,playtomic,Padel 3,indoor,wieczor (18-22),weekend,8,2,6,25.0
-San Padel,Ursynów,playtomic,Padel 3,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 3,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 4,indoor,rano (6-10),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 4,indoor,poludnie (10-14),weekend,8,6,2,75.0
 San Padel,Ursynów,playtomic,Padel 4,indoor,popoludnie (14-18),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 4,indoor,wieczor (18-22),weekend,8,1,7,12.5
-San Padel,Ursynów,playtomic,Padel 4,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 4,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 5,indoor,rano (6-10),weekend,8,3,5,37.5
 San Padel,Ursynów,playtomic,Padel 5,indoor,poludnie (10-14),weekend,8,4,4,50.0
 San Padel,Ursynów,playtomic,Padel 5,indoor,popoludnie (14-18),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 5,indoor,wieczor (18-22),weekend,8,1,7,12.5
-San Padel,Ursynów,playtomic,Padel 5,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 5,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 6 Single,indoor,rano (6-10),weekend,8,7,1,87.5
 San Padel,Ursynów,playtomic,Padel 6 Single,indoor,poludnie (10-14),weekend,8,4,4,50.0
 San Padel,Ursynów,playtomic,Padel 6 Single,indoor,popoludnie (14-18),weekend,8,6,2,75.0
 San Padel,Ursynów,playtomic,Padel 6 Single,indoor,wieczor (18-22),weekend,8,4,4,50.0
-San Padel,Ursynów,playtomic,Padel 6 Single,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 6 Single,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 7,indoor,rano (6-10),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 7,indoor,poludnie (10-14),weekend,8,4,4,50.0
 San Padel,Ursynów,playtomic,Padel 7,indoor,popoludnie (14-18),weekend,8,8,0,100.0
 San Padel,Ursynów,playtomic,Padel 7,indoor,wieczor (18-22),weekend,8,2,6,25.0
-San Padel,Ursynów,playtomic,Padel 7,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 7,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 8,indoor,rano (6-10),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 8,indoor,poludnie (10-14),weekend,8,1,7,12.5
 San Padel,Ursynów,playtomic,Padel 8,indoor,popoludnie (14-18),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 8,indoor,wieczor (18-22),weekend,8,2,6,25.0
-San Padel,Ursynów,playtomic,Padel 8,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 8,indoor,noc,weekend,17,14,3,82.4
 San Padel,Ursynów,playtomic,Padel 9,indoor,rano (6-10),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 9,indoor,poludnie (10-14),weekend,8,1,7,12.5
 San Padel,Ursynów,playtomic,Padel 9,indoor,popoludnie (14-18),weekend,8,5,3,62.5
 San Padel,Ursynów,playtomic,Padel 9,indoor,wieczor (18-22),weekend,8,2,6,25.0
-San Padel,Ursynów,playtomic,Padel 9,indoor,noc,weekend,16,13,3,81.3
+San Padel,Ursynów,playtomic,Padel 9,indoor,noc,weekend,17,14,3,82.4
 Warsaw Padel Club,Białołęka,playtomic,1 - Full Panoramic,indoor,rano (6-10),weekend,8,8,0,100.0
 Warsaw Padel Club,Białołęka,playtomic,1 - Full Panoramic,indoor,poludnie (10-14),weekend,8,8,0,100.0
 Warsaw Padel Club,Białołęka,playtomic,1 - Full Panoramic,indoor,popoludnie (14-18),weekend,8,8,0,100.0
