@@ -1,12 +1,7 @@
 ﻿klub,dzielnica,source,cena_za_godzine,description
 Interpadel Warszawa,Mokotów,playtomic,140.0,cena z Playtomic API
-Interpadel Warszawa,Mokotów,playtomic,196.0,cena z Playtomic API
 Klub Miedzeszyn,Wawer,kluby_org,120.0,cena z kluby.org
 Klub Miedzeszyn,Wawer,kluby_org,140.0,cena z kluby.org
-Loba Padel,Białołęka,playtomic,140.0,cena z Playtomic API
-Loba Padel,Białołęka,playtomic,160.0,cena z Playtomic API
-Loba Padel,Białołęka,playtomic,170.0,cena z Playtomic API
-Loba Padel,Białołęka,playtomic,200.0,cena z Playtomic API
 Mana Padel,Wilanów,kluby_org,132.0,cena z kluby.org
 Mana Padel,Wilanów,kluby_org,140.0,cena z kluby.org
 Mana Padel,Wilanów,kluby_org,184.0,cena z kluby.org
@@ -18,11 +13,6 @@ Padlovnia,Ursynów,kluby_org,140.0,cena z kluby.org
 Padlovnia,Ursynów,kluby_org,160.0,cena z kluby.org
 ProPadel Jutrzenki,Włochy,kluby_org,80.0,cena z kluby.org
 RQT Spot,Bielany,playtomic,79.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,89.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,92.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,99.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,160.0,cena z Playtomic API
-Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,160.0,cena z Playtomic API
 San Padel,Ursynów,playtomic,150.0,cena z Playtomic API
 San Padel,Ursynów,playtomic,200.0,cena z Playtomic API
 Sporteum,Białołęka,kluby_org,110.0,cena z kluby.org
@@ -35,5 +25,3 @@ TenisWil,Wilanów,kluby_org,100.0,cena z kluby.org
 Toro Padel,Bemowo,kluby_org,120.0,cena z kluby.org
 Toro Padel,Bemowo,kluby_org,160.0,cena z kluby.org
 WKT Mera,Ochota,kluby_org,120.0,cena z kluby.org
-Warsaw Padel Club,Białołęka,playtomic,184.0,cena z Playtomic API
-Warsaw Padel Club,Białołęka,playtomic,212.0,cena z Playtomic API
