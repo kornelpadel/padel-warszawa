@@ -1,9 +1,5 @@
 ﻿klub,dzielnica,source,cena_za_godzine,description
 Interpadel Warszawa,Mokotów,playtomic,86.0,cena z Playtomic API
-Interpadel Warszawa,Mokotów,playtomic,99.0,cena z Playtomic API
-Interpadel Warszawa,Mokotów,playtomic,103.0,cena z Playtomic API
-Interpadel Warszawa,Mokotów,playtomic,112.0,cena z Playtomic API
-Interpadel Warszawa,Mokotów,playtomic,138.0,cena z Playtomic API
 Interpadel Warszawa,Mokotów,playtomic,140.0,cena z Playtomic API
 Interpadel Warszawa,Mokotów,playtomic,154.0,cena z Playtomic API
 Interpadel Warszawa,Mokotów,playtomic,159.0,cena z Playtomic API
@@ -51,7 +47,6 @@ Toro Padel,Bemowo,kluby_org,120.0,cena z kluby.org
 Toro Padel,Bemowo,kluby_org,160.0,cena z kluby.org
 WKT Mera,Ochota,kluby_org,120.0,cena z kluby.org
 Warsaw Padel Club,Białołęka,playtomic,82.0,cena z Playtomic API
-Warsaw Padel Club,Białołęka,playtomic,93.0,cena z Playtomic API
 Warsaw Padel Club,Białołęka,playtomic,104.0,cena z Playtomic API
 Warsaw Padel Club,Białołęka,playtomic,116.0,cena z Playtomic API
 Warsaw Padel Club,Białołęka,playtomic,126.0,cena z Playtomic API
