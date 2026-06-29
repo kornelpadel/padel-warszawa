@@ -1,8 +1,6 @@
 ﻿klub,dzielnica,source,cena_za_godzine,description
 Interpadel Warszawa,Mokotów,playtomic,86.0,cena z Playtomic API
-Interpadel Warszawa,Mokotów,playtomic,138.0,cena z Playtomic API
 Interpadel Warszawa,Mokotów,playtomic,140.0,cena z Playtomic API
-Interpadel Warszawa,Mokotów,playtomic,196.0,cena z Playtomic API
 Klub Miedzeszyn,Wawer,kluby_org,120.0,cena z kluby.org
 Klub Miedzeszyn,Wawer,kluby_org,140.0,cena z kluby.org
 Loba Padel,Białołęka,playtomic,140.0,cena z Playtomic API
@@ -23,22 +21,15 @@ RQT Spot,Bielany,playtomic,79.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,80.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,84.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,86.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,88.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,89.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,90.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,92.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,94.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,99.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,113.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,119.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,120.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,128.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,135.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,140.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,142.0,cena z Playtomic API
-RQT Spot,Bielany,playtomic,147.0,cena z Playtomic API
 RQT Spot,Bielany,playtomic,160.0,cena z Playtomic API
-Rakiety Aero - Padel Outdoor,Wawer,playtomic,160.0,cena z Playtomic API
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,100.0,cena z Playtomic API
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,130.0,cena z Playtomic API
 Rakiety PGE Narodowy - Padel Outdoor,Praga Południe,playtomic,140.0,cena z Playtomic API
@@ -58,7 +49,3 @@ WKT Mera,Ochota,kluby_org,120.0,cena z kluby.org
 Warsaw Padel Club,Białołęka,playtomic,101.0,cena z Playtomic API
 Warsaw Padel Club,Białołęka,playtomic,112.0,cena z Playtomic API
 Warsaw Padel Club,Białołęka,playtomic,144.0,cena z Playtomic API
-Warsaw Padel Club,Białołęka,playtomic,161.0,cena z Playtomic API
-Warsaw Padel Club,Białołęka,playtomic,167.0,cena z Playtomic API
-Warsaw Padel Club,Białołęka,playtomic,178.0,cena z Playtomic API
-Warsaw Padel Club,Białołęka,playtomic,212.0,cena z Playtomic API
