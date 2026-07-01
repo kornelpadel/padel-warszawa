@@ -7,6 +7,10 @@ Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,poludnie (10
 Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,popoludnie (14-18),tydzien,9,9,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,wieczor (18-22),tydzien,8,7,1,87.5
 Interpadel Warszawa,Mokotów,playtomic,AQUA Carpatica kort 3,indoor,noc,tydzien,4,4,0,100.0
+Interpadel Warszawa,Mokotów,playtomic,BMW Bawaria Motors kort 10 Singiel,indoor,wieczor (18-22),tydzien,7,7,0,100.0
+Interpadel Warszawa,Mokotów,playtomic,BMW Bawaria Motors kort 10 Singiel,indoor,noc,tydzien,4,4,0,100.0
+Interpadel Warszawa,Mokotów,playtomic,BMW Bawaria Motors kort 2,indoor,wieczor (18-22),tydzien,7,6,1,85.7
+Interpadel Warszawa,Mokotów,playtomic,BMW Bawaria Motors kort 2,indoor,noc,tydzien,4,4,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,OSHEE kort 5,indoor,poludnie (10-14),tydzien,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,OSHEE kort 5,indoor,popoludnie (14-18),tydzien,9,9,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,OSHEE kort 5,indoor,wieczor (18-22),tydzien,8,7,1,87.5
@@ -25,16 +29,14 @@ Interpadel Warszawa,Mokotów,playtomic,WAAY kort 9,indoor,wieczor (18-22),tydzie
 Interpadel Warszawa,Mokotów,playtomic,WAAY kort 9,indoor,noc,tydzien,4,4,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 10 Singiel,indoor,poludnie (10-14),tydzien,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 10 Singiel,indoor,popoludnie (14-18),tydzien,9,8,1,88.9
-Interpadel Warszawa,Mokotów,playtomic,kort 10 Singiel,indoor,wieczor (18-22),tydzien,8,8,0,100.0
-Interpadel Warszawa,Mokotów,playtomic,kort 10 Singiel,indoor,noc,tydzien,4,4,0,100.0
+Interpadel Warszawa,Mokotów,playtomic,kort 10 Singiel,indoor,wieczor (18-22),tydzien,1,1,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,poludnie (10-14),tydzien,8,5,3,62.5
 Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,popoludnie (14-18),tydzien,9,7,2,77.8
 Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,wieczor (18-22),tydzien,8,8,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 11 Singiel,indoor,noc,tydzien,4,4,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,poludnie (10-14),tydzien,8,6,2,75.0
 Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,popoludnie (14-18),tydzien,9,9,0,100.0
-Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,wieczor (18-22),tydzien,8,7,1,87.5
-Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,noc,tydzien,4,4,0,100.0
+Interpadel Warszawa,Mokotów,playtomic,kort 2,indoor,wieczor (18-22),tydzien,1,1,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 4,indoor,poludnie (10-14),tydzien,8,7,1,87.5
 Interpadel Warszawa,Mokotów,playtomic,kort 4,indoor,popoludnie (14-18),tydzien,9,9,0,100.0
 Interpadel Warszawa,Mokotów,playtomic,kort 4,indoor,wieczor (18-22),tydzien,8,8,0,100.0
@@ -105,7 +107,7 @@ RQT Spot,Bielany,playtomic,Padel 6 (zewnętrzny),outdoor,wieczor (18-22),tydzien
 RQT Spot,Bielany,playtomic,Padel 6 (zewnętrzny),outdoor,noc,tydzien,4,4,0,100.0
 RQT Spot,Bielany,playtomic,Padel 7 Single (kryty),indoor,poludnie (10-14),tydzien,8,0,8,0.0
 RQT Spot,Bielany,playtomic,Padel 7 Single (kryty),indoor,popoludnie (14-18),tydzien,9,8,1,88.9
-RQT Spot,Bielany,playtomic,Padel 7 Single (kryty),indoor,wieczor (18-22),tydzien,8,5,3,62.5
+RQT Spot,Bielany,playtomic,Padel 7 Single (kryty),indoor,wieczor (18-22),tydzien,8,7,1,87.5
 RQT Spot,Bielany,playtomic,Padel 7 Single (kryty),indoor,noc,tydzien,4,4,0,100.0
 RQT Spot,Bielany,playtomic,Padel 8 Single (kryty),indoor,poludnie (10-14),tydzien,8,0,8,0.0
 RQT Spot,Bielany,playtomic,Padel 8 Single (kryty),indoor,popoludnie (14-18),tydzien,9,5,4,55.6
@@ -195,7 +197,7 @@ Warsaw Padel Club,Białołęka,playtomic,5 - Full Panoramic,indoor,wieczor (18-2
 Warsaw Padel Club,Białołęka,playtomic,5 - Full Panoramic,indoor,noc,tydzien,4,4,0,100.0
 Warsaw Padel Club,Białołęka,playtomic,6 - Jaguar,indoor,poludnie (10-14),tydzien,8,8,0,100.0
 Warsaw Padel Club,Białołęka,playtomic,6 - Jaguar,indoor,popoludnie (14-18),tydzien,9,9,0,100.0
-Warsaw Padel Club,Białołęka,playtomic,6 - Jaguar,indoor,wieczor (18-22),tydzien,8,6,2,75.0
+Warsaw Padel Club,Białołęka,playtomic,6 - Jaguar,indoor,wieczor (18-22),tydzien,8,8,0,100.0
 Warsaw Padel Club,Białołęka,playtomic,6 - Jaguar,indoor,noc,tydzien,4,4,0,100.0
 Warsaw Padel Club,Białołęka,playtomic,7 - OYSHO,indoor,poludnie (10-14),tydzien,8,6,2,75.0
 Warsaw Padel Club,Białołęka,playtomic,7 - OYSHO,indoor,popoludnie (14-18),tydzien,9,7,2,77.8
