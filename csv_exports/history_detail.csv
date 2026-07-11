@@ -96,12 +96,12 @@
 2026-05-24,RQT Spot,playtomic,16,0,2,1,50.0
 2026-05-24,RQT Spot,playtomic,19,0,4,2,50.0
 2026-05-24,RQT Spot,playtomic,21,0,2,1,50.0
-2026-05-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,0,4,2,50.0
-2026-05-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,0,2,1,50.0
-2026-05-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,0,2,1,50.0
-2026-05-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,0,2,1,50.0
-2026-05-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,0,2,1,50.0
-2026-05-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,0,4,2,50.0
+2026-05-24,Rakiety PGE Narodowy,playtomic,8,0,4,2,50.0
+2026-05-24,Rakiety PGE Narodowy,playtomic,9,0,2,1,50.0
+2026-05-24,Rakiety PGE Narodowy,playtomic,12,0,2,1,50.0
+2026-05-24,Rakiety PGE Narodowy,playtomic,14,0,2,1,50.0
+2026-05-24,Rakiety PGE Narodowy,playtomic,15,0,2,1,50.0
+2026-05-24,Rakiety PGE Narodowy,playtomic,16,0,4,2,50.0
 2026-05-24,San Padel,playtomic,19,0,2,1,50.0
 2026-05-24,Sporteum,kluby_org,8,2,4,0,0.0
 2026-05-24,Sporteum,kluby_org,9,2,3,1,33.0
@@ -276,10 +276,10 @@
 2026-05-31,RQT Spot,playtomic,14,0,2,1,50.0
 2026-05-31,RQT Spot,playtomic,17,0,4,2,50.0
 2026-05-31,RQT Spot,playtomic,19,0,2,1,50.0
-2026-05-31,Rakiety PGE Narodowy - Padel Outdoor,playtomic,6,0,6,3,50.0
-2026-05-31,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,0,4,2,50.0
-2026-05-31,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,0,4,2,50.0
-2026-05-31,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,0,2,1,50.0
+2026-05-31,Rakiety PGE Narodowy,playtomic,6,0,6,3,50.0
+2026-05-31,Rakiety PGE Narodowy,playtomic,7,0,4,2,50.0
+2026-05-31,Rakiety PGE Narodowy,playtomic,13,0,4,2,50.0
+2026-05-31,Rakiety PGE Narodowy,playtomic,14,0,2,1,50.0
 2026-05-31,San Padel,playtomic,15,0,4,2,50.0
 2026-05-31,San Padel,playtomic,16,0,4,2,50.0
 2026-05-31,Sporteum,kluby_org,8,2,8,0,0.0
@@ -516,22 +516,22 @@
 2026-06-01,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-01,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-01,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,2,20.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,25,5,20.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,15,3,20.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,15,3,20.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,2,20.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,3,30.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,4,40.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,8,80.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,8,80.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,8,80.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,8,80.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,8,80.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,8,80.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,8,80.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-01,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,7,5,10,2,20.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,8,5,25,5,20.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,9,5,15,3,20.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,10,5,15,3,20.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,11,5,10,2,20.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,12,5,10,3,30.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,13,5,10,4,40.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,14,5,10,8,80.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,15,5,10,8,80.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,16,5,10,8,80.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,17,5,10,8,80.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,18,5,10,8,80.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,19,5,10,8,80.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,20,5,10,8,80.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-01,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-01,San Padel,playtomic,1,12,12,12,100.0
 2026-06-01,San Padel,playtomic,2,12,24,24,100.0
 2026-06-01,San Padel,playtomic,3,12,24,24,100.0
@@ -669,11 +669,11 @@
 2026-06-06,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-06,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-06,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-06,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,8,80.0
-2026-06-06,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,5,50.0
-2026-06-06,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,5,50.0
-2026-06-06,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-06,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-06,Rakiety PGE Narodowy,playtomic,18,5,10,8,80.0
+2026-06-06,Rakiety PGE Narodowy,playtomic,19,5,10,5,50.0
+2026-06-06,Rakiety PGE Narodowy,playtomic,20,5,10,5,50.0
+2026-06-06,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-06,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-06,San Padel,playtomic,18,12,24,7,29.0
 2026-06-06,San Padel,playtomic,19,12,24,5,21.0
 2026-06-06,San Padel,playtomic,20,12,24,1,4.0
@@ -752,22 +752,22 @@
 2026-06-07,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-07,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-07,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,8,80.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,10,100.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,10,100.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,10,100.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,8,80.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,6,60.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,15,5,33.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,4,40.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,10,100.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,15,14,93.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,9,90.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,7,70.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-07,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,7,5,10,8,80.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,8,5,10,10,100.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,9,5,10,10,100.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,10,5,10,10,100.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,11,5,10,8,80.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,12,5,10,6,60.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,13,5,15,5,33.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,14,5,10,4,40.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,15,5,10,10,100.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,18,5,15,14,93.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,19,5,10,9,90.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,20,5,10,7,70.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-07,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-07,San Padel,playtomic,0,12,12,12,100.0
 2026-06-07,San Padel,playtomic,1,12,24,24,100.0
 2026-06-07,San Padel,playtomic,2,12,24,24,100.0
@@ -873,22 +873,22 @@
 2026-06-08,Rakiety Aero - Padel Outdoor,playtomic,16,1,2,2,100.0
 2026-06-08,Rakiety Aero - Padel Outdoor,playtomic,17,1,2,2,100.0
 2026-06-08,Rakiety Aero - Padel Outdoor,playtomic,18,1,2,1,50.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,0,0.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,0,0.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,0,0.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,1,10.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,2,20.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,4,40.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,5,50.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,9,90.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,10,100.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,15,15,100.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,10,100.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,6,60.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-08,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,7,5,10,0,0.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,8,5,10,0,0.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,9,5,10,0,0.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,10,5,10,1,10.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,11,5,10,2,20.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,12,5,10,4,40.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,13,5,10,5,50.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,14,5,10,9,90.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,15,5,10,10,100.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,18,5,15,15,100.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,19,5,10,10,100.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,20,5,10,6,60.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-08,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-08,San Padel,playtomic,0,12,12,12,100.0
 2026-06-08,San Padel,playtomic,1,12,24,24,100.0
 2026-06-08,San Padel,playtomic,2,12,24,24,100.0
@@ -997,22 +997,22 @@
 2026-06-09,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-09,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-09,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,1,10.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,1,10.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,3,30.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,3,30.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,2,20.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,1,10.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,3,30.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,8,80.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,15,15,100.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,9,90.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,10,100.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,7,70.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-09,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,7,5,10,1,10.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,8,5,10,1,10.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,9,5,10,3,30.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,10,5,10,3,30.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,11,5,10,2,20.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,12,5,10,1,10.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,13,5,10,3,30.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,14,5,10,8,80.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,15,5,15,15,100.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,16,5,10,9,90.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,19,5,10,10,100.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,20,5,10,7,70.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-09,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-09,San Padel,playtomic,1,12,36,36,100.0
 2026-06-09,San Padel,playtomic,2,12,24,24,100.0
 2026-06-09,San Padel,playtomic,3,12,24,24,100.0
@@ -1121,22 +1121,22 @@
 2026-06-10,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-10,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-10,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,10,100.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,10,100.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,6,60.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,6,60.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,2,20.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,3,30.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,5,50.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,8,80.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,10,100.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,6,60.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,15,9,60.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,5,50.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,7,70.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,7,5,10,10,100.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,8,5,10,10,100.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,9,5,10,6,60.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,10,5,10,6,60.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,11,5,10,2,20.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,12,5,10,3,30.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,13,5,10,5,50.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,14,5,10,8,80.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,15,5,10,10,100.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,17,5,10,6,60.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,18,5,15,9,60.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,19,5,10,5,50.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,20,5,10,7,70.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-10,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-10,San Padel,playtomic,1,12,12,12,100.0
 2026-06-10,San Padel,playtomic,2,12,24,24,100.0
 2026-06-10,San Padel,playtomic,3,12,24,24,100.0
@@ -1242,22 +1242,22 @@
 2026-06-11,Rakiety Aero - Padel Outdoor,playtomic,17,1,2,2,100.0
 2026-06-11,Rakiety Aero - Padel Outdoor,playtomic,18,1,2,2,100.0
 2026-06-11,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,6,60.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,5,50.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,7,70.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,10,100.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,10,100.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,10,100.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,6,60.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,4,40.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,4,40.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,5,50.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,7,70.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,8,80.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,15,11,73.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,7,70.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,7,5,10,6,60.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,8,5,10,5,50.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,9,5,10,7,70.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,10,5,10,10,100.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,11,5,10,10,100.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,12,5,10,10,100.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,13,5,10,6,60.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,14,5,10,4,40.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,15,5,10,4,40.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,16,5,10,5,50.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,17,5,10,7,70.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,18,5,10,8,80.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,19,5,15,11,73.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,20,5,10,7,70.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-11,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-11,San Padel,playtomic,1,12,24,24,100.0
 2026-06-11,San Padel,playtomic,2,12,36,36,100.0
 2026-06-11,San Padel,playtomic,3,12,24,24,100.0
@@ -1345,13 +1345,13 @@
 2026-06-12,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-12,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-12,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-12,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,9,90.0
-2026-06-12,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,8,80.0
-2026-06-12,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,8,80.0
-2026-06-12,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,8,80.0
-2026-06-12,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,7,70.0
-2026-06-12,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-12,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-12,Rakiety PGE Narodowy,playtomic,16,5,10,9,90.0
+2026-06-12,Rakiety PGE Narodowy,playtomic,17,5,10,8,80.0
+2026-06-12,Rakiety PGE Narodowy,playtomic,18,5,10,8,80.0
+2026-06-12,Rakiety PGE Narodowy,playtomic,19,5,10,8,80.0
+2026-06-12,Rakiety PGE Narodowy,playtomic,20,5,10,7,70.0
+2026-06-12,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-12,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-12,San Padel,playtomic,2,12,24,24,100.0
 2026-06-12,San Padel,playtomic,3,12,24,24,100.0
 2026-06-12,San Padel,playtomic,4,12,24,13,54.0
@@ -1458,22 +1458,22 @@
 2026-06-13,Rakiety Aero - Padel Outdoor,playtomic,19,1,3,3,100.0
 2026-06-13,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-13,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,4,40.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,6,60.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,5,50.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,5,50.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,4,40.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,3,30.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,15,8,53.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,9,90.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,6,60.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,5,50.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,2,20.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,1,10.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,15,0,0.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,5,50.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-13,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,7,5,10,4,40.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,8,5,10,6,60.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,9,5,10,5,50.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,10,5,10,5,50.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,11,5,10,4,40.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,12,5,10,3,30.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,13,5,15,8,53.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,14,5,10,9,90.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,15,5,10,6,60.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,16,5,10,5,50.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,17,5,10,2,20.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,18,5,10,1,10.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,19,5,15,0,0.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,20,5,10,5,50.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-13,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-13,San Padel,playtomic,0,12,24,24,100.0
 2026-06-13,San Padel,playtomic,1,12,24,24,100.0
 2026-06-13,San Padel,playtomic,2,12,36,36,100.0
@@ -1578,22 +1578,22 @@
 2026-06-14,Rakiety Aero - Padel Outdoor,playtomic,19,1,3,3,100.0
 2026-06-14,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-14,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,3,30.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,6,60.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,9,90.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,9,90.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,7,70.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,5,50.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,15,3,20.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,7,70.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,8,80.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,8,80.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,8,80.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,15,0,0.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,5,50.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-14,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,7,5,10,3,30.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,8,5,10,6,60.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,9,5,10,9,90.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,10,5,10,9,90.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,11,5,10,7,70.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,12,5,10,5,50.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,13,5,15,3,20.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,14,5,10,7,70.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,15,5,10,8,80.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,17,5,10,8,80.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,18,5,10,8,80.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,19,5,15,0,0.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,20,5,10,5,50.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-14,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-14,San Padel,playtomic,0,12,12,12,100.0
 2026-06-14,San Padel,playtomic,1,12,24,24,100.0
 2026-06-14,San Padel,playtomic,2,12,24,24,100.0
@@ -1739,22 +1739,22 @@
 2026-06-15,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-15,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-15,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,0,0.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,0,0.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,0,0.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,0,0.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,0,0.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,1,10.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,2,20.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,6,60.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,7,70.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,8,80.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,9,90.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,8,80.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,0,0.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,5,50.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,15,15,100.0
-2026-06-15,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,7,5,10,0,0.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,8,5,10,0,0.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,9,5,10,0,0.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,10,5,10,0,0.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,11,5,10,0,0.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,12,5,10,1,10.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,13,5,10,2,20.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,14,5,10,6,60.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,15,5,10,7,70.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,16,5,10,8,80.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,17,5,10,9,90.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,18,5,10,8,80.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,19,5,10,0,0.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,20,5,10,5,50.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,21,5,15,15,100.0
+2026-06-15,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-15,San Padel,playtomic,0,12,36,36,100.0
 2026-06-15,San Padel,playtomic,1,12,24,24,100.0
 2026-06-15,San Padel,playtomic,2,12,24,24,100.0
@@ -1895,22 +1895,22 @@
 2026-06-16,Rakiety Aero - Padel Outdoor,playtomic,18,1,2,2,100.0
 2026-06-16,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-16,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,0,0.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,0,0.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,0,0.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,0,0.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,0,0.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,2,20.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,4,40.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,3,30.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,7,70.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,6,60.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,15,12,80.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-16,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,7,5,10,0,0.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,8,5,10,0,0.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,9,5,10,0,0.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,10,5,10,0,0.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,11,5,10,0,0.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,12,5,10,2,20.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,13,5,10,4,40.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,14,5,10,3,30.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,15,5,10,7,70.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,19,5,10,6,60.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,20,5,15,12,80.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-16,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-16,San Padel,playtomic,2,12,24,24,100.0
 2026-06-16,San Padel,playtomic,3,12,24,24,100.0
 2026-06-16,San Padel,playtomic,4,12,24,12,50.0
@@ -1972,11 +1972,11 @@
 2026-06-17,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-17,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-17,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-17,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,5,5,100.0
-2026-06-17,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,8,80.0
-2026-06-17,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,9,90.0
-2026-06-17,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-17,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-17,Rakiety PGE Narodowy,playtomic,18,5,5,5,100.0
+2026-06-17,Rakiety PGE Narodowy,playtomic,19,5,10,8,80.0
+2026-06-17,Rakiety PGE Narodowy,playtomic,20,5,10,9,90.0
+2026-06-17,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-17,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-17,San Padel,playtomic,18,12,12,12,100.0
 2026-06-17,San Padel,playtomic,19,12,24,15,63.0
 2026-06-17,San Padel,playtomic,20,12,24,6,25.0
@@ -2050,22 +2050,22 @@
 2026-06-18,Rakiety Aero - Padel Outdoor,playtomic,14,1,2,0,0.0
 2026-06-18,Rakiety Aero - Padel Outdoor,playtomic,15,1,2,0,0.0
 2026-06-18,Rakiety Aero - Padel Outdoor,playtomic,16,1,2,2,100.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,2,20.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,3,30.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,5,50.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,6,60.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,2,20.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,5,50.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,4,40.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,5,50.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,10,100.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,15,15,100.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,10,100.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,8,80.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-18,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,7,5,10,2,20.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,8,5,10,3,30.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,9,5,10,5,50.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,10,5,10,6,60.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,11,5,10,2,20.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,12,5,10,5,50.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,13,5,10,4,40.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,14,5,10,5,50.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,15,5,10,10,100.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,16,5,15,15,100.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,19,5,10,10,100.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,20,5,10,8,80.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-18,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-18,San Padel,playtomic,1,12,24,24,100.0
 2026-06-18,San Padel,playtomic,2,12,36,36,100.0
 2026-06-18,San Padel,playtomic,3,12,24,24,100.0
@@ -2168,22 +2168,22 @@
 2026-06-19,Rakiety Aero - Padel Outdoor,playtomic,14,1,2,2,100.0
 2026-06-19,Rakiety Aero - Padel Outdoor,playtomic,15,1,2,2,100.0
 2026-06-19,Rakiety Aero - Padel Outdoor,playtomic,16,1,2,1,50.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,8,80.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,6,60.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,5,50.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,3,30.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,3,30.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,3,30.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,7,70.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,10,100.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,10,100.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,15,15,100.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,9,90.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,10,100.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-19,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,7,5,10,8,80.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,8,5,10,6,60.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,9,5,10,5,50.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,10,5,10,3,30.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,11,5,10,3,30.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,12,5,10,3,30.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,13,5,10,7,70.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,14,5,10,10,100.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,15,5,10,10,100.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,16,5,15,15,100.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,19,5,10,9,90.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,20,5,10,10,100.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-19,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-19,San Padel,playtomic,1,12,24,24,100.0
 2026-06-19,San Padel,playtomic,2,12,36,36,100.0
 2026-06-19,San Padel,playtomic,3,12,24,24,100.0
@@ -2288,22 +2288,22 @@
 2026-06-20,Rakiety Aero - Padel Outdoor,playtomic,17,1,2,2,100.0
 2026-06-20,Rakiety Aero - Padel Outdoor,playtomic,18,1,2,2,100.0
 2026-06-20,Rakiety Aero - Padel Outdoor,playtomic,19,1,1,1,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,10,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,10,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,10,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,10,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,10,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,10,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,15,15,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,6,60.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,7,70.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,8,80.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,8,80.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,15,6,40.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,7,70.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-20,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,7,5,10,10,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,8,5,10,10,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,9,5,10,10,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,10,5,10,10,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,11,5,10,10,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,12,5,10,10,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,13,5,15,15,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,14,5,10,6,60.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,15,5,10,7,70.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,17,5,10,8,80.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,18,5,10,8,80.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,19,5,15,6,40.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,20,5,10,7,70.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-20,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-20,San Padel,playtomic,0,12,24,24,100.0
 2026-06-20,San Padel,playtomic,1,12,24,24,100.0
 2026-06-20,San Padel,playtomic,2,12,24,24,100.0
@@ -2447,22 +2447,22 @@
 2026-06-21,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-21,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-21,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,10,100.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,10,100.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,10,100.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,9,90.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,6,60.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,9,90.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,6,60.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,15,10,67.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,10,100.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,7,70.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,6,60.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,15,15,100.0
-2026-06-21,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,7,5,10,10,100.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,8,5,10,10,100.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,9,5,10,10,100.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,10,5,10,9,90.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,11,5,10,6,60.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,12,5,10,9,90.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,13,5,10,6,60.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,14,5,15,10,67.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,15,5,10,10,100.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,19,5,10,7,70.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,20,5,10,6,60.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,21,5,15,15,100.0
+2026-06-21,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-21,San Padel,playtomic,0,12,12,12,100.0
 2026-06-21,San Padel,playtomic,1,12,24,24,100.0
 2026-06-21,San Padel,playtomic,2,12,24,24,100.0
@@ -2620,22 +2620,22 @@
 2026-06-22,Rakiety Aero - Padel Outdoor,playtomic,18,1,2,2,100.0
 2026-06-22,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-22,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,0,0.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,0,0.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,0,0.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,0,0.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,0,0.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,0,0.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,2,20.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,6,60.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,8,80.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,9,90.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,9,90.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,15,13,87.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-22,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,7,5,10,0,0.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,8,5,10,0,0.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,9,5,10,0,0.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,10,5,10,0,0.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,11,5,10,0,0.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,12,5,10,0,0.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,13,5,10,2,20.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,14,5,10,6,60.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,15,5,10,8,80.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,16,5,10,9,90.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,19,5,10,9,90.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,20,5,15,13,87.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-22,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-22,San Padel,playtomic,0,12,12,12,100.0
 2026-06-22,San Padel,playtomic,1,12,24,24,100.0
 2026-06-22,San Padel,playtomic,2,12,24,24,100.0
@@ -2744,22 +2744,22 @@
 2026-06-23,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-23,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-23,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,4,40.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,5,50.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,4,40.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,4,40.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,2,20.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,2,20.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,4,40.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,4,40.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,15,13,87.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,10,100.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,6,60.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-23,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,7,5,10,4,40.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,8,5,10,5,50.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,9,5,10,4,40.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,10,5,10,4,40.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,11,5,10,2,20.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,12,5,10,2,20.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,13,5,10,4,40.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,14,5,10,4,40.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,15,5,15,13,87.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,19,5,10,10,100.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,20,5,10,6,60.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-23,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-23,San Padel,playtomic,1,12,12,12,100.0
 2026-06-23,San Padel,playtomic,2,12,24,24,100.0
 2026-06-23,San Padel,playtomic,3,12,24,24,100.0
@@ -2868,22 +2868,22 @@
 2026-06-24,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-24,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-24,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,2,20.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,4,40.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,4,40.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,2,20.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,0,0.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,1,10.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,2,20.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,2,20.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,8,80.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,10,100.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,10,100.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-24,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,5,5,100.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,7,5,10,2,20.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,8,5,10,4,40.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,9,5,10,4,40.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,10,5,10,2,20.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,11,5,10,0,0.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,12,5,10,1,10.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,13,5,10,2,20.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,14,5,10,2,20.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,15,5,10,8,80.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,19,5,10,10,100.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,20,5,10,10,100.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-24,Rakiety PGE Narodowy,playtomic,22,5,5,5,100.0
 2026-06-24,San Padel,playtomic,0,12,12,12,100.0
 2026-06-24,San Padel,playtomic,1,12,24,24,100.0
 2026-06-24,San Padel,playtomic,2,12,24,24,100.0
@@ -2992,22 +2992,22 @@
 2026-06-25,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-25,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-25,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,3,30.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,6,60.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,4,40.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,3,30.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,3,30.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,3,30.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,1,10.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,15,7,47.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,7,70.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,9,90.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,10,100.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,10,100.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-25,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,7,5,10,3,30.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,8,5,10,6,60.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,9,5,10,4,40.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,10,5,10,3,30.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,11,5,10,3,30.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,12,5,10,3,30.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,13,5,10,1,10.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,14,5,15,7,47.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,15,5,10,7,70.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,16,5,10,9,90.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,19,5,10,10,100.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,20,5,10,10,100.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-25,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-06-25,San Padel,playtomic,0,12,12,12,100.0
 2026-06-25,San Padel,playtomic,1,12,24,24,100.0
 2026-06-25,San Padel,playtomic,2,12,24,24,100.0
@@ -3116,23 +3116,23 @@
 2026-06-26,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-26,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-06-26,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,4,40.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,4,40.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,5,50.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,3,30.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,3,30.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,3,30.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,4,40.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,9,90.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,10,100.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,10,100.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,10,100.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,10,100.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,9,90.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,5,50.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,15,15,100.0
-2026-06-26,Rakiety PGE Narodowy - Padel Outdoor,playtomic,23,5,10,10,100.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,7,5,10,4,40.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,8,5,10,4,40.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,9,5,10,5,50.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,10,5,10,3,30.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,11,5,10,3,30.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,12,5,10,3,30.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,13,5,10,4,40.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,14,5,10,9,90.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,15,5,10,10,100.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,16,5,10,10,100.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,18,5,10,10,100.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,19,5,10,10,100.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,20,5,10,9,90.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,21,5,10,5,50.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,22,5,15,15,100.0
+2026-06-26,Rakiety PGE Narodowy,playtomic,23,5,10,10,100.0
 2026-06-26,San Padel,playtomic,1,12,12,12,100.0
 2026-06-26,San Padel,playtomic,2,12,24,24,100.0
 2026-06-26,San Padel,playtomic,3,12,24,24,100.0
@@ -3233,22 +3233,22 @@
 2026-06-27,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,1,50.0
 2026-06-27,Rakiety Aero - Padel Outdoor,playtomic,21,1,2,2,100.0
 2026-06-27,Rakiety Aero - Padel Outdoor,playtomic,22,1,1,1,100.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,9,90.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,8,80.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,7,70.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,6,60.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,6,60.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,6,60.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,15,5,33.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,1,10.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,2,20.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,4,40.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,15,5,33.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,8,80.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,8,80.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,5,50.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-06-27,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,5,5,100.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,7,5,10,9,90.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,8,5,10,8,80.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,9,5,10,7,70.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,10,5,10,6,60.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,11,5,10,6,60.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,12,5,10,6,60.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,13,5,15,5,33.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,14,5,10,1,10.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,15,5,10,2,20.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,16,5,10,4,40.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,17,5,15,5,33.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,18,5,10,8,80.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,19,5,10,8,80.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,20,5,10,5,50.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
+2026-06-27,Rakiety PGE Narodowy,playtomic,22,5,5,5,100.0
 2026-06-27,San Padel,playtomic,0,12,12,12,100.0
 2026-06-27,San Padel,playtomic,1,12,24,24,100.0
 2026-06-27,San Padel,playtomic,2,12,24,24,100.0
@@ -3388,21 +3388,21 @@
 2026-06-28,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,1,50.0
 2026-06-28,Rakiety Aero - Padel Outdoor,playtomic,21,1,3,3,100.0
 2026-06-28,Rakiety Aero - Padel Outdoor,playtomic,22,1,2,2,100.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,2,20.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,1,10.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,1,10.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,0,0.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,0,0.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,0,0.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,15,0,0.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,2,20.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,4,40.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,10,6,60.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,10,100.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,15,15,100.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,10,100.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,9,90.0
-2026-06-28,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,7,5,10,2,20.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,8,5,10,1,10.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,9,5,10,1,10.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,10,5,10,0,0.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,11,5,10,0,0.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,12,5,10,0,0.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,13,5,15,0,0.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,14,5,10,2,20.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,15,5,10,4,40.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,16,5,10,6,60.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,17,5,10,10,100.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,18,5,15,15,100.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,19,5,10,10,100.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,20,5,10,9,90.0
+2026-06-28,Rakiety PGE Narodowy,playtomic,21,5,10,10,100.0
 2026-06-28,San Padel,playtomic,0,12,12,12,100.0
 2026-06-28,San Padel,playtomic,1,12,24,24,100.0
 2026-06-28,San Padel,playtomic,2,12,24,24,100.0
@@ -3539,23 +3539,23 @@
 2026-06-29,Rakiety Aero - Padel Outdoor,playtomic,18,1,2,2,100.0
 2026-06-29,Rakiety Aero - Padel Outdoor,playtomic,19,1,2,2,100.0
 2026-06-29,Rakiety Aero - Padel Outdoor,playtomic,20,1,1,1,100.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,7,5,10,4,40.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,3,30.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,1,10.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,0,0.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,15,0,0.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,0,0.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,10,0,0.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,1,10.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,2,20.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,15,5,33.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,8,80.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,9,90.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,10,10,100.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,15,11,73.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,5,50.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,15,15,100.0
-2026-06-29,Rakiety PGE Narodowy - Padel Outdoor,playtomic,23,5,10,10,100.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,7,5,10,4,40.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,8,5,10,3,30.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,9,5,10,1,10.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,10,5,10,0,0.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,11,5,15,0,0.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,12,5,10,0,0.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,13,5,10,0,0.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,14,5,10,1,10.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,15,5,10,2,20.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,16,5,15,5,33.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,17,5,10,8,80.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,18,5,10,9,90.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,19,5,10,10,100.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,20,5,15,11,73.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,21,5,10,5,50.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,22,5,15,15,100.0
+2026-06-29,Rakiety PGE Narodowy,playtomic,23,5,10,10,100.0
 2026-06-29,San Padel,playtomic,0,12,12,12,100.0
 2026-06-29,San Padel,playtomic,1,12,24,24,100.0
 2026-06-29,San Padel,playtomic,2,12,24,24,100.0
@@ -4853,20 +4853,20 @@
 2026-07-10,Rakiety Aero - Padel Outdoor,playtomic,19,1,3,3,100.0
 2026-07-10,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-07-10,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,5,5,100.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,10,100.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,10,9,90.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,8,80.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,15,12,80.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,9,90.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,10,8,80.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,15,11,73.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,7,70.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,9,90.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,15,7,47.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,6,60.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,15,15,100.0
-2026-07-10,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,5,5,100.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,9,5,5,5,100.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,10,5,10,10,100.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,11,5,10,9,90.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,12,5,10,8,80.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,13,5,15,12,80.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,14,5,10,9,90.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,15,5,10,8,80.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,16,5,15,11,73.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,17,5,10,7,70.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,18,5,10,9,90.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,19,5,15,7,47.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,20,5,10,6,60.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,21,5,15,15,100.0
+2026-07-10,Rakiety PGE Narodowy,playtomic,22,5,5,5,100.0
 2026-07-10,San Padel,playtomic,9,12,12,5,42.0
 2026-07-10,San Padel,playtomic,10,12,24,6,25.0
 2026-07-10,San Padel,playtomic,11,12,24,4,17.0
@@ -4931,9 +4931,14 @@
 2026-07-11,Interpadel Warszawa,playtomic,18,11,22,21,95.0
 2026-07-11,Interpadel Warszawa,playtomic,19,11,33,30,91.0
 2026-07-11,Interpadel Warszawa,playtomic,20,11,22,20,91.0
-2026-07-11,Interpadel Warszawa,playtomic,21,11,22,11,50.0
+2026-07-11,Interpadel Warszawa,playtomic,21,11,33,16,48.0
 2026-07-11,Interpadel Warszawa,playtomic,22,11,22,22,100.0
 2026-07-11,Interpadel Warszawa,playtomic,23,11,22,22,100.0
+2026-07-11,Klub Miedzeszyn,kluby_org,10,2,2,2,100.0
+2026-07-11,Klub Miedzeszyn,kluby_org,12,1,1,1,100.0
+2026-07-11,Klub Miedzeszyn,kluby_org,13,1,1,1,100.0
+2026-07-11,Klub Miedzeszyn,kluby_org,14,1,1,1,100.0
+2026-07-11,Klub Miedzeszyn,kluby_org,19,1,1,1,100.0
 2026-07-11,Loba Padel,playtomic,8,8,16,10,63.0
 2026-07-11,Loba Padel,playtomic,9,8,16,12,75.0
 2026-07-11,Loba Padel,playtomic,10,8,16,12,75.0
@@ -4947,8 +4952,26 @@
 2026-07-11,Loba Padel,playtomic,18,8,16,3,19.0
 2026-07-11,Loba Padel,playtomic,19,8,24,4,17.0
 2026-07-11,Loba Padel,playtomic,20,8,16,9,56.0
-2026-07-11,Loba Padel,playtomic,21,8,16,16,100.0
+2026-07-11,Loba Padel,playtomic,21,8,24,24,100.0
 2026-07-11,Loba Padel,playtomic,22,8,16,16,100.0
+2026-07-11,Mana Padel,kluby_org,7,1,1,1,100.0
+2026-07-11,Mana Padel,kluby_org,8,5,5,5,100.0
+2026-07-11,Mana Padel,kluby_org,9,3,3,3,100.0
+2026-07-11,Mana Padel,kluby_org,10,5,7,7,100.0
+2026-07-11,Mana Padel,kluby_org,11,2,2,2,100.0
+2026-07-11,Mana Padel,kluby_org,12,7,8,8,100.0
+2026-07-11,Mana Padel,kluby_org,13,1,1,1,100.0
+2026-07-11,Mana Padel,kluby_org,14,2,3,3,100.0
+2026-07-11,Mana Padel,kluby_org,15,2,2,2,100.0
+2026-07-11,Mana Padel,kluby_org,16,7,7,7,100.0
+2026-07-11,Mana Padel,kluby_org,17,1,1,1,100.0
+2026-07-11,Mana Padel,kluby_org,18,6,6,6,100.0
+2026-07-11,Mana Padel,kluby_org,19,3,3,3,100.0
+2026-07-11,Mana Padel,kluby_org,20,2,2,2,100.0
+2026-07-11,Mana Padel,kluby_org,21,7,8,1,13.0
+2026-07-11,Mana Padel,kluby_org,22,8,15,8,53.0
+2026-07-11,Mana Padel,kluby_org,23,8,8,0,0.0
+2026-07-11,Padlovnia,kluby_org,7,7,7,7,100.0
 2026-07-11,RQT Spot,playtomic,8,10,20,8,40.0
 2026-07-11,RQT Spot,playtomic,9,10,20,12,60.0
 2026-07-11,RQT Spot,playtomic,10,10,20,13,65.0
@@ -4962,7 +4985,7 @@
 2026-07-11,RQT Spot,playtomic,18,10,20,13,65.0
 2026-07-11,RQT Spot,playtomic,19,10,30,22,73.0
 2026-07-11,RQT Spot,playtomic,20,10,20,11,55.0
-2026-07-11,RQT Spot,playtomic,21,10,20,14,70.0
+2026-07-11,RQT Spot,playtomic,21,10,30,18,60.0
 2026-07-11,RQT Spot,playtomic,22,10,20,20,100.0
 2026-07-11,RQT Spot,playtomic,23,10,20,20,100.0
 2026-07-11,Rakiety Aero - Padel Outdoor,playtomic,8,1,2,2,100.0
@@ -4979,21 +5002,21 @@
 2026-07-11,Rakiety Aero - Padel Outdoor,playtomic,19,1,3,3,100.0
 2026-07-11,Rakiety Aero - Padel Outdoor,playtomic,20,1,2,2,100.0
 2026-07-11,Rakiety Aero - Padel Outdoor,playtomic,21,1,1,1,100.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,8,5,10,5,50.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,9,5,10,7,70.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,10,5,10,5,50.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,11,5,15,1,7.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,12,5,10,0,0.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,13,5,15,2,13.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,14,5,10,4,40.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,15,5,15,8,53.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,16,5,15,12,80.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,17,5,10,7,70.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,18,5,10,3,30.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,19,5,15,0,0.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,20,5,10,5,50.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,21,5,10,10,100.0
-2026-07-11,Rakiety PGE Narodowy - Padel Outdoor,playtomic,22,5,10,10,100.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,8,5,10,5,50.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,9,5,10,7,70.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,10,5,10,5,50.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,11,5,15,1,7.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,12,5,10,0,0.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,13,5,15,2,13.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,14,5,10,4,40.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,15,5,15,8,53.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,16,5,15,12,80.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,17,5,10,7,70.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,18,5,10,3,30.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,19,5,15,0,0.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,20,5,10,5,50.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,21,5,15,15,100.0
+2026-07-11,Rakiety PGE Narodowy,playtomic,22,5,10,10,100.0
 2026-07-11,San Padel,playtomic,8,12,24,21,88.0
 2026-07-11,San Padel,playtomic,9,12,24,24,100.0
 2026-07-11,San Padel,playtomic,10,12,24,22,92.0
@@ -5007,9 +5030,40 @@
 2026-07-11,San Padel,playtomic,18,12,24,16,67.0
 2026-07-11,San Padel,playtomic,19,12,36,25,69.0
 2026-07-11,San Padel,playtomic,20,12,24,13,54.0
-2026-07-11,San Padel,playtomic,21,12,24,18,75.0
+2026-07-11,San Padel,playtomic,21,12,36,18,50.0
 2026-07-11,San Padel,playtomic,22,12,24,24,100.0
 2026-07-11,San Padel,playtomic,23,12,24,24,100.0
+2026-07-11,Sporteum,kluby_org,17,1,1,1,100.0
+2026-07-11,TENES Klub Sportowy,kluby_org,6,3,3,3,100.0
+2026-07-11,TENES Klub Sportowy,kluby_org,12,1,1,1,100.0
+2026-07-11,TENES Klub Sportowy,kluby_org,16,1,1,1,100.0
+2026-07-11,TENES Klub Sportowy,kluby_org,17,1,1,1,100.0
+2026-07-11,TENES Klub Sportowy,kluby_org,21,3,3,3,100.0
+2026-07-11,TENES Klub Sportowy,kluby_org,23,3,3,3,100.0
+2026-07-11,TenisWil,kluby_org,7,3,3,3,100.0
+2026-07-11,TenisWil,kluby_org,21,3,3,0,0.0
+2026-07-11,Toro Padel,kluby_org,8,1,1,1,100.0
+2026-07-11,Toro Padel,kluby_org,9,5,5,5,100.0
+2026-07-11,Toro Padel,kluby_org,10,1,1,1,100.0
+2026-07-11,Toro Padel,kluby_org,11,1,2,2,100.0
+2026-07-11,Toro Padel,kluby_org,12,2,2,2,100.0
+2026-07-11,Toro Padel,kluby_org,13,4,5,5,100.0
+2026-07-11,Toro Padel,kluby_org,14,4,5,5,100.0
+2026-07-11,Toro Padel,kluby_org,15,4,4,4,100.0
+2026-07-11,Toro Padel,kluby_org,16,2,3,3,100.0
+2026-07-11,Toro Padel,kluby_org,17,2,3,3,100.0
+2026-07-11,Toro Padel,kluby_org,18,2,2,2,100.0
+2026-07-11,Toro Padel,kluby_org,19,1,1,1,100.0
+2026-07-11,Toro Padel,kluby_org,20,1,1,1,100.0
+2026-07-11,Toro Padel,kluby_org,21,4,5,1,20.0
+2026-07-11,Toro Padel,kluby_org,22,6,11,0,0.0
+2026-07-11,WKT Mera,kluby_org,10,1,1,1,100.0
+2026-07-11,WKT Mera,kluby_org,11,2,2,2,100.0
+2026-07-11,WKT Mera,kluby_org,15,2,2,2,100.0
+2026-07-11,WKT Mera,kluby_org,16,1,1,1,100.0
+2026-07-11,WKT Mera,kluby_org,21,2,2,0,0.0
+2026-07-11,WKT Mera,kluby_org,22,2,4,0,0.0
+2026-07-11,WKT Mera,kluby_org,23,2,4,0,0.0
 2026-07-11,Warsaw Padel Club,playtomic,8,11,22,18,82.0
 2026-07-11,Warsaw Padel Club,playtomic,9,11,22,21,95.0
 2026-07-11,Warsaw Padel Club,playtomic,10,11,22,22,100.0
@@ -5023,6 +5077,6 @@
 2026-07-11,Warsaw Padel Club,playtomic,18,11,22,16,73.0
 2026-07-11,Warsaw Padel Club,playtomic,19,11,33,33,100.0
 2026-07-11,Warsaw Padel Club,playtomic,20,11,22,19,86.0
-2026-07-11,Warsaw Padel Club,playtomic,21,11,22,18,82.0
+2026-07-11,Warsaw Padel Club,playtomic,21,11,33,29,88.0
 2026-07-11,Warsaw Padel Club,playtomic,22,11,22,22,100.0
 2026-07-11,Warsaw Padel Club,playtomic,23,11,22,22,100.0
