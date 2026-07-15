@@ -1,0 +1,20 @@
+﻿klub,dzielnica,source,nawierzchnia,korty_padlowe,cena_min,cena_max,cena_srednia,godz_tydzien,godz_weekend,slotow_dzisiaj,oblozenie_pct,address,slotow_max
+Toro Padel,Bemowo,kluby_org,indoor,6,120.0,160.0,140.0,,,49,79.6,ul. Kazubów 14 (Bemowo),304
+Loba Padel,Białołęka,playtomic,indoor,8,120.0,200.0,159.0,06:00-23:00,06:00-23:00,240,53.8,"Smugowa 44, 03-032",312
+Sporteum,Białołęka,kluby_org,indoor,2,110.0,130.0,120.0,,,5,60.0,ul. Zawiślańska 27 (Białołęka),120
+Warsaw Padel Club,Białołęka,playtomic,indoor,11,82.0,212.0,151.0,06:00-01:00,06:00-01:00,352,81.0,"Annopol 3, 03-236",451
+RQT Spot,Bielany,playtomic,indoor,6,79.0,160.0,122.0,07:00-00:00,07:00-00:00,192,55.2,"Estrady 13K, 05-080",390
+RQT Spot,Bielany,playtomic,outdoor,4,79.0,160.0,122.0,07:00-00:00,07:00-00:00,128,37.5,"Estrady 13K, 05-080",390
+Interpadel Warszawa,Mokotów,playtomic,indoor,11,86.0,196.0,126.0,06:00-02:00,06:00-02:00,352,91.8,"Bokserska 66A, 02-690",451
+WKT Mera,Ochota,kluby_org,indoor,2,120.0,120.0,120.0,,,17,70.6,al. Bohaterów Września 12 (Ochota),126
+Rakiety PGE Narodowy,Praga Południe,playtomic,indoor,5,120.0,160.0,137.0,07:00-23:00,07:00-23:00,150,73.3,"al. Księcia Józefa Poniatowskiego 1, 03-901",190
+TENES Klub Sportowy,Ursus,kluby_org,indoor,3,70.0,110.0,90.0,,,25,72.0,ul. Piwna 13 (Ursus),173
+Padlovnia,Ursynów,kluby_org,indoor,7,100.0,160.0,130.0,,,78,66.7,ul. Karnawał 8 (Ursynów),354
+Padlovnia,Ursynów,kluby_org,outdoor,4,100.0,160.0,130.0,,,0,,ul. Karnawał 8 (Ursynów),354
+San Padel,Ursynów,playtomic,indoor,12,75.0,200.0,145.0,00:00-00:00,00:00-00:00,384,55.2,"Przedsiębiorców 1, 05-500",612
+Klub Miedzeszyn,Wawer,kluby_org,indoor,2,120.0,140.0,130.0,,,6,100.0,ul. Bielika 17 (Wawer),92
+Rakiety Aero - Padel Outdoor,Wawer,playtomic,outdoor,1,120.0,160.0,130.0,08:00-21:30,08:00-21:30,27,70.4,"Wał Miedzeszyński 646, 03-994",35
+Mana Padel,Wilanów,kluby_org,indoor,8,132.0,200.0,164.0,,,97,72.2,ul. Zawodzie 24 (Wilanów),318
+TenisWil,Wilanów,kluby_org,outdoor,3,80.0,100.0,90.0,,,13,100.0,ul. Przyczółkowa 210C (Wilanów),154
+ProPadel Jutrzenki,Włochy,kluby_org,indoor,5,80.0,80.0,80.0,,,0,,ul. Jutrzenki 12 (Włochy),360
+Padel4All Bulwary,Śródmieście,kluby_org,indoor,1,80.0,80.0,80.0,,,0,,,66
