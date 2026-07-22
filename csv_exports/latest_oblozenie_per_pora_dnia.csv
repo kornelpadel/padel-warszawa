@@ -1,187 +1,237 @@
 ﻿klub,dzielnica,source,kort,nawierzchnia,pora_dnia,typ_dnia,slotow,zajete,wolne,oblozenie_pct
+Klub Miedzeszyn,Wawer,kluby_org,"Kort 2P
+ PADEL HALA",indoor,poludnie (10-14),tydzien,1,1,0,100.0
+Klub Miedzeszyn,Wawer,kluby_org,"Kort 2P
+ PADEL HALA",indoor,wieczor (18-22),tydzien,1,1,0,100.0
 Klub Miedzeszyn,Wawer,kluby_org,"kort 1P
- PADEL HALA",indoor,wieczor (18-22),tydzien,5,5,0,100.0
+ PADEL HALA",indoor,wieczor (18-22),tydzien,3,3,0,100.0
 Mana Padel,Wilanów,kluby_org,"(2) OSHEE
-Padel",indoor,rano (6-10),tydzien,2,2,0,100.0
+Padel",indoor,rano (6-10),tydzien,4,4,0,100.0
 Mana Padel,Wilanów,kluby_org,"(2) OSHEE
-Padel",indoor,poludnie (10-14),tydzien,3,3,0,100.0
+Padel",indoor,poludnie (10-14),tydzien,5,5,0,100.0
 Mana Padel,Wilanów,kluby_org,"(2) OSHEE
-Padel",indoor,popoludnie (14-18),tydzien,4,4,0,100.0
+Padel",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
 Mana Padel,Wilanów,kluby_org,"(2) OSHEE
-Padel",indoor,wieczor (18-22),tydzien,3,3,0,100.0
+Padel",indoor,wieczor (18-22),tydzien,4,4,0,100.0
 Mana Padel,Wilanów,kluby_org,"(2) OSHEE
-Padel",indoor,noc,tydzien,4,2,2,50.0
+Padel",indoor,noc,tydzien,4,0,4,0.0
 Mana Padel,Wilanów,kluby_org,"(3) Jaguar ERA
-Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
+Padel",indoor,rano (6-10),tydzien,4,4,0,100.0
 Mana Padel,Wilanów,kluby_org,"(3) Jaguar ERA
-Padel",indoor,poludnie (10-14),tydzien,3,3,0,100.0
+Padel",indoor,poludnie (10-14),tydzien,6,6,0,100.0
 Mana Padel,Wilanów,kluby_org,"(3) Jaguar ERA
 Padel",indoor,popoludnie (14-18),tydzien,3,3,0,100.0
 Mana Padel,Wilanów,kluby_org,"(3) Jaguar ERA
-Padel",indoor,wieczor (18-22),tydzien,3,3,0,100.0
+Padel",indoor,wieczor (18-22),tydzien,4,4,0,100.0
 Mana Padel,Wilanów,kluby_org,"(3) Jaguar ERA
-Padel",indoor,noc,tydzien,3,1,2,33.3
+Padel",indoor,noc,tydzien,4,1,3,25.0
 Mana Padel,Wilanów,kluby_org,"(4) BANDERAS
-Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
+Padel",indoor,rano (6-10),tydzien,4,4,0,100.0
 Mana Padel,Wilanów,kluby_org,"(4) BANDERAS
 Padel",indoor,poludnie (10-14),tydzien,3,3,0,100.0
 Mana Padel,Wilanów,kluby_org,"(4) BANDERAS
 Padel",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
 Mana Padel,Wilanów,kluby_org,"(4) BANDERAS
-Padel",indoor,wieczor (18-22),tydzien,3,3,0,100.0
+Padel",indoor,wieczor (18-22),tydzien,2,2,0,100.0
 Mana Padel,Wilanów,kluby_org,"(4) BANDERAS
-Padel",indoor,noc,tydzien,2,0,2,0.0
+Padel",indoor,noc,tydzien,4,0,4,0.0
 Mana Padel,Wilanów,kluby_org,"(5)Dental Fraternity
-Padel",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
 Mana Padel,Wilanów,kluby_org,"(5)Dental Fraternity
-Padel",indoor,wieczor (18-22),tydzien,2,2,0,100.0
-Mana Padel,Wilanów,kluby_org,"(5)Dental Fraternity
-Padel",indoor,noc,tydzien,2,0,2,0.0
-Mana Padel,Wilanów,kluby_org,"(6) nikalab.
 Padel",indoor,poludnie (10-14),tydzien,1,1,0,100.0
+Mana Padel,Wilanów,kluby_org,"(5)Dental Fraternity
+Padel",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
+Mana Padel,Wilanów,kluby_org,"(5)Dental Fraternity
+Padel",indoor,wieczor (18-22),tydzien,1,1,0,100.0
+Mana Padel,Wilanów,kluby_org,"(5)Dental Fraternity
+Padel",indoor,noc,tydzien,4,0,4,0.0
 Mana Padel,Wilanów,kluby_org,"(6) nikalab.
-Padel",indoor,wieczor (18-22),tydzien,2,2,0,100.0
+Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
 Mana Padel,Wilanów,kluby_org,"(6) nikalab.
-Padel",indoor,noc,tydzien,1,0,1,0.0
+Padel",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
+Mana Padel,Wilanów,kluby_org,"(6) nikalab.
+Padel",indoor,wieczor (18-22),tydzien,1,1,0,100.0
+Mana Padel,Wilanów,kluby_org,"(6) nikalab.
+Padel",indoor,noc,tydzien,3,0,3,0.0
 Mana Padel,Wilanów,kluby_org,"(7) BOMBILLA
 Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
 Mana Padel,Wilanów,kluby_org,"(7) BOMBILLA
-Padel",indoor,poludnie (10-14),tydzien,1,1,0,100.0
+Padel",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
 Mana Padel,Wilanów,kluby_org,"(7) BOMBILLA
-Padel",indoor,wieczor (18-22),tydzien,2,2,0,100.0
+Padel",indoor,noc,tydzien,2,0,2,0.0
 Mana Padel,Wilanów,kluby_org,"(8) 4FLEX
 Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
+Mana Padel,Wilanów,kluby_org,"(8) 4FLEX
+Padel",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+Mana Padel,Wilanów,kluby_org,"(8) 4FLEX
+Padel",indoor,noc,tydzien,1,0,1,0.0
 Mana Padel,Wilanów,kluby_org,"Premier Padel Court
-Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
+Padel",indoor,rano (6-10),tydzien,3,3,0,100.0
 Mana Padel,Wilanów,kluby_org,"Premier Padel Court
-Padel",indoor,poludnie (10-14),tydzien,4,4,0,100.0
+Padel",indoor,poludnie (10-14),tydzien,7,7,0,100.0
 Mana Padel,Wilanów,kluby_org,"Premier Padel Court
-Padel",indoor,popoludnie (14-18),tydzien,6,6,0,100.0
+Padel",indoor,popoludnie (14-18),tydzien,5,5,0,100.0
 Mana Padel,Wilanów,kluby_org,"Premier Padel Court
-Padel",indoor,wieczor (18-22),tydzien,7,7,0,100.0
+Padel",indoor,wieczor (18-22),tydzien,6,6,0,100.0
 Mana Padel,Wilanów,kluby_org,"Premier Padel Court
-Padel",indoor,noc,tydzien,4,2,2,50.0
+Padel",indoor,noc,tydzien,4,1,3,25.0
 Padlovnia,Ursynów,kluby_org,"Hala 1
- Hala",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
+ Hala",indoor,rano (6-10),tydzien,1,1,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 1
- Hala",indoor,wieczor (18-22),tydzien,7,7,0,100.0
+ Hala",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+Padlovnia,Ursynów,kluby_org,"Hala 1
+ Hala",indoor,wieczor (18-22),tydzien,6,6,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 1
  Hala",indoor,noc,tydzien,4,1,3,25.0
 Padlovnia,Ursynów,kluby_org,"Hala 2
- Hala",indoor,poludnie (10-14),tydzien,1,1,0,100.0
+ Hala",indoor,rano (6-10),tydzien,1,1,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 2
- Hala",indoor,popoludnie (14-18),tydzien,3,3,0,100.0
+ Hala",indoor,poludnie (10-14),tydzien,2,2,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 2
- Hala",indoor,wieczor (18-22),tydzien,4,4,0,100.0
+ Hala",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+Padlovnia,Ursynów,kluby_org,"Hala 2
+ Hala",indoor,wieczor (18-22),tydzien,6,6,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 2
  Hala",indoor,noc,tydzien,3,0,3,0.0
 Padlovnia,Ursynów,kluby_org,"Hala 3
- Hala",indoor,rano (6-10),tydzien,3,3,0,100.0
+ Hala",indoor,rano (6-10),tydzien,4,4,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 3
- Hala",indoor,poludnie (10-14),tydzien,3,3,0,100.0
+ Hala",indoor,poludnie (10-14),tydzien,5,5,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 3
- Hala",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
+ Hala",indoor,popoludnie (14-18),tydzien,4,4,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 3
- Hala",indoor,wieczor (18-22),tydzien,3,3,0,100.0
+ Hala",indoor,wieczor (18-22),tydzien,4,4,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 3
  Hala",indoor,noc,tydzien,3,0,3,0.0
 Padlovnia,Ursynów,kluby_org,"Hala 4
  Hala",indoor,rano (6-10),tydzien,1,1,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 4
- Hala",indoor,poludnie (10-14),tydzien,2,2,0,100.0
-Padlovnia,Ursynów,kluby_org,"Hala 4
- Hala",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+ Hala",indoor,poludnie (10-14),tydzien,1,1,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 4
  Hala",indoor,wieczor (18-22),tydzien,3,3,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 4
  Hala",indoor,noc,tydzien,3,0,3,0.0
 Padlovnia,Ursynów,kluby_org,"Hala 5
- Hala",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+ Hala",indoor,rano (6-10),tydzien,1,1,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 5
- Hala",indoor,wieczor (18-22),tydzien,3,3,0,100.0
+ Hala",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
+Padlovnia,Ursynów,kluby_org,"Hala 5
+ Hala",indoor,wieczor (18-22),tydzien,1,1,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 5
  Hala",indoor,noc,tydzien,2,0,2,0.0
 Padlovnia,Ursynów,kluby_org,"Hala 6
+ Hala",indoor,rano (6-10),tydzien,1,1,0,100.0
+Padlovnia,Ursynów,kluby_org,"Hala 6
+ Hala",indoor,wieczor (18-22),tydzien,1,1,0,100.0
+Padlovnia,Ursynów,kluby_org,"Hala 6
  Hala",indoor,noc,tydzien,2,0,2,0.0
 Padlovnia,Ursynów,kluby_org,"Hala 7
- Hala",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+ Hala",indoor,rano (6-10),tydzien,1,1,0,100.0
 Padlovnia,Ursynów,kluby_org,"Hala 7
- Hala",indoor,noc,tydzien,1,0,1,0.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 1
- Kort odkryty",indoor,rano (6-10),tydzien,1,1,0,100.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 1
- Kort odkryty",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 1
- Kort odkryty",indoor,wieczor (18-22),tydzien,1,1,0,100.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 1
- Kort odkryty",indoor,noc,tydzien,1,1,0,100.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 2
- Kort odkryty",indoor,rano (6-10),tydzien,1,1,0,100.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 2
- Kort odkryty",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 2
- Kort odkryty",indoor,noc,tydzien,1,1,0,100.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 3
- Kort odkryty",indoor,rano (6-10),tydzien,1,1,0,100.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 3
- Kort odkryty",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
-TENES Klub Sportowy,Ursus,kluby_org,"Padel 3
- Kort odkryty",indoor,noc,tydzien,1,1,0,100.0
-TenisWil,Wilanów,kluby_org,"Padel 1
- Zewnętrzny",outdoor,rano (6-10),tydzien,1,1,0,100.0
-TenisWil,Wilanów,kluby_org,"Padel 1
- Zewnętrzny",outdoor,wieczor (18-22),tydzien,1,1,0,100.0
-TenisWil,Wilanów,kluby_org,"Padel 2
- Zewnętrzny",outdoor,rano (6-10),tydzien,1,1,0,100.0
-TenisWil,Wilanów,kluby_org,"Padel 2
- Zewnętrzny",outdoor,wieczor (18-22),tydzien,1,1,0,100.0
-TenisWil,Wilanów,kluby_org,"Padel 3
- Zewnętrzny",outdoor,rano (6-10),tydzien,1,1,0,100.0
-TenisWil,Wilanów,kluby_org,"Padel 3
- Zewnętrzny",outdoor,wieczor (18-22),tydzien,1,1,0,100.0
-Toro Padel,Bemowo,kluby_org,"DoPadla.pl Kort 3
- Padel",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
-Toro Padel,Bemowo,kluby_org,"DoPadla.pl Kort 3
- Padel",indoor,wieczor (18-22),tydzien,3,3,0,100.0
-Toro Padel,Bemowo,kluby_org,"Kort 1
- Padel",indoor,rano (6-10),tydzien,3,3,0,100.0
-Toro Padel,Bemowo,kluby_org,"Kort 1
+ Hala",indoor,noc,tydzien,2,0,2,0.0
+Sporteum,Białołęka,kluby_org,"Padel 1
  Padel",indoor,poludnie (10-14),tydzien,1,1,0,100.0
+Sporteum,Białołęka,kluby_org,"Padel 1
+ Padel",indoor,wieczor (18-22),tydzien,3,3,0,100.0
+Sporteum,Białołęka,kluby_org,"Padel 2
+ Padel",indoor,wieczor (18-22),tydzien,1,1,0,100.0
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 1
+ Kort odkryty",indoor,rano (6-10),tydzien,1,1,0,100.0
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 1
+ Kort odkryty",indoor,wieczor (18-22),tydzien,5,5,0,100.0
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 1
+ Kort odkryty",indoor,noc,tydzien,3,1,2,33.3
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 2
+ Kort odkryty",indoor,rano (6-10),tydzien,1,1,0,100.0
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 2
+ Kort odkryty",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 2
+ Kort odkryty",indoor,wieczor (18-22),tydzien,3,3,0,100.0
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 2
+ Kort odkryty",indoor,noc,tydzien,3,1,2,33.3
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 3
+ Kort odkryty",indoor,rano (6-10),tydzien,1,1,0,100.0
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 3
+ Kort odkryty",indoor,wieczor (18-22),tydzien,1,1,0,100.0
+TENES Klub Sportowy,Ursus,kluby_org,"Padel 3
+ Kort odkryty",indoor,noc,tydzien,2,1,1,50.0
+TenisWil,Wilanów,kluby_org,"Padel 1
+ Zewnętrzny",outdoor,rano (6-10),tydzien,1,1,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 1
+ Zewnętrzny",outdoor,poludnie (10-14),tydzien,1,1,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 1
+ Zewnętrzny",outdoor,popoludnie (14-18),tydzien,1,1,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 1
+ Zewnętrzny",outdoor,wieczor (18-22),tydzien,3,3,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 2
+ Zewnętrzny",outdoor,rano (6-10),tydzien,1,1,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 2
+ Zewnętrzny",outdoor,poludnie (10-14),tydzien,1,1,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 2
+ Zewnętrzny",outdoor,popoludnie (14-18),tydzien,1,1,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 2
+ Zewnętrzny",outdoor,wieczor (18-22),tydzien,2,2,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 3
+ Zewnętrzny",outdoor,rano (6-10),tydzien,1,1,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 3
+ Zewnętrzny",outdoor,popoludnie (14-18),tydzien,1,1,0,100.0
+TenisWil,Wilanów,kluby_org,"Padel 3
+ Zewnętrzny",outdoor,wieczor (18-22),tydzien,1,1,0,100.0
+Toro Padel,Bemowo,kluby_org,"DoPadla.pl Kort 3
+ Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
+Toro Padel,Bemowo,kluby_org,"DoPadla.pl Kort 3
+ Padel",indoor,poludnie (10-14),tydzien,2,2,0,100.0
+Toro Padel,Bemowo,kluby_org,"DoPadla.pl Kort 3
+ Padel",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
+Toro Padel,Bemowo,kluby_org,"DoPadla.pl Kort 3
+ Padel",indoor,wieczor (18-22),tydzien,2,2,0,100.0
+Toro Padel,Bemowo,kluby_org,"DoPadla.pl Kort 3
+ Padel",indoor,noc,tydzien,2,1,1,50.0
+Toro Padel,Bemowo,kluby_org,"Kort 1
+ Padel",indoor,rano (6-10),tydzien,2,2,0,100.0
+Toro Padel,Bemowo,kluby_org,"Kort 1
+ Padel",indoor,poludnie (10-14),tydzien,2,2,0,100.0
 Toro Padel,Bemowo,kluby_org,"Kort 1
  Padel",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
 Toro Padel,Bemowo,kluby_org,"Kort 1
- Padel",indoor,wieczor (18-22),tydzien,5,5,0,100.0
+ Padel",indoor,wieczor (18-22),tydzien,7,7,0,100.0
 Toro Padel,Bemowo,kluby_org,"Kort 1
  Padel",indoor,noc,tydzien,2,0,2,0.0
 Toro Padel,Bemowo,kluby_org,"Kort 2
- Padel",indoor,rano (6-10),tydzien,2,2,0,100.0
+ Padel",indoor,poludnie (10-14),tydzien,2,2,0,100.0
 Toro Padel,Bemowo,kluby_org,"Kort 2
- Padel",indoor,popoludnie (14-18),tydzien,3,3,0,100.0
+ Padel",indoor,popoludnie (14-18),tydzien,4,4,0,100.0
 Toro Padel,Bemowo,kluby_org,"Kort 2
  Padel",indoor,wieczor (18-22),tydzien,4,4,0,100.0
+Toro Padel,Bemowo,kluby_org,"Kort 2
+ Padel",indoor,noc,tydzien,2,0,2,0.0
+Toro Padel,Bemowo,kluby_org,"Kort 4
+ Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
 Toro Padel,Bemowo,kluby_org,"Kort 4
  Padel",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
 Toro Padel,Bemowo,kluby_org,"Kort 4
- Padel",indoor,wieczor (18-22),tydzien,3,3,0,100.0
-Toro Padel,Bemowo,kluby_org,"Kort 5
- Padel",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
-Toro Padel,Bemowo,kluby_org,"Kort 5
- Padel",indoor,wieczor (18-22),tydzien,3,3,0,100.0
-Toro Padel,Bemowo,kluby_org,"Kort 6
- Padel",indoor,rano (6-10),tydzien,1,1,0,100.0
-Toro Padel,Bemowo,kluby_org,"Kort 6
  Padel",indoor,wieczor (18-22),tydzien,1,1,0,100.0
-WKT Mera,Ochota,kluby_org,"Padel 1
-Padel trawa",indoor,rano (6-10),tydzien,1,1,0,100.0
+Toro Padel,Bemowo,kluby_org,"Kort 4
+ Padel",indoor,noc,tydzien,2,0,2,0.0
+Toro Padel,Bemowo,kluby_org,"Kort 5
+ Padel",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+Toro Padel,Bemowo,kluby_org,"Kort 5
+ Padel",indoor,noc,tydzien,2,0,2,0.0
+Toro Padel,Bemowo,kluby_org,"Kort 6
+ Padel",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
+Toro Padel,Bemowo,kluby_org,"Kort 6
+ Padel",indoor,noc,tydzien,1,0,1,0.0
 WKT Mera,Ochota,kluby_org,"Padel 1
 Padel trawa",indoor,popoludnie (14-18),tydzien,2,2,0,100.0
 WKT Mera,Ochota,kluby_org,"Padel 1
-Padel trawa",indoor,wieczor (18-22),tydzien,1,1,0,100.0
+Padel trawa",indoor,wieczor (18-22),tydzien,3,3,0,100.0
 WKT Mera,Ochota,kluby_org,"Padel 1
 Padel trawa",indoor,noc,tydzien,4,0,4,0.0
 WKT Mera,Ochota,kluby_org,"Padel 2
-Padel trawa",indoor,rano (6-10),tydzien,1,1,0,100.0
+Padel trawa",indoor,poludnie (10-14),tydzien,2,2,0,100.0
 WKT Mera,Ochota,kluby_org,"Padel 2
-Padel trawa",indoor,wieczor (18-22),tydzien,2,2,0,100.0
+Padel trawa",indoor,popoludnie (14-18),tydzien,1,1,0,100.0
 WKT Mera,Ochota,kluby_org,"Padel 2
-Padel trawa",indoor,noc,tydzien,2,0,2,0.0
+Padel trawa",indoor,wieczor (18-22),tydzien,1,1,0,100.0
+WKT Mera,Ochota,kluby_org,"Padel 2
+Padel trawa",indoor,noc,tydzien,4,0,4,0.0
